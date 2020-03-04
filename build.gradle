@@ -1,0 +1,39 @@
+plugins {
+    id 'application'
+    // Die folgenden beiden Plugins werden für die Integration von JavaFX benötigt
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.beryx.jlink' version '2.12.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+// Konfiguration von JavaFX
+javafx {
+    version = "13"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+// Zum Testen wird die JUnit-Plattform verwendet
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    // JUnit
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+    implementation 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+    // Guava-Framework, wird für Vorbedingungen verwendet
+    implementation 'com.google.guava:guava:28.2-jre'
+    // JSON
+    implementation 'org.json:json:20190722'
+}
+
+// Wird zum Starten von JavaFX-Anwendungen benötigt
+jlink {
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = 'hawhamburg'
+    }
+}
