@@ -1,9 +1,9 @@
+/**
+ * Diese Datei ist Teil der Vorgabe zur Lehrveranstaltung Programmiermethodik 2 im Studiengang ITS der Hochschule
+ * für Angwandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
+ */
+
 package vorlesungsuebungen.vorlesung10.uebung11;
-
-import com.google.common.base.Preconditions;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Extrahiert Vor- und Nachname aus Namens-Strings.

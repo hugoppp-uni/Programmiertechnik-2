@@ -1,6 +1,9 @@
-package vorlesungsuebungen.vorlesung10.uebung2;
+/**
+ * Diese Datei ist Teil der Vorgabe zur Lehrveranstaltung Programmiermethodik 2 im Studiengang ITS der Hochschule
+ * für Angwandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
+ */
 
-import java.util.regex.Pattern;
+package vorlesungsuebungen.vorlesung10.uebung2;
 
 /**
  * Prüfklasse für URL mit der DE-Domäne

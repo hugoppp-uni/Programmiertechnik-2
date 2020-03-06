@@ -1,6 +1,9 @@
-package vorlesungsuebungen.vorlesung09.uebung1;
+/**
+ * Diese Datei ist Teil der Vorgabe zur Lehrveranstaltung Programmiermethodik 2 im Studiengang ITS der Hochschule
+ * für Angwandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
+ */
 
-import java.util.Iterator;
+package vorlesungsuebungen.vorlesung09.uebung1;
 
 /**
  * Repräsentation einer Liste von T-Objekten:

@@ -1,10 +1,9 @@
-package vorlesungsuebungen.vorlesung08.uebung2;
+/**
+ * Diese Datei ist Teil der Vorgabe zur Lehrveranstaltung Programmiermethodik 2 im Studiengang ITS der Hochschule
+ * für Angwandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
+ */
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+package vorlesungsuebungen.vorlesung08.uebung2;
 
 /**
  * Hier die Übung 8.2 bearbeiten
