@@ -23,6 +23,5 @@ module hawhamburg {
     exports vorlesungsuebungen.vorlesung09.uebung3_4_5_6;
     exports vorlesungsuebungen.vorlesung09.uebung7;
     exports praktikum.aufgabe3.darstellung;
-    exports praktikum.loesung.aufgabe3;
-    exports praktikum.loesung.aufgabe4;
+    exports praktikum.aufgabe4;
 }
