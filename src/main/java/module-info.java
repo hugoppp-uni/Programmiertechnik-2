@@ -2,7 +2,7 @@
 // Module werden dann in einer solchen Datei konfiguriert
 module hawhamburg {
 
-    // Abhängigkeiten zu anderen Modulen
+    // Abhängigkeiten zu anderen Modulen (Import)
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
@@ -10,11 +10,8 @@ module hawhamburg {
     requires com.google.common;
     requires org.json;
 
-    // Namens-Mapping
-    opens vorlesungsuebungen.vorlesung08.uebung2 to javafx.fxml;
-
     // API des Moduls (von außen sichtbar) - hier müssen alle Packages mit Anwendungsklassen dabei sein
-    // exports ist eine weitere Sichtbarkeitsebene über private/protected/public
+    // exports ist eine weitere Sichtbarkeitsebene über private/protected/public (Export)
     exports vorlesungsuebungen.vorlesung08.uebung2;
     exports vorlesungsuebungen.vorlesung08.uebung3;
     exports vorlesungsuebungen.vorlesung08.uebung4;
