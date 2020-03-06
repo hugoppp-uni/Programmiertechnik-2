@@ -23,7 +23,8 @@ public enum Typ {
     WOLFSHUND,
     PFERD,
     STEINTROLL,
-    VAMPIR;
+    VAMPIR,
+    UNDEFINED;
 
     /**
      * Liefert die Konstante für einen String. Einige Typen aus der JSON-Datei, die den gleichen Typ beschreiben werden

@@ -5,7 +5,7 @@ package praktikum.aufgabe2;
  */
 public enum Geschlecht {
 
-    MAENNLICH, WEIBLICH;
+    MAENNLICH, WEIBLICH, UNDEFINED;
 
     /**
      * Liefert die Konstante für einen String. Liefert null, wenn keine passende Konstante gefunden wurde.
