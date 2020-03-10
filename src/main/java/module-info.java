@@ -1,6 +1,6 @@
 // Seit Java9 kann man ein Java-Projekt in Module aufteilen
 // Module werden dann in einer solchen Datei konfiguriert
-module hawhamburg {
+module pmzwei {
 
     // Abhängigkeiten zu anderen Modulen (Import)
     requires javafx.controls;
