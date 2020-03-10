@@ -7,6 +7,7 @@ module pmzwei {
     requires javafx.fxml;
     requires java.desktop;
     requires org.junit.jupiter.api;
+    requires org.junit.jupiter.engine;
     requires com.google.common;
     requires org.json;
 
@@ -19,6 +20,8 @@ module pmzwei {
     exports vorlesungsuebungen.vorlesung08.uebung7;
     exports vorlesungsuebungen.vorlesung09.uebung3_4_5_6;
     exports vorlesungsuebungen.vorlesung09.uebung7;
+    exports praktikum.aufgabe1;
+    exports praktikum.aufgabe2;
     exports praktikum.aufgabe3.darstellung;
     exports praktikum.aufgabe4;
 }
