@@ -8,13 +8,6 @@ public class PM2Map<K, V> implements Map<K, V> {
   public PM2Map() {
   }
 
-  void einfuegen(String kategorie, Person person) {
-    if (put((K) kategorie, (V) person).equals(null)) ;
-    Map<String, List<Person>> m = new HashMap<>();
-    
-  }
-
-
   @Override
   public int size() {
     return this.paare.length;
