@@ -152,4 +152,13 @@ public class PM2Map<K, V> implements Map<K, V> {
       return oldValue;
     }
   }
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    for (var paar : paare) {
+      sb.append(paar.getKey()).append(" -> ").append(paar.getValue()).
+        append('\n');
+    }
+    return sb.toString();
+  }
 }
