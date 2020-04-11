@@ -3,7 +3,7 @@ package praktikum.aufgabe1.F;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Objects;
+import java.util.*;
 
 public class Person {
   private String vorname;
@@ -24,6 +24,13 @@ public class Person {
     this.vorname = lastName;
     this.nachname = firstName;
     this.geburtsdatum = LocalDate.of(year,month,day);
+  }
+
+  void einfuegen1(String kategorie, Person person){
+    Map<String, List<Person>> m = new PM2Map<>();
+    if(m.containsKey(kategorie)){
+      
+    }
   }
 
   @Override

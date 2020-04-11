@@ -11,7 +11,7 @@ public class PM2Map<K, V> implements Map<K, V> {
   void einfuegen(String kategorie, Person person) {
     if (put((K) kategorie, (V) person).equals(null)) ;
     Map<String, List<Person>> m = new HashMap<>();
-
+    
   }
 
 
