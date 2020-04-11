@@ -24,16 +24,12 @@ public class TestMap {
    * -Methode initialisiert.
    */
   private Map<Integer, String> testMap;
-  private Person p1;
-  private PM2Map<String, List<Person>> pm2Map;
 
   @BeforeEach
   public void init() {
     // Achtung: hier müssen Sie Ihre Implementierung instanziieren.
     //testMap = new HashMap<>();
     testMap = new PM2Map<>();
-    pm2Map = new PM2Map<>();
-    p1 = new Person("Frodo", "Beutlin", LocalDate.of(2012, 3, 3));
   }
 
   @Test
