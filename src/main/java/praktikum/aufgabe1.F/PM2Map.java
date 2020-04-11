@@ -9,7 +9,9 @@ public class PM2Map<K, V> implements Map<K, V> {
   }
 
   void einfuegen(String kategorie, Person person) {
-    if (put((K)kategorie, (V)person).equals(null));
+    if (put((K) kategorie, (V) person).equals(null)) ;
+    Map<String, List<Person>> m = new HashMap<>();
+
   }
 
 
@@ -64,13 +66,11 @@ public class PM2Map<K, V> implements Map<K, V> {
           return v;
         }
       }
-    } else {
-      int newLength = paare.length + 1;
-      paare = Arrays.copyOf(paare, paare.length+1);
-      paare[newLength - 1] = new MapPaar<>(k, v);
-      return v;
     }
-    return null;
+    int newLength = paare.length + 1;
+    paare = Arrays.copyOf(paare, paare.length + 1);
+    paare[newLength - 1] = new MapPaar<>(k, v);
+    return v;
   }
 
   @Override
