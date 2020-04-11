@@ -16,6 +16,16 @@ public class Person {
     this.geburtsdatum = geburtsdatum;
   }
 
+  public Person(String firstName, String lastName, int day, int month,
+                int year) {
+    if (lastName == null || firstName == null) {
+      throw new IllegalArgumentException("Parameters can't be null");
+    }
+    this.vorname = lastName;
+    this.nachname = firstName;
+    this.geburtsdatum = LocalDate.of(year,month,day);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
