@@ -1,6 +1,8 @@
 package praktikum.aufgabe1.F;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Objects;
 
 public class Person {
@@ -26,7 +28,12 @@ public class Person {
 
   @Override
   public String toString() {
-    return super.toString();
+    return
+      '\n' +
+        "first name: \t" + vorname + '\n' +
+        "last name: \t" + nachname + '\n' +
+        "birthday: \t" + geburtsdatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) +
+        '\n';
   }
 
   @Override
