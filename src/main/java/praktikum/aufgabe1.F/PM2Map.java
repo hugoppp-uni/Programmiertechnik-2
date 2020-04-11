@@ -66,9 +66,7 @@ public class PM2Map<K, V> implements Map<K, V> {
       }
     } else {
       int newLength = paare.length + 1;
-      MapPaar<K, V>[] newArray = new MapPaar[newLength];
-      System.arraycopy(paare, 0, newArray, 0, paare.length);
-      paare = newArray;
+      paare = Arrays.copyOf(paare, paare.length+1);
       paare[newLength - 1] = new MapPaar<>(k, v);
       return v;
     }
