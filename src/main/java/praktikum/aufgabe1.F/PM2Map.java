@@ -119,12 +119,14 @@ public class PM2Map<K, V> implements Map<K, V> {
     for (MapPaar<K, V> m : paare) {
       c.add(m.getValue());
     }
-    return (Collection<V>) c;
+    return c;
   }
 
   @Override
   public Set<Entry<K, V>> entrySet() {
-    return null;
+    Set<Entry<K, V>> set = new HashSet<>();
+    set.addAll(Arrays.asList(paare));
+    return set;
   }
 
   public static class MapPaar<K, V> implements Map.Entry<K, V> {
