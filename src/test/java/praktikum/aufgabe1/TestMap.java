@@ -25,44 +25,62 @@ public class TestMap {
     @BeforeEach
     public void init() {
         // Achtung: hier müssen Sie Ihre Implementierung instanziieren.
-        testMap = new HashMap<>();
-        //testMap = new PM2Map<>();
+        //testMap = new HashMap<>();
+        testMap = new PM2Map<>();
     }
 
     @Test
     public void testSize() {
-        // TODO
-        assertTrue(true);
+        assertEquals(testMap.size(), 0);
+        testMap.put(1, "1");
+        assertEquals(testMap.size(), 1);
+        testMap.put(1, "2");
+        assertEquals(testMap.size(), 1);
+        testMap.put(2, "2");
+        assertEquals(testMap.size(), 2);
+        testMap.put(3, "3");
+        testMap.put(4, "4");
+        testMap.put(5, "5");
+        testMap.put(6, "6");
+        assertEquals(testMap.size(), 6);
     }
 
     @Test
     public void testIsEmpty() {
-        // TODO
-        assertTrue(true);
+        assertTrue(testMap.isEmpty());
+        testMap.put(1, "1");
+        assertFalse(testMap.isEmpty());
     }
 
     @Test
     public void testContainsKey() {
-        // TODO
-        assertTrue(true);
+        assertFalse(testMap.containsKey(1));
+        testMap.put(1, "1");
+        assertTrue(testMap.containsKey(1));
     }
 
     @Test
     public void testContainsValue() {
-        // TODO
-        assertTrue(true);
+        assertFalse(testMap.containsValue("1"));
+        testMap.put(1, "1");
+        assertTrue(testMap.containsValue("1"));
     }
 
     @Test
     public void testGet() {
-        // TODO
-        assertTrue(true);
+        assertNull(testMap.get(1));
+        testMap.put(1, "1");
+        assertEquals(testMap.get(1), "1");
     }
 
     @Test
     public void testPut() {
-        // TODO
-        assertTrue(true);
+        assertNull(testMap.put(1,"1"));
+        assertEquals(testMap.size(), 1);
+        assertEquals(testMap.put(1,"2"),"1");
+        assertEquals(testMap.size(), 1);
+        testMap.put(3, "3");
+        assertEquals(testMap.size(), 2);
     }
 
     @Test
