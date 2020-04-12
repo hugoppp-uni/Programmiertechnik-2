@@ -5,9 +5,6 @@ import java.util.*;
 public class PM2Map<K, V> implements Map<K, V> {
   private MapPaar<K, V>[] paare = new MapPaar[0];
 
-  public PM2Map() {
-  }
-
   @Override
   public int size() {
     return this.paare.length;

@@ -10,7 +10,7 @@ public class Person {
   private String nachname;
   private LocalDate geburtsdatum;
 
-  public Person(String vorname, String nachname, LocalDate geburtsdatum){
+  public Person(String vorname, String nachname, LocalDate geburtsdatum) {
     this.vorname = vorname;
     this.nachname = nachname;
     this.geburtsdatum = geburtsdatum;
@@ -23,14 +23,7 @@ public class Person {
     }
     this.vorname = lastName;
     this.nachname = firstName;
-    this.geburtsdatum = LocalDate.of(year,month,day);
-  }
-
-  void einfuegen1(String kategorie, Person person){
-    Map<String, List<Person>> m = new PM2Map<>();
-    if(m.containsKey(kategorie)){
-      
-    }
+    this.geburtsdatum = LocalDate.of(year, month, day);
   }
 
   @Override
@@ -49,7 +42,8 @@ public class Person {
       '\n' +
         "first name: \t" + vorname + '\n' +
         "last name: \t" + nachname + '\n' +
-        "birthday: \t" + geburtsdatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) +
+        "birthday: \t" + geburtsdatum.format
+        (DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) +
         '\n';
   }
 
