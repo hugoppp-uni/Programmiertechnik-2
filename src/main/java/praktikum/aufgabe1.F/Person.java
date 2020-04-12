@@ -6,24 +6,17 @@ import java.time.format.FormatStyle;
 import java.util.*;
 
 public class Person {
-  private String vorname;
-  private String nachname;
-  private LocalDate geburtsdatum;
+  private final String vorname;
+  private final String nachname;
+  private final LocalDate geburtsdatum;
 
   public Person(String vorname, String nachname, LocalDate geburtsdatum) {
+    if (nachname == null || vorname == null) {
+      throw new IllegalArgumentException("Parameters can't be null");
+    }
     this.vorname = vorname;
     this.nachname = nachname;
     this.geburtsdatum = geburtsdatum;
-  }
-
-  public Person(String firstName, String lastName, int day, int month,
-                int year) {
-    if (lastName == null || firstName == null) {
-      throw new IllegalArgumentException("Parameters can't be null");
-    }
-    this.vorname = lastName;
-    this.nachname = firstName;
-    this.geburtsdatum = LocalDate.of(year, month, day);
   }
 
   @Override

@@ -1,7 +1,7 @@
-/**
- * Diese Datei ist Teil der Vorgabe zur Lehrveranstaltung Programmiermethodik 2
- * im Studiengang ITS der Hochschule für Angewandte Wissenschaften Hamburg von
- * Prof. Philipp Jenke (Informatik)
+/*
+  Diese Datei ist Teil der Vorgabe zur Lehrveranstaltung Programmiermethodik 2
+  im Studiengang ITS der Hochschule für Angewandte Wissenschaften Hamburg von
+  Prof. Philipp Jenke (Informatik)
  */
 
 package praktikum.aufgabe1.F;
@@ -9,7 +9,6 @@ package praktikum.aufgabe1.F;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
