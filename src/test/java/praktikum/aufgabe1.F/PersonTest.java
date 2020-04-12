@@ -34,9 +34,9 @@ class PersonTest {
 
   @Test
   void testEquals() {
-    assertFalse(testMap.get("Hobbit").get(0).equals(testMap.get("Hobbit").get(1)));
-    assertTrue(testMap.get("Hobbit").get(0).equals(testMap.get("Hobbit").get(2)));
-    assertFalse(testMap.get("Hobbit").get(0).equals(testMap.get("Hobbit").get(3)));
-    assertFalse(testMap.get("Hobbit").get(0).equals(testMap.get("Hobbit").get(4)));
+    assertNotEquals(testMap.get("Hobbit").get(0), testMap.get("Hobbit").get(1));
+    assertEquals(testMap.get("Hobbit").get(0), testMap.get("Hobbit").get(2));
+    assertNotEquals(testMap.get("Hobbit").get(0), testMap.get("Hobbit").get(3));
+    assertNotEquals(testMap.get("Hobbit").get(0), testMap.get("Hobbit").get(4));
   }
 }
