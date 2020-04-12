@@ -13,7 +13,7 @@ class PersonTest {
   private final PersonListMap testMap = new PersonListMap();
 
   @BeforeEach
-  public void init(){
+  public void init() {
     Person Frodo = new Person("Frodo", "Beutlin",
       LocalDate.of(1009, 12, 3));
     Person Legolas = new Person("Legolas", "Grünblatt",
@@ -41,6 +41,6 @@ class PersonTest {
 
   @Test
   void testHashCode() {
-    
+
   }
 }

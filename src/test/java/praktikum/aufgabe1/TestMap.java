@@ -76,9 +76,9 @@ public class TestMap {
 
     @Test
     public void testPut() {
-        assertNull(testMap.put(1,"1"));
+        assertNull(testMap.put(1, "1"));
         assertEquals(testMap.size(), 1);
-        assertEquals(testMap.put(1,"2"),"1");
+        assertEquals(testMap.put(1, "2"), "1");
         assertEquals(testMap.size(), 1);
         testMap.put(3, "3");
         assertEquals(testMap.size(), 2);
@@ -163,11 +163,20 @@ public class TestMap {
         testMap.put(12, "12");
         eintraege = testMap.entrySet();
         assertEquals(3, eintraege.size());
-        for (Map.Entry<Integer, String> eintrag: eintraege) {
+        for (Map.Entry<Integer, String> eintrag : eintraege) {
             assertTrue(eintrag.getKey().equals(23) || eintrag.getKey().equals(42) ||
-                    eintrag.getKey().equals(12));
+              eintrag.getKey().equals(12));
             assertTrue(eintrag.getValue().equals("23") || eintrag.getValue().equals("42") ||
-                    eintrag.getValue().equals("12"));
+              eintrag.getValue().equals("12"));
         }
+    }
+
+    public static void main(String[] args) {
+        Map<String, String> map = new PM2Map<>();
+
+        map.put("eins", "1");
+        map.put("zwei", "2");
+
+        System.out.println(map);
     }
 }
