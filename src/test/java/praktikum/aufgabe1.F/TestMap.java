@@ -33,7 +33,6 @@ public class TestMap {
 
     @Test
     public void testSize() {
-        // TODO
         assertEquals(0, testMap.size());
         testMap.put(1, "Hello");
         assertEquals(1, testMap.size());
@@ -46,7 +45,6 @@ public class TestMap {
 
     @Test
     public void testIsEmpty() {
-        // TODO
         assertTrue(testMap.isEmpty());
         testMap.put(23, "23");
         assertFalse(testMap.isEmpty());
@@ -56,7 +54,6 @@ public class TestMap {
 
     @Test
     public void testContainsKey() {
-        // TODO
         assertFalse(testMap.containsKey(23));
         testMap.put(23, "23");
         assertTrue(testMap.containsKey(23));
@@ -66,7 +63,6 @@ public class TestMap {
 
     @Test
     public void testContainsValue() {
-        // TODO
         assertFalse(testMap.containsValue("23"));
         testMap.put(23, "23");
         assertTrue(testMap.containsValue("23"));
@@ -80,7 +76,6 @@ public class TestMap {
 
     @Test
     public void testGet() {
-        // TODO
         assertNull(testMap.get(23));
         testMap.put(23, "23");
         assertNotNull(testMap.get(23));
@@ -89,7 +84,6 @@ public class TestMap {
 
     @Test
     public void testPut() {
-        // TODO
         assertEquals("Hello", testMap.put(2, "Hello"));
         assertEquals("Nihao", testMap.put(2, "Nihao"));
         assertEquals(1, testMap.size());
