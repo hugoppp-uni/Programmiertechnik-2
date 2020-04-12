@@ -1,4 +1,8 @@
 package praktikum.aufgabe1.F;
+/**
+ * Implementation einer Map,
+ * akzeptiert keine Null - Keys
+ */
 
 import java.util.*;
 
