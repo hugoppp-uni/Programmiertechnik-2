@@ -37,11 +37,9 @@ public class PM2Map<K, V> implements Map<K, V> {
 
     @Override
     public V get(Object key) {
-        if (containsKey(key)) {
-            for (MapPaar<K, V> m : paare) {
-                if (m.key.equals(key)) {
-                    return m.value;
-                }
+        for (MapPaar<K, V> m : paare) {
+            if (m.key.equals(key)) {
+                return m.value;
             }
         }
         return null;
@@ -68,9 +66,11 @@ public class PM2Map<K, V> implements Map<K, V> {
         for (int i = 0; i <= paare.length - 1; i++) {
             if (paare[i].key.equals(key)) {
                 V v = paare[i].value;
-                MapPaar<K, V>[] newArray = Arrays.copyOf(paare, paare.length - 1);
+                MapPaar<K, V>[] newArray = Arrays.copyOf(paare,
+                  paare.length - 1);
                 if (paare.length >= 2) {
-                    System.arraycopy(paare, i + 1, newArray, i, paare.length - (i + 1));
+                    System.arraycopy(paare, i + 1, newArray, i,
+                      paare.length - (i + 1));
                 }
                 paare = newArray;
                 return v;
@@ -121,6 +121,9 @@ public class PM2Map<K, V> implements Map<K, V> {
         private V value;
 
         public MapPaar(K key, V value) {
+            if(key == null){
+                throw new IllegalArgumentException("Key darf nicht null sein");
+            }
             this.key = key;
             this.value = value;
         }
