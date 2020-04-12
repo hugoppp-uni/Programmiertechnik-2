@@ -1,11 +1,11 @@
 package praktikum.aufgabe1.F;
+
+import java.util.*;
+
 /**
  * Implementation einer Map,
  * akzeptiert keine Null - Keys
  */
-
-import java.util.*;
-
 public class PM2Map<K, V> implements Map<K, V> {
     private MapPaar<K, V>[] paare = new MapPaar[0];
 
@@ -125,7 +125,7 @@ public class PM2Map<K, V> implements Map<K, V> {
         private V value;
 
         public MapPaar(K key, V value) {
-            if(key == null){
+            if (key == null) {
                 throw new IllegalArgumentException("Key darf nicht null sein");
             }
             this.key = key;
