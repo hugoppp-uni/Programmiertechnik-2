@@ -7,6 +7,7 @@ package praktikum.aufgabe1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import praktikum.aufgabe1.F.PM2Map;
 
 import java.util.*;
 

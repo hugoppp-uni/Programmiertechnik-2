@@ -19,6 +19,11 @@ public class Person {
     this.geburtsdatum = geburtsdatum;
   }
 
+  public Person(String vorname, String nachname, int day, int month,
+                int year) {
+    this(vorname,nachname, LocalDate.of(year,month,day));
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

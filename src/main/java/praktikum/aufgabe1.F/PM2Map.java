@@ -151,4 +151,14 @@ public class PM2Map<K, V> implements Map<K, V> {
     }
     return sb.toString();
   }
+
+
+  public static void main(String[] args) {
+    PM2Map<String,String> map = new PM2Map<>();
+
+    map.put("eins", "1");
+    map.put("zwei", "2");
+
+    System.out.println(map);
+  }
 }
