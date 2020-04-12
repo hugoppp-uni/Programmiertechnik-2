@@ -9,6 +9,16 @@ public class PersonListMap extends PM2Map<String, List<Person>> {
         super();
     }
 
+    /**
+     * Methode zum Einfügen von einer Person mit einer Kategorie in die Map
+     * <p>
+     * Ist die Kategorie noch nicht in der Map vorhanden, wird eine neue Liste
+     * an Personen angelegt und die Person eingefügt. Wenn es die Kategorie
+     * schon gibt, wird die Person in die schon bestehende Liste eingefügt.
+     *
+     * @param kategorie String
+     * @param person Person
+     */
     public void einfuegen(String kategorie, Person person) {
         if (!containsKey(kategorie)) {
             List<Person> newList = new ArrayList<>();

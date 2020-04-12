@@ -18,7 +18,7 @@ public class PM2Map<K, V> implements Map<K, V> {
     @Override
     public boolean containsKey(Object o) {
         for (MapPaar<K, V> p : this.paare) {
-            if (p.key.equals(o)) {
+            if (p.getKey().equals(o)) {
                 return true;
             }
         }
@@ -28,7 +28,7 @@ public class PM2Map<K, V> implements Map<K, V> {
     @Override
     public boolean containsValue(Object o) {
         for (MapPaar<K, V> p : this.paare) {
-            if (p.value.equals(o)) {
+            if (p.getValue().equals(o)) {
                 return true;
             }
         }
@@ -38,8 +38,8 @@ public class PM2Map<K, V> implements Map<K, V> {
     @Override
     public V get(Object key) {
         for (MapPaar<K, V> m : paare) {
-            if (m.key.equals(key)) {
-                return m.value;
+            if (m.getKey().equals(key)) {
+                return m.getValue();
             }
         }
         return null;
@@ -49,8 +49,8 @@ public class PM2Map<K, V> implements Map<K, V> {
     public V put(K k, V v) {
         if (containsKey(k)) {
             for (MapPaar<K, V> m : paare) {
-                if (m.key.equals(k)) {
-                    m.value = v;
+                if (m.getKey().equals(k)) {
+                    m.setValue(v);
                     return v;
                 }
             }
@@ -64,8 +64,8 @@ public class PM2Map<K, V> implements Map<K, V> {
     @Override
     public V remove(Object key) {
         for (int i = 0; i <= paare.length - 1; i++) {
-            if (paare[i].key.equals(key)) {
-                V v = paare[i].value;
+            if (paare[i].getKey().equals(key)) {
+                V v = paare[i].getValue();
                 MapPaar<K, V>[] newArray = Arrays.copyOf(paare,
                   paare.length - 1);
                 if (paare.length >= 2) {
