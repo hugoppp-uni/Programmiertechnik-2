@@ -1,14 +1,13 @@
 package praktikum.aufgabe1.F;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-class PersonTest {
+public class PersonTest {
 
   private final PersonListMap testMap = new PersonListMap();
 

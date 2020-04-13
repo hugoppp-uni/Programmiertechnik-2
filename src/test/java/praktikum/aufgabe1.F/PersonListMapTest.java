@@ -8,9 +8,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PersonListMapTest {
+public class PersonListMapTest {
 
     private final PersonListMap testMap = new PersonListMap();
 
