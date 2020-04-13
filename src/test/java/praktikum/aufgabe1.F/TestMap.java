@@ -9,6 +9,7 @@ package praktikum.aufgabe1.F;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -186,5 +187,16 @@ public class TestMap {
         map.put("zwei", "2");
 
         System.out.println(map);
+
+        PM2Map<String, List<Person>> listPM2Map = new PM2Map<>();
+
+        listPM2Map.put("Hobbit", Collections.singletonList(new Person
+          ("Frodo", "Beutlin",
+            LocalDate.of(1992, 2, 19))));
+        listPM2Map.put("Hobbit", Collections.singletonList(new Person
+          ("Merry", "Beutlin",
+            LocalDate.of(1999, 4, 24))));
+
+        System.out.println(listPM2Map);
     }
 }
