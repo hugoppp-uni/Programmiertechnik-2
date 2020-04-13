@@ -188,14 +188,14 @@ public class TestMap {
 
         System.out.println(map);
 
-        PM2Map<String, List<Person>> listPM2Map = new PM2Map<>();
+        PersonListMap listPM2Map = new PersonListMap();
 
-        listPM2Map.put("Hobbit", Collections.singletonList(new Person
+        listPM2Map.einfuegen("Hobbit", new Person
           ("Frodo", "Beutlin",
-            LocalDate.of(1992, 2, 19))));
-        listPM2Map.put("Hobbit", Collections.singletonList(new Person
+            LocalDate.of(1992, 2, 19)));
+        listPM2Map.einfuegen("Hobbit", new Person
           ("Merry", "Beutlin",
-            LocalDate.of(1999, 4, 24))));
+            LocalDate.of(1999, 4, 24)));
 
         System.out.println(listPM2Map);
     }
