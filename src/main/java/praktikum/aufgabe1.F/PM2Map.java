@@ -97,7 +97,7 @@ public class PM2Map<K, V> implements Map<K, V> {
 
     @Override
     public Set<K> keySet() {
-        Set<K> set = new HashSet<K>();
+        Set<K> set = new HashSet<>();
         for (MapPaar<K, V> m : paare) {
             set.add(m.getKey());
         }
@@ -115,13 +115,11 @@ public class PM2Map<K, V> implements Map<K, V> {
 
     @Override
     public Set<Entry<K, V>> entrySet() {
-        Set<Entry<K, V>> set = new HashSet<>();
-        set.addAll(Arrays.asList(paare));
-        return set;
+        return new HashSet<>(Arrays.asList(paare));
     }
 
     public static class MapPaar<K, V> implements Map.Entry<K, V> {
-        private K key;
+        private final K key;
         private V value;
 
         public MapPaar(K key, V value) {
