@@ -12,31 +12,22 @@ class PersonTest {
 
   private final PersonListMap testMap = new PersonListMap();
 
-  @BeforeEach
-  public void init() {
-    Person Frodo = new Person("Frodo", "Beutlin",
-      LocalDate.of(1009, 12, 3));
-    Person Frodo1 = new Person("Frodo", "Beutlin",
-      LocalDate.of(1009, 12, 3));
-    Person Frodo2 = new Person("Frodolin", "Beutlin",
-      LocalDate.of(1009, 12, 3));
-    Person Frodo3 = new Person("Frodo", "Beutlin",
-      LocalDate.of(1008, 12, 3));
-    Person Merry = new Person("Meriadoc", "Brandybock",
-      LocalDate.of(1382, 4, 24));
-    testMap.einfuegen("Hobbit", Frodo);
-    testMap.einfuegen("Hobbit", Merry);
-    testMap.einfuegen("Hobbit", Frodo1);
-    testMap.einfuegen("Hobbit", Frodo2);
-    testMap.einfuegen("Hobbit", Frodo3);
-  }
-
-
   @Test
   void testEquals() {
-    assertNotEquals(testMap.get("Hobbit").get(0), testMap.get("Hobbit").get(1));
-    assertEquals(testMap.get("Hobbit").get(0), testMap.get("Hobbit").get(2));
-    assertNotEquals(testMap.get("Hobbit").get(0), testMap.get("Hobbit").get(3));
-    assertNotEquals(testMap.get("Hobbit").get(0), testMap.get("Hobbit").get(4));
+    Person frodo = new Person("Frodo", "Beutlin",
+      LocalDate.of(1009, 12, 3));
+    Person frodo_gleich = new Person("Frodo", "Beutlin",
+      LocalDate.of(1009, 12, 3));
+    Person frodo2_vorname = new Person("falsch", "Beutlin",
+      LocalDate.of(1009, 12, 3));
+    Person frodo_geb = new Person("Frodo", "Beutlin",
+      LocalDate.of(9999, 12, 3));
+    Person frodo_nachname = new Person("Frodo", "falsch",
+      LocalDate.of(9999, 12, 3));
+
+    assertEquals(frodo, frodo_gleich);
+    assertNotEquals(frodo,frodo2_vorname);
+    assertNotEquals(frodo,frodo_nachname);
+    assertNotEquals(frodo, frodo_geb);
   }
 }
