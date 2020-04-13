@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class PersonTest {
+public class TestPerson {
 
   private final PersonListMap testMap = new PersonListMap();
 
