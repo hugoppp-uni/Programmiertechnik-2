@@ -6,23 +6,34 @@ import java.util.*;
  * Implementation einer Map,
  * akzeptiert keine Null - Keys
  */
+
+//TODO Hashcode vor Equals
+//TODO Verdoppeln vom Array statt +1
 public class PM2Map<K, V> implements Map<K, V> {
-    private MapPaar<K, V>[] paare = new MapPaar[0];
+    private Object[] paare;
+    private int anzElemente;
+
+    public PM2Map() {
+        this.paare = new MapPaar[0];
+    }
 
     @Override
     public int size() {
-        return this.paare.length;
+        return anzElemente;
     }
 
     @Override
     public boolean isEmpty() {
-        return this.paare == null || this.paare.length == 0;
+        return anzElemente == 0;
     }
 
     @Override
     public boolean containsKey(Object o) {
-        for (MapPaar<K, V> p : this.paare) {
-            if (p.getKey().equals(o)) {
+        var andererKey = ((MapPaar<K, V>) o).getKey();
+        for (int i = 0; i < anzElemente; i++) {
+            var aktuellerKey = ((MapPaar<K, V>) paare[i]).getKey();
+            if (aktuellerKey.hashCode() == andererKey.hashCode() &&
+              aktuellerKey.equals(andererKey)) {
                 return true;
             }
         }
@@ -31,8 +42,12 @@ public class PM2Map<K, V> implements Map<K, V> {
 
     @Override
     public boolean containsValue(Object o) {
-        for (MapPaar<K, V> p : this.paare) {
-            if (p.getValue().equals(o)) {
+
+        var andererValue = ((MapPaar<K, V>) o).getValue();
+        for (int i = 0; i < anzElemente; i++) {
+            var aktuellerValue = ((MapPaar<K, V>) paare[i]).getValue();
+            if (aktuellerValue.hashCode() == andererValue.hashCode() &&
+              aktuellerValue.equals(andererValue)) {
                 return true;
             }
         }
@@ -40,10 +55,13 @@ public class PM2Map<K, V> implements Map<K, V> {
     }
 
     @Override
-    public V get(Object key) {
-        for (MapPaar<K, V> m : paare) {
-            if (m.getKey().equals(key)) {
-                return m.getValue();
+    public V get(Object o) {
+        var keyZuFinden = ((MapPaar<K, V>) o).getKey();
+        for (int i = 0; i < anzElemente; i++) {
+            var aktuellerKey = ((MapPaar<K, V>) paare[i]).getKey();
+            if (aktuellerKey.hashCode() == keyZuFinden.hashCode() &&
+              aktuellerKey.equals(keyZuFinden)) {
+                return ((MapPaar<K, V>) paare[i]).getValue();
             }
         }
         return null;
@@ -52,22 +70,27 @@ public class PM2Map<K, V> implements Map<K, V> {
     @Override
     public V put(K k, V v) {
         if (containsKey(k)) {
-            for (MapPaar<K, V> m : paare) {
-                if (m.getKey().equals(k)) {
-                    m.setValue(v);
-                    return v;
+            var keyZuFinden = ((MapPaar<K, V>) k).getKey();
+            for (int i = 0; i < anzElemente; i++) {
+                var aktuellerKey = ((MapPaar<K, V>) paare[i]).getKey();
+                if (aktuellerKey.hashCode() == keyZuFinden.hashCode() &&
+                  aktuellerKey.equals(keyZuFinden)) {
+                    var alterValue = ((MapPaar<K, V>) paare[i]).getValue();
+                    ((MapPaar<K, V>) paare[i]).setValue(v);
+                    return alterValue;
                 }
             }
+
+
         }
-        int newLength = paare.length + 1;
-        paare = Arrays.copyOf(paare, paare.length + 1);
-        paare[newLength - 1] = new MapPaar<>(k, v);
-        return v;
+        if (anzElemente == paare.length) verdoppeln();
+        paare[anzElemente + 1] = new MapPaar<>(k, v);
+        return null;
     }
 
     @Override
     public V remove(Object key) {
-        for (int i = 0; i <= paare.length - 1; i++) {
+        for (int i = 0; i < paare.length; i++) {
             if (paare[i].getKey().equals(key)) {
                 V v = paare[i].getValue();
                 MapPaar<K, V>[] newArray = Arrays.copyOf(paare,
@@ -158,4 +181,7 @@ public class PM2Map<K, V> implements Map<K, V> {
         return sb.toString();
     }
 
+    private void verdoppeln() {
+        paare = Arrays.copyOf(paare, paare.length * 2);
+    }
 }

@@ -9,7 +9,8 @@ package praktikum.aufgabe1.F;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,6 +23,7 @@ public class TestMap {
      * Mit dieser Map wird getestet. Sie wird für jeden Test neu in der init()
      * -Methode initialisiert.
      */
+    //TODO Null-Werte testen
     private Map<Integer, String> testMap;
 
     @BeforeEach

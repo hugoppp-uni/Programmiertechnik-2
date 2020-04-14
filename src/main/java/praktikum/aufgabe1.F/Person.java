@@ -3,7 +3,7 @@ package praktikum.aufgabe1.F;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.*;
+import java.util.Objects;
 
 public class Person {
     private final String vorname;
@@ -47,6 +47,6 @@ public class Person {
 
     @Override
     public int hashCode() {
-        return Objects.hash(vorname, nachname, geburtsdatum);
+        return Objects.hash(nachname, geburtsdatum);
     }
 }

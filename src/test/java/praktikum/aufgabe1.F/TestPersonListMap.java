@@ -16,6 +16,7 @@ public class TestPersonListMap {
 
     @Test
     void TestEinfuegen() {
+        assertEquals(0, testMap.size());
         Person Frodo = new Person("Frodo", "Beutlin",
           LocalDate.of(1009, 12, 3));
         Person Legolas = new Person("Legolas", "Grünblatt",
