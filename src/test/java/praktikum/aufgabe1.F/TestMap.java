@@ -9,7 +9,8 @@ package praktikum.aufgabe1.F;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,11 +35,17 @@ public class TestMap {
     @Test
     public void testSize() {
         assertEquals(0, testMap.size());
+
         testMap.put(1, "Hello");
         assertEquals(1, testMap.size());
+
+        testMap.put(1, "Hello");
+        assertEquals(1, testMap.size());
+
         testMap.put(2, "Nihao");
         testMap.put(3, "Konnichiha");
         assertEquals(3, testMap.size());
+
         testMap.remove(1, "Hello");
         assertEquals(2, testMap.size());
     }
@@ -84,12 +91,11 @@ public class TestMap {
 
     @Test
     public void testPut() {
-        assertEquals("Hello", testMap.put(2, "Hello"));
-        assertEquals("Nihao", testMap.put(2, "Nihao"));
-        assertEquals(1, testMap.size());
-        assertEquals("oyasumi", testMap.put(1, "oyasumi"));
-        assertEquals(2, testMap.size());
-        assertNotEquals("Oyasumi", testMap.put(2, "oyasumi"));
+        assertNull(testMap.put(2, "Hello"));
+        assertEquals("Hello", testMap.get(2));
+
+        assertEquals("Hello", testMap.put(2, "Moin"));
+        assertEquals("Moin", testMap.get(2));
     }
 
     @Test
@@ -164,18 +170,20 @@ public class TestMap {
 
     @Test
     public void testEntrySet() {
-        var eintraege = testMap.entrySet();
-        assertEquals(0, eintraege.size());
+        var entrySet = testMap.entrySet();
+        assertEquals(0, entrySet.size());
         testMap.put(23, "23");
         testMap.put(42, "42");
         testMap.put(12, "12");
-        eintraege = testMap.entrySet();
-        assertEquals(3, eintraege.size());
-        for (Map.Entry<Integer, String> eintrag : eintraege) {
-            assertTrue(eintrag.getKey().equals(23) || eintrag.getKey().equals(42) ||
+        entrySet = testMap.entrySet();
+        assertEquals(3, entrySet.size());
+        for (Map.Entry<Integer, String> eintrag : entrySet) {
+            assertTrue(
+              eintrag.getKey().equals(23) || eintrag.getKey().equals(42) ||
               eintrag.getKey().equals(12));
-            assertTrue(eintrag.getValue().equals("23") || eintrag.getValue().equals("42") ||
-              eintrag.getValue().equals("12"));
+            assertTrue(eintrag.getValue().equals("23") ||
+                       eintrag.getValue().equals("42") ||
+                       eintrag.getValue().equals("12"));
         }
     }
 

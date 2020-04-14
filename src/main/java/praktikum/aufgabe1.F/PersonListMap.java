@@ -17,7 +17,7 @@ public class PersonListMap extends PM2Map<String, List<Person>> {
      * schon gibt, wird die Person in die schon bestehende Liste eingefügt.
      *
      * @param kategorie String
-     * @param person Person
+     * @param person    Person
      */
     public void einfuegen(String kategorie, Person person) {
         if (!containsKey(kategorie)) {

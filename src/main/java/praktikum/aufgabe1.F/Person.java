@@ -30,19 +30,19 @@ public class Person {
         if (!(o instanceof Person)) return false;
         Person person = (Person) o;
         return Objects.equals(vorname, person.vorname) &&
-          Objects.equals(nachname, person.nachname) &&
-          Objects.equals(geburtsdatum, person.geburtsdatum);
+               Objects.equals(nachname, person.nachname) &&
+               Objects.equals(geburtsdatum, person.geburtsdatum);
     }
 
     @Override
     public String toString() {
         return
           '\n' +
-            "first name: \t" + vorname + '\n' +
-            "last name: \t" + nachname + '\n' +
-            "birthday: \t" + geburtsdatum.format
+          "first name: \t" + vorname + '\n' +
+          "last name: \t" + nachname + '\n' +
+          "birthday: \t" + geburtsdatum.format
             (DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) +
-            '\n';
+          '\n';
     }
 
     @Override
