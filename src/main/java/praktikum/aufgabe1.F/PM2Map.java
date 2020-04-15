@@ -7,6 +7,7 @@ import java.util.*;
  * akzeptiert keine Null - Keys
  */
 
+@SuppressWarnings({"unchecked", "NullableProblems"})
 public class PM2Map<K, V> implements Map<K, V> {
     private Object[] paare;
     private int anzElemente;
@@ -26,12 +27,11 @@ public class PM2Map<K, V> implements Map<K, V> {
     }
 
     @Override
-    public boolean containsKey(Object o) {
-        var andererKey = o;
+    public boolean containsKey(Object k) {
         for (int i = 0; i < anzElemente; i++) {
             var aktuellerKey = ((MapPaar<K, V>) paare[i]).getKey();
-            if (aktuellerKey.hashCode() == andererKey.hashCode() &&
-                aktuellerKey.equals(andererKey)) {
+            if (aktuellerKey.hashCode() == k.hashCode() &&
+                aktuellerKey.equals(k)) {
                 return true;
             }
         }
@@ -39,12 +39,11 @@ public class PM2Map<K, V> implements Map<K, V> {
     }
 
     @Override
-    public boolean containsValue(Object o) {
-        var andererValue = o;
+    public boolean containsValue(Object v) {
         for (int i = 0; i < anzElemente; i++) {
             var aktuellerValue = ((MapPaar<K, V>) paare[i]).getValue();
-            if (aktuellerValue.hashCode() == andererValue.hashCode() &&
-                aktuellerValue.equals(andererValue)) {
+            if (aktuellerValue.hashCode() == v.hashCode() &&
+                aktuellerValue.equals(v)) {
                 return true;
             }
         }
@@ -52,12 +51,11 @@ public class PM2Map<K, V> implements Map<K, V> {
     }
 
     @Override
-    public V get(Object o) {
-        var keyZuFinden = o;
+    public V get(Object v) {
         for (int i = 0; i < anzElemente; i++) {
             var aktuellerKey = ((MapPaar<K, V>) paare[i]).getKey();
-            if (aktuellerKey.hashCode() == keyZuFinden.hashCode() &&
-                aktuellerKey.equals(keyZuFinden)) {
+            if (aktuellerKey.hashCode() == v.hashCode() &&
+                aktuellerKey.equals(v)) {
                 return ((MapPaar<K, V>) paare[i]).getValue();
             }
         }
@@ -67,11 +65,10 @@ public class PM2Map<K, V> implements Map<K, V> {
     @Override
     public V put(K k, V v) {
         if (containsKey(k)) {
-            var keyZuFinden = k;
             for (int i = 0; i < anzElemente; i++) {
                 var aktuellerKey = ((MapPaar<K, V>) paare[i]).getKey();
-                if (aktuellerKey.hashCode() == keyZuFinden.hashCode() &&
-                    aktuellerKey.equals(keyZuFinden)) {
+                if (aktuellerKey.hashCode() == k.hashCode() &&
+                    aktuellerKey.equals(k)) {
                     var alterValue = ((MapPaar<K, V>) paare[i]).getValue();
                     ((MapPaar<K, V>) paare[i]).setValue(v);
                     return alterValue;
@@ -86,11 +83,10 @@ public class PM2Map<K, V> implements Map<K, V> {
 
     @Override
     public V remove(Object k) {
-        var keyZuFinden = k;
         for (int i = 0; i < anzElemente; i++) {
             var aktuellerKey = ((MapPaar<K, V>) paare[i]).getKey();
-            if (aktuellerKey.hashCode() == keyZuFinden.hashCode() &&
-                aktuellerKey.equals(keyZuFinden)) {
+            if (aktuellerKey.hashCode() == k.hashCode() &&
+                aktuellerKey.equals(k)) {
                 var alterValue = ((MapPaar<K, V>) paare[i]).getValue();
                 var temp = Arrays.copyOf(paare, paare.length - 1);
                 System.arraycopy(paare, i + 1, temp, i, paare.length - i - 1);
@@ -136,7 +132,7 @@ public class PM2Map<K, V> implements Map<K, V> {
 
     @Override
     public Set<Entry<K, V>> entrySet() {
-        return new HashSet(Arrays.asList(Arrays.copyOf((MapPaar<K, V>[]) paare, anzElemente)));
+        return new HashSet<>(Arrays.asList(Arrays.copyOf((MapPaar<K, V>[]) paare, anzElemente)));
     }
 
     public static class MapPaar<K, V> implements Map.Entry<K, V> {
