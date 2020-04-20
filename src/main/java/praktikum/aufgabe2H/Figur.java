@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Figur {
+public class Figur implements Comparable<Figur> {
   private final String id;
   private final float groesse;
   private final Typ typ;
@@ -73,5 +73,10 @@ public class Figur {
            '\'' + ", partner='" + partner + '\'' + ", todestag='" + todestag +
            '\'' + ", haarfarbe='" + haarfarbe + '\'' + ", name='" + name +
            '\'' + "}";
+  }
+
+  @Override
+  public int compareTo(Figur o) {
+    return name.compareTo(o.name);
   }
 }
