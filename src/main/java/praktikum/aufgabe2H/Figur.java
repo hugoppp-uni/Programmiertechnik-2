@@ -20,6 +20,10 @@ public class Figur implements Comparable<Figur> {
     return groesse;
   }
 
+  public String getName() {
+    return name;
+  }
+
   public Figur(String id,
                float groesse,
                Typ typ,
@@ -83,4 +87,5 @@ public class Figur implements Comparable<Figur> {
   public int compareTo(Figur o) {
     return name.compareTo(o.name);
   }
+
 }
