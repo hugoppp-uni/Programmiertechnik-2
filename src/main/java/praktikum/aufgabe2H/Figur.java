@@ -1,8 +1,5 @@
 package praktikum.aufgabe2H;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -25,7 +22,9 @@ public class Figur {
                Geschlecht geschlecht,
                String geburtstag,
                String partner,
-               String todestag, String haarfarbe, String name) {
+               String todestag,
+               String haarfarbe,
+               String name) {
     this.id = id;
     this.groesse = groesse;
     this.typ = typ;
@@ -39,22 +38,16 @@ public class Figur {
 
   public static List<Figur> generateFromJson(String path) {
     ArrayList<Figur> ls = new ArrayList<>();
-    JSONArray figurenArray = JSONReader.read(path).getJSONArray("docs");
-
-    for (Object o : figurenArray) {
-      JSONObject jsonFigur = ((JSONObject) o);
-      ls.add(new Figur(
-            JSONReader.getSafeString(jsonFigur, "_id"),
-            parseSize(JSONReader.getSafeString(jsonFigur, "height")),
-            Typ.from((JSONReader.getSafeString(jsonFigur, "race"))),
-            Geschlecht.from(JSONReader.getSafeString(jsonFigur, "gender")),
-            JSONReader.getSafeString(jsonFigur, "birth"),
-            JSONReader.getSafeString(jsonFigur, "spouse"),
-            JSONReader.getSafeString(jsonFigur, "death"),
-            JSONReader.getSafeString(jsonFigur, "hair"),
-            JSONReader.getSafeString(jsonFigur, "name")
-      ));
-    }
+    var JsonLs = JSONReader.getJSONObjectList(path, "docs");
+    JsonLs.forEach(o -> ls.add(new Figur(JSONReader.getSafeString(o, "_id"),
+        parseSize(JSONReader.getSafeString(o, "height")),
+        Typ.from((JSONReader.getSafeString(o, "race"))),
+        Geschlecht.from(JSONReader.getSafeString(o, "gender")),
+        JSONReader.getSafeString(o, "birth"),
+        JSONReader.getSafeString(o, "spouse"),
+        JSONReader.getSafeString(o, "death"),
+        JSONReader.getSafeString(o, "hair"),
+        JSONReader.getSafeString(o, "name"))));
     return ls;
   }
 
@@ -68,23 +61,17 @@ public class Figur {
     if (matcher.find()) {
       String res = (matcher.group());
       return Float.parseFloat(
-            res.charAt(0) + "." + res.charAt(1) + res.charAt(2));
+          res.charAt(0) + "." + res.charAt(1) + res.charAt(2));
     }
     return 0f;
   }
 
   @Override
   public String toString() {
-    return name + "{\n" +
-           "id='" + id + '\'' +
-           ", groesse=" + groesse +
-           ", typ=" + typ +
-           ", geschlecht=" + geschlecht +
-           ", geburtstag='" + geburtstag + '\'' +
-           ", partner='" + partner + '\'' +
-           ", todestag='" + todestag + '\'' +
-           ", haarfarbe='" + haarfarbe + '\'' +
-           ", name='" + name + '\'' +
-           "}";
+    return "Figur{" + "id='" + id + "'\n" + ", groesse=" + groesse + ", typ=" +
+           typ + ", geschlecht=" + geschlecht + ", geburtstag='" + geburtstag +
+           '\'' + ", partner='" + partner + '\'' + ", todestag='" + todestag +
+           '\'' + ", haarfarbe='" + haarfarbe + '\'' + ", name='" + name +
+           '\'' + "}";
   }
 }
