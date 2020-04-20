@@ -1,4 +1,4 @@
-package praktikum.aufgabe2.H;
+package praktikum.aufgabe2H;
 
 public class Zitate {
     private String id;

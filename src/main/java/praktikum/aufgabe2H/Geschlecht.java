@@ -3,7 +3,7 @@
  * für Angewandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
  */
 
-package praktikum.aufgabe2.H;
+package praktikum.aufgabe2H;
 
 /**
  * Typ für das Geschlecht: Männlich oder Weiblich
