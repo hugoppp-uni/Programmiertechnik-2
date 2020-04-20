@@ -9,6 +9,18 @@ public class Zitat {
     private final String filmId;
     private final String figurId;
 
+    public String getId() {
+        return id;
+    }
+
+    public String getDialog() {
+        return dialog;
+    }
+
+    public String getFigurId() {
+        return figurId;
+    }
+
     public Zitat(String id, String dialog, String filmId, String figurId) {
         this.id = id;
         this.dialog = dialog;

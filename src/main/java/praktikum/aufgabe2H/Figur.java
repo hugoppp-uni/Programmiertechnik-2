@@ -24,6 +24,10 @@ public class Figur implements Comparable<Figur> {
     return name;
   }
 
+  public String getId() {
+    return id;
+  }
+
   public Figur(String id,
                float groesse,
                Typ typ,
