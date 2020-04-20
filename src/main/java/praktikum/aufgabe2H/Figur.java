@@ -16,6 +16,10 @@ public class Figur implements Comparable<Figur> {
   private final String haarfarbe;
   private final String name;
 
+  public float getGroesse() {
+    return groesse;
+  }
+
   public Figur(String id,
                float groesse,
                Typ typ,
