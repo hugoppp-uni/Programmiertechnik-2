@@ -16,15 +16,12 @@ public class HerrDerRingeDaten {
     return figuren;
   }
 
-  public List<Zitat> getZitate() {
-    return zitate;
-  }
-
-  public List<Film> getFilme() {
-    return filme;
-  }
-
-
+  /**
+   * Finds a Figur with matching name
+   *
+   * @param name Figur name
+   * @return random Figure with matching name.
+   */
   public Figur findFigur(String name) {
     ArrayList<Figur> figurenCopy = new ArrayList<>(figuren);
     while (!figurenCopy.isEmpty()) {
@@ -36,6 +33,12 @@ public class HerrDerRingeDaten {
     return null;
   }
 
+  /**
+   * Gets all Zitate from random Figure with matching name
+   *
+   * @param name Figur name
+   * @return list of Zitate as String
+   */
   public List<String> getZitateOf(String name) {
     if (name == null || name.equals("")) return null;
     var ls = new ArrayList<String>();
@@ -47,6 +50,12 @@ public class HerrDerRingeDaten {
         .collect(Collectors.toList());
   }
 
+  /**
+   * Gets all Zitate from a List of Figures
+   *
+   * @param figurenLs List of Figures
+   * @return Map with Figure name and all corresponding Zitate as List
+   */
   public HashMap<String, List<String>> getZitateMap(List<Figur> figurenLs) {
     HashMap<String, List<String>> nameZitateHashmap = new HashMap<>();
     figurenLs.stream()
@@ -56,8 +65,15 @@ public class HerrDerRingeDaten {
     return nameZitateHashmap;
   }
 
-  public void printZitate(HashMap<String, List<String>> map) {
-    map.forEach((name, zitate) -> System.out.println(
-        "\n--" + name + "--" + ":\t" + zitate.stream().reduce("", (s1, s2) -> s1 + "\n\t" + s2)));
+  /**
+   * Prints all Zitate from a List of Figures
+   *
+   * @param figurenLs List of Figures
+   */
+  public void printZitate(List<Figur> figurenLs) {
+    getZitateMap(figurenLs).
+        forEach((name, zitate) -> System.out.println(
+            "\n--" + name + "--" + ":\t" +
+            zitate.stream().reduce("", (s1, s2) -> s1 + "\n\t" + s2)));
   }
 }

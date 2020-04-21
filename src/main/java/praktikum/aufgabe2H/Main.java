@@ -6,7 +6,7 @@ public class Main {
 //    System.out.println(daten.findFigur("Bill Ferny"));
 //    System.out.println(daten.findFigur("noooooope"));
 //    daten.getZitateOf("").forEach(System.out::println);
-    daten.printZitate(daten.getZitateMap(daten.getFiguren()));
+    daten.printZitate(daten.getFiguren());
     daten.findFigur("Frodo Baggins").iterator().forEachRemaining(System.out::println);
   }
 }

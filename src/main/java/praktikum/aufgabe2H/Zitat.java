@@ -18,6 +18,12 @@ public class Zitat {
     this.figurId = figurId;
   }
 
+  /**
+   * generates List of Zitat from JSON file
+   *
+   * @param path path to json file
+   * @return List of Zitat
+   */
   public static List<Zitat> generateFromJson(String path) {
     ArrayList<Zitat> ls = new ArrayList<>();
     List<JSONObject> JsonLs = JSONReader.getJSONObjectList(path, "docs");
