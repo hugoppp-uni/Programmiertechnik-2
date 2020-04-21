@@ -1,21 +1,12 @@
 package praktikum.aufgabe2H;
 
-import java.util.HashMap;
-import java.util.List;
-
 public class Main {
   public static void main(String[] args) {
-    HerrDerRingeDaten herrDerRingeDaten = new HerrDerRingeDaten();
-    System.out.println(herrDerRingeDaten.findFigur("Bill Ferny"));
-    System.out.println(herrDerRingeDaten.findFigur("noooooope"));
-    HashMap<String, List<String>> nameZitateHashmap = new HashMap<>();
-    herrDerRingeDaten
-        .getFiguren()
-        .stream()
-        .map(Figur::getName)
-        .filter(name -> !herrDerRingeDaten.getZitateOf(name).isEmpty())
-        .forEach(name -> nameZitateHashmap.put(name, herrDerRingeDaten.getZitateOf(name)));
-    nameZitateHashmap.forEach((name, zitate) -> System.out.println(name + ":\n" + zitate + "\n\n"));
-
+    HerrDerRingeDaten daten = new HerrDerRingeDaten();
+//    System.out.println(daten.findFigur("Bill Ferny"));
+//    System.out.println(daten.findFigur("noooooope"));
+//    daten.getZitateOf("").forEach(System.out::println);
+    daten.printZitate(daten.getZitateMap(daten.getFiguren()));
+    daten.findFigur("Frodo Baggins").iterator().forEachRemaining(System.out::println);
   }
 }

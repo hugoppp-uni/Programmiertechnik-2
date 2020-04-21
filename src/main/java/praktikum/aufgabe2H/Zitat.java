@@ -21,10 +21,13 @@ public class Zitat {
   public static List<Zitat> generateFromJson(String path) {
     ArrayList<Zitat> ls = new ArrayList<>();
     List<JSONObject> JsonLs = JSONReader.getJSONObjectList(path, "docs");
-    JsonLs.forEach(jsonObject -> ls.add(new Zitat(JSONReader.getSafeString(jsonObject, "_id"),
+    JsonLs.forEach(jsonObject -> ls.add(new Zitat(
+        JSONReader.getSafeString(jsonObject, "_id"),
         //trims duplicate spaces of safestring
-        JSONReader.getSafeString(jsonObject, "dialog").replaceAll("\\s{2,}", " ").trim(), JSONReader
-        .getSafeString(jsonObject, "movie"), JSONReader.getSafeString(jsonObject, "character"))));
+        JSONReader.getSafeString(jsonObject, "dialog").replaceAll("\\s{2,}", " ").trim(),
+        JSONReader.getSafeString(jsonObject, "movie"),
+        JSONReader.getSafeString(jsonObject, "character")
+    )));
     return ls;
   }
 
@@ -45,4 +48,6 @@ public class Zitat {
     return "Zitat{" + "id='" + id + "'\n" + "    dialog='" + dialog + '\'' + ", filmId='" + filmId +
            '\'' + ", figurId='" + figurId + '\'' + "\n}";
   }
+
+
 }
