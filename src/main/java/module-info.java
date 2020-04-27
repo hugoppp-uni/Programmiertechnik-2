@@ -10,6 +10,7 @@ module pmzwei {
   requires org.junit.jupiter.engine;
   requires com.google.common;
   requires org.json;
+  requires org.jetbrains.annotations;
 
   // API des Moduls (von außen sichtbar) - hier müssen alle Packages mit Anwendungsklassen dabei sein
   // exports ist eine weitere Sichtbarkeitsebene über private/protected/public (Export)

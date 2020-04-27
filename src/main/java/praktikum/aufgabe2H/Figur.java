@@ -1,5 +1,7 @@
 package praktikum.aufgabe2H;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -112,6 +114,7 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
   }
 
   @Override
+  @NotNull
   public Iterator<String> iterator() {
     return (Arrays.asList(new String[]{
         name,
