@@ -41,7 +41,6 @@ public class HerrDerRingeDaten {
    */
   public List<String> getZitateOf(String name) {
     if (name == null || name.equals("")) return null;
-    var ls = new ArrayList<String>();
     String id = findFigur(name).getId();
     if (id == null || id.equals("")) return null;
     return zitate.stream()
