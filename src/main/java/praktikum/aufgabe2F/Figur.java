@@ -31,6 +31,10 @@ public class Figur implements Comparable<Figur> {
         this.name = name;
     }
 
+    public Figur(){
+
+    }
+
     public static Figur fromJson(JSONObject o) {
         String id = getNotNull(o, "_id");
         float groesse = Float.parseFloat(getNumber(getNumberNotNull(o,
@@ -57,13 +61,13 @@ public class Figur implements Comparable<Figur> {
     @Override
     public String toString() {
         return "Figur{" +
-          "id='" + id + '\'' +
+          "Name ='" + name + '\'' +
           '}';
     }
 
     @Override
     public int compareTo(Figur o) {
-        return name.hashCode() - o.name.hashCode();
+        return getName().compareTo(o.getName());
     }
 
     public String getId() {

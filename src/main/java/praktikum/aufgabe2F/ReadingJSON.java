@@ -16,7 +16,10 @@ import java.util.stream.Stream;
 public class ReadingJSON {
     public static void main(String[] args) {
         //reader();
-        einlesen("src/main/resources/json/figuren.json");
+        String file = "figuren.json";
+        JSONArray e = einlesen("src/main/resources/json/" + file);
+        FigurenComparator f = new FigurenComparator();
+        f.ausgebenMaiar(createListFiguren(e));
     }
 
     public static void reader() {
