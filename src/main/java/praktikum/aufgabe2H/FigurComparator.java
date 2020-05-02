@@ -3,7 +3,7 @@ package praktikum.aufgabe2H;
 import java.util.Comparator;
 
 /**
- * Vergleich Figuren anhand der Groesse
+ * Vergleicht Figuren anhand der Groesse
  */
 public class FigurComparator implements Comparator<Figur> {
   @Override

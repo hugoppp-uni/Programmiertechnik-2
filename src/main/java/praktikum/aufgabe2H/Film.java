@@ -27,6 +27,12 @@ public class Film {
     this.oskars = oskars;
   }
 
+  /**
+   * Generates a List of new Film from JSON file
+   *
+   * @param path path to json file
+   * @return List of Film
+   */
   public static List<Film> generateFromJson(String path) {
     ArrayList<Film> ls = new ArrayList<>();
     var JsonLs = JSONReader.getJSONObjectList(path, "docs");

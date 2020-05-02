@@ -18,8 +18,20 @@ public class Zitat {
     this.figurId = figurId;
   }
 
+  public String getId() {
+    return id;
+  }
+
+  public String getDialog() {
+    return dialog;
+  }
+
+  public String getFigurId() {
+    return figurId;
+  }
+
   /**
-   * generates List of Zitat from JSON file
+   * Generates a List of Zitat from JSON file
    *
    * @param path path to json file
    * @return List of Zitat
@@ -35,18 +47,6 @@ public class Zitat {
         JSONReader.getSafeString(jsonObject, "character")
     )));
     return ls;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public String getDialog() {
-    return dialog;
-  }
-
-  public String getFigurId() {
-    return figurId;
   }
 
   @Override
