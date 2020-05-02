@@ -19,11 +19,10 @@ public class ReadingJSON {
         String file = "figuren.json";
         JSONArray e = einlesen("src/main/resources/json/" + file);
         FigurenComparator f = new FigurenComparator();
-        f.ausgebenMaiar(createListFiguren(e));
+        f.ausgebenHobbit(createListFiguren(e));
     }
 
     public static void reader() {
-        //TODO relativer pfad bsp: src/main/resources/json/figuren.json
         new File("../").toPath().toAbsolutePath();
         try (FileReader inFile = new FileReader(new File(
           "src/main/resources/json/figuren.json"));

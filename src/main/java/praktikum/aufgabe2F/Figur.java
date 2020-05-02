@@ -37,8 +37,7 @@ public class Figur implements Comparable<Figur> {
 
     public static Figur fromJson(JSONObject o) {
         String id = getNotNull(o, "_id");
-        float groesse = Float.parseFloat(getNumber(getNumberNotNull(o,
-          "height")));
+        float groesse = (float) getNumber(getNumberNotNull(o, "height"));
         Typ typ = getNotNull(o, "race") == null ? null :
           Typ.from(o.getString("race"));
         Geschlecht geschlecht = getNotNull(o, "gender") == null ? null :

@@ -13,15 +13,22 @@ class HelperTest {
 
     @Test
     public void testGetNumber() {
-        assertNotNull(Helper.getNumber("Unknown (book) 1.66m (5'5\\\") " +
-          "(film)"));
-        assertEquals("1.66", Helper.getNumber("Unknown (book) 1.66m " +
-          "(5'5\\\") (film)"));
+        assertEquals(1.06,
+          Math.round(getNumber("1.06m (3'6\")") * 100.0) / 100.0);
+        assertEquals(1.06,
+          Math.round(getNumber(getNumberNotNull(jObjErzeugen(),
+            "height"))*100.0)/100.0);
     }
 
     @Test
-    public void testGetNotNull(){
+    public void testGetNotNull() {
         //assertNull(Helper.getNotNull(jObjErzeugen(), "height")); //0, 337
         assertNotNull(getNotNull(jObjErzeugen(), "height")); //242
+    }
+
+    @Test
+    public void testGetNumberNotNull() {
+        assertEquals("1.06m (3'6\")", getNumberNotNull(jObjErzeugen(),
+          "height"));
     }
 }

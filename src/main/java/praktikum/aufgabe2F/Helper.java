@@ -12,13 +12,13 @@ import java.util.regex.Pattern;
 
 public class Helper {
 
-    public static String getNumber(String str) {
-        Pattern pattern = Pattern.compile(".+?(\\d[.]\\d\\d)\\s?m.*");
+    public static double getNumber(String str) {
+        Pattern pattern = Pattern.compile("(\\d[.]\\d+)\\s?m.*");
         Matcher matcher = pattern.matcher(str);
         if (matcher.find()) {
-            return matcher.group(1);
+            return Math.round(Float.parseFloat(matcher.group(1))*100.0)/100.0;
         }
-        return "0";
+        return 0.0;
     }
 
     public static String getNumberNotNull(JSONObject json, String key) {
@@ -45,7 +45,7 @@ public class Helper {
             String contents = sw.toString();
             JSONObject o = new JSONObject(contents);
             JSONArray docs = o.getJSONArray("docs");
-            JSONObject figur = (JSONObject) docs.get(242);
+            JSONObject figur = (JSONObject) docs.get(892);
             return figur;
         } catch (IOException e) {
             e.printStackTrace();
