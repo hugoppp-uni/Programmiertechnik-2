@@ -101,14 +101,6 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
   }
 
   @Override
-  public String toString() {
-    return "Figur{" + "id='" + id + "'\n" + ", groesse=" + groesse + ", typ=" + typ +
-           ", geschlecht=" + geschlecht + ", geburtstag='" + geburtstag + '\'' + ", partner='" +
-           partner + '\'' + ", todestag='" + todestag + '\'' + ", haarfarbe='" + haarfarbe + '\'' +
-           ", name='" + name + '\'' + "}";
-  }
-
-  @Override
   public int compareTo(Figur o) {
     return name.compareTo(o.name);
   }
@@ -128,5 +120,13 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
         haarfarbe
     })).
         iterator();
+  }
+
+  @Override
+  public String toString() {
+    return "Figur{" + "id='" + id + "'\n" + ", groesse=" + groesse + ", typ=" + typ +
+           ", geschlecht=" + geschlecht + ", geburtstag='" + geburtstag + '\'' + ", partner='" +
+           partner + '\'' + ", todestag='" + todestag + '\'' + ", haarfarbe='" + haarfarbe + '\'' +
+           ", name='" + name + '\'' + "}";
   }
 }
