@@ -25,10 +25,9 @@ public class HerrDerRingeDaten {
   public Figur findFigur(String name) {
     ArrayList<Figur> figurenCopy = new ArrayList<>(figuren);
     while (!figurenCopy.isEmpty()) {
-      var searchStream = figurenCopy.stream();
-      Optional<Figur> result = searchStream.findAny();
+      Optional<Figur> result = figurenCopy.stream().findAny();
+      if (result.get().getName().equals(name)) return result.get();
       result.ifPresent(figurenCopy::remove);
-      if (result.isPresent() && result.get().getName().equals(name)) return result.get();
     }
     return null;
   }
@@ -45,12 +44,12 @@ public class HerrDerRingeDaten {
     if (id == null || id.equals("")) return null;
     return zitate.stream()
         .filter(o -> o.getFigurId().equals(id))
-        .map(o -> o.getDialog())
+        .map(Zitat::getDialog)
         .collect(Collectors.toList());
   }
 
   /**
-   * Gets all Zitate from a List of Figures
+   * Gets a Map of Zitate corresponding to a Figur, from a List of Figures
    *
    * @param figurenLs List of Figures
    * @return Map with Figure name and all corresponding Zitate as List

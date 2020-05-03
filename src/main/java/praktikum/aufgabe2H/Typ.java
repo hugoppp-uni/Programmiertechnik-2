@@ -44,6 +44,7 @@ public enum Typ {
       case "Men":
         return MENSCH;
       case "Elf":
+      case "Elves":
         return ELB;
       case "Dwarf":
       case "Dwarves":
@@ -55,8 +56,6 @@ public enum Typ {
       case "Maiar,Balrogs":
       case "Balrog":
         return MAIAR;
-      case "Elves":
-        return ELB;
       case "Ent":
       case "Ents":
         return ENT;
@@ -67,11 +66,10 @@ public enum Typ {
       case "Uruk-hai,Orc":
       case "Urulóki":
       case "Orc,Goblin":
+      case "Black Uruk":
         return ORC;
       case "Great Spiders":
         return GROSSE_SPINNE;
-      case "Black Uruk":
-        return ORC;
       case "Dragons":
       case "Dragon":
         return DRACHE;
@@ -99,7 +97,6 @@ public enum Typ {
         return STEINTROLL;
       case "Vampire":
         return VAMPIR;
-
       default:
         return UNDEFINED;
     }

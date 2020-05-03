@@ -8,6 +8,6 @@ import java.util.Comparator;
 public class FigurComparator implements Comparator<Figur> {
   @Override
   public int compare(Figur o1, Figur o2) {
-    return Double.compare(o1.getGroesse(), o2.getGroesse());
+    return Float.compare(o1.getGroesse(), o2.getGroesse());
   }
 }

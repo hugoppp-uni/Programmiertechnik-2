@@ -79,12 +79,12 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
   }
 
   /**
-   * Parses double out of String, must one of the following formats:
+   * Parses float out of String, must one of the following formats:
    * \d\d[.]\dm
    * \d\d\dcm
    *
    * @param s String to be parsed
-   * @return parsed double
+   * @return parsed float
    */
   private static float parseSize(String s) {
     Matcher matcher = Pattern.compile("\\d\\d[.]\\dm").matcher(s);
@@ -118,8 +118,7 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
         partner,
         todestag,
         haarfarbe
-    })).
-        iterator();
+    })).iterator();
   }
 
   @Override
