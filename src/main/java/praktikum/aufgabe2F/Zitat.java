@@ -1,14 +1,14 @@
-package praktikum.aufgabe2F.keineAbgabe;
+package praktikum.aufgabe2F;
 
 import org.json.JSONObject;
 
-import static praktikum.aufgabe2F.keineAbgabe.Helper.getNotNull;
+import static praktikum.aufgabe2F.Helper.getNotNull;
 
 public class Zitat {
-    private final String id;
-    private final String dialog;
-    private final String filmId;
-    private final String figurId;
+    private String id;
+    private String dialog;
+    private String filmId;
+    private String figurId;
 
     public Zitat(String id, String dialog, String filmId, String figurId){
         this.id = id;
@@ -45,10 +45,7 @@ public class Zitat {
     @Override
     public String toString() {
         return "Zitat{" +
-          "\nid ='" + id + '\'' +
-          ",\ndialog ='" + dialog + '\'' +
-          ",\nfilmId ='" + filmId + '\'' +
-          ",\nfigurId ='" + figurId + '\'' +
-          "\n}\n";
+          "id='" + id + '\'' +
+          '}';
     }
 }

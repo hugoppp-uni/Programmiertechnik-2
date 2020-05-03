@@ -1,9 +1,9 @@
-/*
+/**
  * Diese Datei ist Teil der Vorgabe zur Lehrveranstaltung Programmiermethodik 2 im Studiengang ITS der Hochschule
  * für Angewandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
  */
 
-package praktikum.aufgabe2F.keineAbgabe;
+package praktikum.aufgabe2F;
 
 /**
  * Aufwählungstyp für die verfügbaren Typen.
