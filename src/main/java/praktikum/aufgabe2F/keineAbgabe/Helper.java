@@ -16,7 +16,8 @@ public class Helper {
         Pattern pattern = Pattern.compile("(\\d[.]\\d+)\\s?m.*");
         Matcher matcher = pattern.matcher(str);
         if (matcher.find()) {
-            return Math.round(Float.parseFloat(matcher.group(1)) * 100.0) / 100.0;
+            return Math.round(Float.parseFloat(matcher.group(1)) * 100.0)
+              / 100.0;
         }
         return 0.0;
     }
@@ -28,7 +29,7 @@ public class Helper {
     }
 
     public static String getNotNull(JSONObject json, String key) {
-        if(json.has(key)) {
+        if (json.has(key)) {
             Object obj = json.get(key);
             return obj.equals(JSONObject.NULL) ? null :
               ((String) obj).isEmpty() ? null : (String) obj;
