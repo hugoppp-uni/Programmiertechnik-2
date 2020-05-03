@@ -1,4 +1,4 @@
-package praktikum.aufgabe2F;
+package praktikum.aufgabe2F.keineAbgabe;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,19 +16,19 @@ public class Helper {
         Pattern pattern = Pattern.compile("(\\d[.]\\d+)\\s?m.*");
         Matcher matcher = pattern.matcher(str);
         if (matcher.find()) {
-            return Math.round(Float.parseFloat(matcher.group(1))*100.0)/100.0;
+            return Math.round(Float.parseFloat(matcher.group(1)) * 100.0) / 100.0;
         }
         return 0.0;
     }
 
     public static String getNumberNotNull(JSONObject json, String key) {
         Object obj = json.get(key);
-        return obj.equals(JSONObject.NULL) ? "0" : ((String) obj).isEmpty() ?
-          "0" : (String) obj;
+        return obj.equals(JSONObject.NULL) ? "0" : (String.valueOf(obj))
+          .isEmpty() ? "0" : String.valueOf(obj);
     }
 
     public static String getNotNull(JSONObject json, String key) {
-        if (json.has(key)) {
+        if(json.has(key)) {
             Object obj = json.get(key);
             return obj.equals(JSONObject.NULL) ? null :
               ((String) obj).isEmpty() ? null : (String) obj;
@@ -36,7 +36,10 @@ public class Helper {
         return null;
     }
 
-    public static JSONObject jObjErzeugen() {
+    public static JSONObject jObjErzeugenFigur(int objectIndex) {
+        if (objectIndex < 0 || objectIndex > 932) {
+            throw new IndexOutOfBoundsException("Index nicht in Range");
+        }
         try (FileReader inFile = new FileReader(new File("C:/Users" +
           "/Ziska/SynologyDrive/Drive/HAW/Module/2.Semester" +
           "/PM2/pm2_vorgabe/src/main/resources/json/figuren.json"));
@@ -45,8 +48,7 @@ public class Helper {
             String contents = sw.toString();
             JSONObject o = new JSONObject(contents);
             JSONArray docs = o.getJSONArray("docs");
-            JSONObject figur = (JSONObject) docs.get(892);
-            return figur;
+            return (JSONObject) docs.get(objectIndex);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,16 +1,16 @@
-package praktikum.aufgabe2F;
+package praktikum.aufgabe2F.keineAbgabe;
 
 import org.json.JSONObject;
 
-import static praktikum.aufgabe2F.Helper.getNotNull;
-import static praktikum.aufgabe2F.Helper.getNumberNotNull;
+import static praktikum.aufgabe2F.keineAbgabe.Helper.getNotNull;
+import static praktikum.aufgabe2F.keineAbgabe.Helper.getNumberNotNull;
 
 public class Film {
-    private String id;
-    private String name;
-    private int laufzeit;
-    private int budget;
-    private int oskars;
+    private final String id;
+    private final String name;
+    private final int laufzeit;
+    private final int budget;
+    private final int oskars;
 
     public Film(String id, String name, int laufzeit, int budget, int oskars){
         this.id = id;
@@ -36,7 +36,11 @@ public class Film {
     @Override
     public String toString() {
         return "Film{" +
-          "id='" + id + '\'' +
-          '}';
+          "\nid ='" + id + '\'' +
+          ",\nname ='" + name + '\'' +
+          ",\nlaufzeit =" + laufzeit +
+          ",\nbudget =" + budget +
+          ",\noskars =" + oskars +
+          "\n}\n";
     }
 }
