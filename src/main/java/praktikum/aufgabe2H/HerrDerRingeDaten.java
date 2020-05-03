@@ -7,10 +7,24 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class HerrDerRingeDaten {
-  String relPath = "./src/main/resources/json/";
-  private final List<Figur> figuren = Figur.generateFromJson(relPath + "figuren.json");
-  private final List<Zitat> zitate = Zitat.generateFromJson(relPath + "zitate.json");
-  private final List<Film> filme = Film.generateFromJson(relPath + "filme.json");
+  private final List<Figur> figuren;
+  private final List<Zitat> zitate;
+  private final List<Film> filme;
+
+  /**
+   * Create HerrDerRingeDaten from JSON Data
+   *
+   * @param relPath Must contain zitate.json, figuren.json, filme.json
+   */
+  public HerrDerRingeDaten(String relPath) {
+    zitate = Zitat.generateFromJson(relPath + "zitate.json");
+    figuren = Figur.generateFromJson(relPath + "figuren.json");
+    filme = Film.generateFromJson(relPath + "filme.json");
+  }
+
+  public HerrDerRingeDaten() {
+    this("./src/main/resources/json/");
+  }
 
   public List<Figur> getFiguren() {
     return figuren;

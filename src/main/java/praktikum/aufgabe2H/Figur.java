@@ -55,6 +55,10 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
     return id;
   }
 
+  public Typ getTyp() {
+    return typ;
+  }
+
   /**
    * Generates a List of new Figur from JSON file
    *
@@ -87,7 +91,7 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
    * @return parsed float
    */
   private static float parseSize(String s) {
-    Matcher matcher = Pattern.compile("\\d\\d[.]\\dm").matcher(s);
+    Matcher matcher = Pattern.compile("\\d[.]\\d\\dm").matcher(s);
     if (matcher.find()) {
       String res = (matcher.group());
       return Float.parseFloat(res.substring(0, res.length() - 1));
