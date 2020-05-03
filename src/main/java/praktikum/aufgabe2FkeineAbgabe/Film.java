@@ -1,9 +1,9 @@
-package praktikum.aufgabe2F.keineAbgabe;
+package praktikum.aufgabe2FkeineAbgabe;
 
 import org.json.JSONObject;
 
-import static praktikum.aufgabe2F.keineAbgabe.Helper.getNotNull;
-import static praktikum.aufgabe2F.keineAbgabe.Helper.getNumberNotNull;
+import static praktikum.aufgabe2FkeineAbgabe.Helper.getNotNull;
+import static praktikum.aufgabe2FkeineAbgabe.Helper.getNumberNotNull;
 
 public class Film {
     private final String id;

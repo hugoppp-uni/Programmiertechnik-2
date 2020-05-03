@@ -3,7 +3,7 @@
  * für Angewandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
  */
 
-package praktikum.aufgabe2F.keineAbgabe;
+package praktikum.aufgabe2FkeineAbgabe;
 
 /**
  * Aufwählungstyp für die verfügbaren Typen.

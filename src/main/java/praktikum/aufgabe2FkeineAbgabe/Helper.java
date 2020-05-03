@@ -1,4 +1,4 @@
-package praktikum.aufgabe2F.keineAbgabe;
+package praktikum.aufgabe2FkeineAbgabe;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

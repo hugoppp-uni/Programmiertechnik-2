@@ -1,4 +1,4 @@
-package praktikum.aufgabe2F.keineAbgabe;
+package praktikum.aufgabe2FkeineAbgabe;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static praktikum.aufgabe2F.keineAbgabe.ReadingJSON.*;
+import static praktikum.aufgabe2FkeineAbgabe.ReadingJSON.*;
 
 public class HerrDerRingeDaten {
     private final List<Figur> figurenListe;
