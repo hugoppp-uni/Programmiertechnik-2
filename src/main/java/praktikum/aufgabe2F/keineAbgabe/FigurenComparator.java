@@ -1,40 +1,8 @@
-package praktikum.aufgabe2F;
+package praktikum.aufgabe2F.keineAbgabe;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Stream;
 
 public class FigurenComparator implements Comparator<Figur> {
-
-    public Figur compareFiguren(Figur eins, Figur zwei) {
-        if (eins.getGroesse() < zwei.getGroesse()) {
-            return zwei;
-        }
-        return eins;
-    }
-
-    public void ausgebenMaiar(List<Figur> figurenListe) {
-        List<Figur> fListe = new ArrayList<>();
-        for (Figur figur : figurenListe) {
-            if (figur.getTyp() == Typ.MAIAR) {
-                fListe.add(figur);
-            }
-        }
-        Stream<Figur> s = fListe.stream();
-        s.sorted().forEach(System.out::println);
-    }
-
-    public void ausgebenHobbit(List<Figur> figurenListe){
-        List<Figur> fListe = new ArrayList<>();
-        for (Figur figur : figurenListe) {
-            if (figur.getTyp() == Typ.HOBBIT && figur.getGroesse()!=0) {
-                fListe.add(figur);
-            }
-        }
-        Stream<Figur> s = fListe.stream();
-        s.sorted(this::compare).forEach(System.out::println);
-    }
 
     /**
      * Compares its two arguments for order.  Returns a negative integer, zero,
@@ -79,7 +47,7 @@ public class FigurenComparator implements Comparator<Figur> {
     public int compare(Figur o1, Figur o2) {
         if (o1.getGroesse() < o2.getGroesse()) {
             return -1;
-        } else if(o1.getGroesse() == o2.getGroesse()){
+        } else if (o1.getGroesse() == o2.getGroesse()) {
             return 0;
         }
         return 1;
