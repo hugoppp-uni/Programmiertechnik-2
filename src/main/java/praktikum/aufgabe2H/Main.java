@@ -2,6 +2,8 @@ package praktikum.aufgabe2H;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
   public static void main(String[] args) {
@@ -19,25 +21,24 @@ public class Main {
     objects.forEach(o -> System.out.println(o[1] + ": " + o[0]));
 
 
-    printHobbit(daten);
+    printHobbit(daten).forEach(System.out::println);
     System.out.println("\n\n");
-    printMaiar(daten);
+    printMaiar(daten).forEach(System.out::println);
 
   }
 
-  private static void printMaiar(HerrDerRingeDaten daten) {
-    daten.getFiguren().stream()
+  private static List<Figur> printMaiar(HerrDerRingeDaten daten) {
+    return daten.getFiguren().stream()
         .filter(figur -> figur.getTyp().equals(Typ.MAIAR))
         .sorted()
-        .forEach(System.out::println);
+        .collect(Collectors.toCollection(ArrayList::new));
   }
 
-  private static void printHobbit(HerrDerRingeDaten daten) {
-    FigurComparator figurComparator = new FigurComparator();
-    daten.getFiguren().stream()
+  private static List<Figur> printHobbit(HerrDerRingeDaten daten) {
+    return daten.getFiguren().stream()
         .filter(figur -> figur.getTyp().equals(Typ.HOBBIT))
         .filter(figur -> figur.getGroesse() > 0)
-        .sorted(figurComparator)
-        .forEach(System.out::println);
+        .sorted(new FigurComparator())
+        .collect(Collectors.toCollection(ArrayList::new));
   }
 }
