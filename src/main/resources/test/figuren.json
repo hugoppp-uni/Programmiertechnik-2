@@ -1,0 +1,55 @@
+{
+  "docs": [
+    {
+      "_id": "testSubject0",
+      "height": " dasd fg1.11m dasdas ",
+      "race": "Human",
+      "gender": "Male",
+      "birth": "heute",
+      "spouse": "Unnamed wife",
+      "death": "morgen",
+      "realm": "Númenor",
+      "hair": "keins",
+      "name": "Test Subject 0",
+      "wikiUrl": "http://lotr.wikia.com//wiki/Tar-Amandil"
+    },
+    {
+      "_id": "testSubject1",
+      "height": "ads112cmasd",
+      "race": "Human",
+      "gender": "Male",
+      "birth": "heute",
+      "spouse": "Unnamed wife",
+      "death": "morgen",
+      "realm": "Númenor",
+      "hair": "keins",
+      "name": "Test Subject 1",
+      "wikiUrl": "http://lotr.wikia.com//wiki/Tar-Amandil"
+    },
+    {
+      "_id": "testSubjectLeer",
+      "height": null,
+      "race": null,
+      "gender": null,
+      "birth": null,
+      "spouse": null,
+      "death": null,
+      "realm": null,
+      "name": null,
+      "wikiUrl": "http://lotr.wikia.com//wiki/Tar-Ciryatan"
+    },
+    {
+      "_id": "testSubjectLeer",
+      "height": "",
+      "race": "",
+      "gender": "",
+      "birth": "",
+      "spouse": "",
+      "death": "",
+      "realm": "",
+      "hair": "",
+      "name": "",
+      "wikiUrl": ""
+    }
+  ]
+}

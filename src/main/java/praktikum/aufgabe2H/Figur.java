@@ -1,6 +1,7 @@
 package praktikum.aufgabe2H;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,7 +68,7 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
    */
   public static List<Figur> generateFromJson(String path) {
     ArrayList<Figur> ls = new ArrayList<>();
-    var JsonLs = JSONReader.getJSONObjectList(path, "docs");
+    List<JSONObject> JsonLs = JSONReader.getJSONObjectList(path, "docs");
     JsonLs.forEach(o -> ls.add(new Figur(
         JSONReader.getSafeString(o, "_id"),
         parseSize(JSONReader.getSafeString(o, "height")),
@@ -123,6 +124,21 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
         todestag,
         haarfarbe
     })).iterator();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Figur strings = (Figur) o;
+
+    return id.equals(strings.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return id.hashCode();
   }
 
   @Override
