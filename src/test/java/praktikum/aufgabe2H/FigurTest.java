@@ -2,8 +2,7 @@ package praktikum.aufgabe2H;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class FigurTest {
   Figur figur1 = new Figur("a", 1.0f, Typ.ELB, Geschlecht.MAENNLICH, "morgen",
@@ -11,6 +10,8 @@ class FigurTest {
   Figur figur2 = new Figur("a", 1.0f, Typ.ELB, Geschlecht.MAENNLICH, "morgen",
       "rechte Hand", "uebermorgen", "glänzende Glatze", "Rudolfs Bruder");
   Figur figur3 = new Figur("a", 1.0f, Typ.ELB, Geschlecht.WEIBLICH, "morgen",
+      "rechte Hand", "uebermorgen", "glänzende Glatze", "Rudolfs Schwester");
+  Figur figur3copy = new Figur("a", 1.0f, Typ.ELB, Geschlecht.WEIBLICH, "morgen",
       "rechte Hand", "uebermorgen", "glänzende Glatze", "Rudolfs Schwester");
 
 
@@ -26,6 +27,9 @@ class FigurTest {
     assertTrue(figur3.compareTo(figur1) > 0);
     assertTrue(figur3.compareTo(figur2) > 0);
 
+    assertEquals(0,figur3.compareTo(figur3copy));
+
+    assertThrows(NullPointerException.class, () -> figur3.compareTo(null));
   }
 
   @Test
