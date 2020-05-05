@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class HerrDerRingeDatenTest {
 
   @Test
-  void herrDerRingeDatenShouldBeInstantiatable() {
+  void testHerrDerRingeDatenShouldBeInstantiatable() {
     try {
       new HerrDerRingeDaten();
       assertTrue(true);
@@ -16,7 +16,7 @@ class HerrDerRingeDatenTest {
     }
   }
   @Test
-  void findFigur() {
+  void testFindFigur() {
     HerrDerRingeDaten herrDerRingeDaten = new HerrDerRingeDaten();
     assertEquals("5cd99d4bde30eff6ebccfc15",herrDerRingeDaten.findFigur("Frodo Baggins").getId());
     assertNull(herrDerRingeDaten.findFigur("Frodo Bagginsssssssssssssssssssssss"));

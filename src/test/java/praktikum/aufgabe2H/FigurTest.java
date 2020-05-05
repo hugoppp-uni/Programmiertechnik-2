@@ -15,7 +15,7 @@ class FigurTest {
 
 
   @Test
-  void compareTo() {
+  void testCompareTo() {
 
     assertTrue(figur1.compareTo(figur2) < 0);
     assertTrue(figur1.compareTo(figur3) < 0);
@@ -29,7 +29,7 @@ class FigurTest {
   }
 
   @Test
-  void IteratorShouldIterateOver9Items(){
+  void testIteratorShouldIterateOver9Items(){
     int i = 0;
     for (String ignored : figur1) {
       i++;

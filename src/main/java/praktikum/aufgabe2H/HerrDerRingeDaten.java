@@ -1,6 +1,5 @@
 package praktikum.aufgabe2H;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -37,13 +36,10 @@ public class HerrDerRingeDaten {
    * @return random Figure with matching name.
    */
   public Figur findFigur(String name) {
-    ArrayList<Figur> figurenCopy = new ArrayList<>(figuren);
-    while (!figurenCopy.isEmpty()) {
-      Optional<Figur> result = figurenCopy.stream().findAny();
-      if (result.get().getName().equals(name)) return result.get();
-      result.ifPresent(figurenCopy::remove);
-    }
-    return null;
+    Optional<Figur> result = figuren.stream()
+        .filter(figur -> figur.getName().equals(name))
+        .findAny();
+    return result.orElse(null);
   }
 
   /**
