@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings({"ResultOfMethodCallIgnored", "ConstantConditions"})
 class FigurTest {
   Figur figur1 = new Figur("a", 1.0f, Typ.ELB, Geschlecht.MAENNLICH, "morgen",
       "rechte Hand", "uebermorgen", "glänzende Glatze", "Rudolf");
