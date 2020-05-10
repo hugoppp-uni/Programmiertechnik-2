@@ -3,7 +3,7 @@
  * für Angewandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
  */
 
-package praktikum.aufgabe3;
+package praktikum.aufgabe3F;
 
 /**
  * Ein Simulationsobjekt in der Piraten-Szenerie: Entweder ein Schiff oder ein Pirat.

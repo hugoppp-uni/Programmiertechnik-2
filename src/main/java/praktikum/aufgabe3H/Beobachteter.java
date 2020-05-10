@@ -3,7 +3,7 @@
  * für Angewandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
  */
 
-package praktikum.aufgabe3;
+package praktikum.aufgabe3H;
 
 import java.util.HashSet;
 import java.util.Set;

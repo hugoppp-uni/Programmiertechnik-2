@@ -3,7 +3,7 @@
  * für Angewandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
  */
 
-package praktikum.aufgabe3;
+package praktikum.aufgabe3H;
 
 /**
  * Schnittstelle für die Implementierung des Zustands.

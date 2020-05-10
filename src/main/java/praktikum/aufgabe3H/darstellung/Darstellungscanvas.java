@@ -3,15 +3,15 @@
  * für Angewandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
  */
 
-package praktikum.aufgabe3.darstellung;
+package praktikum.aufgabe3H.darstellung;
 
 import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import praktikum.aufgabe3.Beobachter;
-import praktikum.aufgabe3.ISimObjekt;
+import praktikum.aufgabe3H.Beobachter;
+import praktikum.aufgabe3H.ISimObjekt;
 
 import java.io.FileInputStream;
 import java.io.IOException;

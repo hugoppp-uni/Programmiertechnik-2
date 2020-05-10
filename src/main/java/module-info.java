@@ -22,6 +22,6 @@ module pmzwei {
   exports vorlesungsuebungen.vorlesung09.uebung3_4_5_6;
   exports vorlesungsuebungen.vorlesung09.uebung7;
   exports praktikum.aufgabe2H;
-  exports praktikum.aufgabe3.darstellung;
+  exports praktikum.aufgabe3F.darstellung;
   exports praktikum.aufgabe4;
 }

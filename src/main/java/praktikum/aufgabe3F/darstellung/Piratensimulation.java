@@ -3,13 +3,13 @@
  * für Angewandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
  */
 
-package praktikum.aufgabe3.darstellung;
+package praktikum.aufgabe3F.darstellung;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import praktikum.aufgabe3.ISimObjekt;
+import praktikum.aufgabe3F.ISimObjekt;
 
 import java.util.ArrayList;
 import java.util.List;
