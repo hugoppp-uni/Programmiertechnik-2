@@ -32,26 +32,22 @@ public class Schiff extends ISimObjekt {
   }
 
   public Schiff(int kapazitat, int hafenDauer, int flussDauer) {
-    Zustand z1 = new Zustand(
-      "Osthafen",
+    Zustand z1 = new Zustand("Osthafen",
       hafenDauer,
       this,
       () -> setOrt(Ort.OSTHAFEN)
     );
-    Zustand z2 = new Zustand(
-      "Im Fluss vom Osthafen zum Westhafen",
+    Zustand z2 = new Zustand("Im Fluss vom Osthafen zum Westhafen",
       flussDauer,
       this,
       () -> setOrt(Ort.FLUSS)
     );
-    Zustand z3 = new Zustand(
-      "Westhafen",
+    Zustand z3 = new Zustand("Westhafen",
       hafenDauer,
       this,
       () -> setOrt(Ort.WESTHAFEN)
     );
-    Zustand z4 = new Zustand(
-      "Im Fluss vom Westhafen zum Osthafen.",
+    Zustand z4 = new Zustand("Im Fluss vom Westhafen zum Osthafen.",
       flussDauer,
       this,
       () -> setOrt(Ort.FLUSS)
@@ -70,6 +66,13 @@ public class Schiff extends ISimObjekt {
     this(kapazitat, 10, 5);
   }
 
+  /**
+   * Increments beladung if schiff is not full and schiff and pirat have same
+   * ort. Notifies all.
+   * Waits otherwise.
+   *
+   * @param pirat Pirat to einschiffen.
+   */
   public synchronized void einschiffen(Pirat pirat) {
     while (beladung >= kapazitat || ort != pirat.getOrt()) {
       try {
@@ -82,6 +85,14 @@ public class Schiff extends ISimObjekt {
     notifyAll();
   }
 
+  /**
+   * Decrements beladung if pirat is AUF_SCHIFF and pirat.ort is ziel.
+   * Notifies all.
+   * Waits otherwise.
+   *
+   * @param pirat Pirat to ausschiffen.
+   * @param ziel  Ziel of pirat.
+   */
   public synchronized void ausschiffen(Pirat pirat, Ort ziel) {
     while (!(pirat.getOrt() == Ort.AUF_SCHIFF) || !(ort == ziel)) {
       try {

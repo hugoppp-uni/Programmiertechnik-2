@@ -31,10 +31,20 @@ public class Pirat extends ISimObjekt {
     return Typ.PIRAT;
   }
 
+  /**
+   * Sets the minimum amount of ticks a pirat will spend in Ost- / Westland.
+   *
+   * @param rumlaufDauerMin Amount of time in ticks.
+   */
   public static void setRumlaufDauerMin(int rumlaufDauerMin) {
     Pirat.rumlaufDauerMin = rumlaufDauerMin;
   }
 
+  /**
+   * Sets the maximal amount of ticks a pirat will spend in Ost- / Westland.
+   *
+   * @param rumlaufDauerMax Amount of time in ticks.
+   */
   public static void setRumlaufDauerMax(int rumlaufDauerMax) {
     Pirat.rumlaufDauerMax = rumlaufDauerMax;
   }
