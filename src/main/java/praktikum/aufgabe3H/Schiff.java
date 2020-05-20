@@ -8,13 +8,29 @@ public class Schiff extends ISimObjekt {
 
   public Schiff(int kapazitat, int hafenDauer, int flussDauer) {
     Zustand z1 = new Zustand(
-        "Osthafen", hafenDauer, this, () -> setOrt(Ort.OSTHAFEN));
+      "Osthafen",
+      hafenDauer,
+      this,
+      () -> setOrt(Ort.OSTHAFEN)
+    );
     Zustand z2 = new Zustand(
-        "Im Fluss vom Osthafen zum Westhafen", flussDauer, this, () -> setOrt(Ort.FLUSS));
+      "Im Fluss vom Osthafen zum Westhafen",
+      flussDauer,
+      this,
+      () -> setOrt(Ort.FLUSS)
+    );
     Zustand z3 = new Zustand(
-        "Westhafen", hafenDauer, this, () -> setOrt(Ort.WESTHAFEN));
+      "Westhafen",
+      hafenDauer,
+      this,
+      () -> setOrt(Ort.WESTHAFEN)
+    );
     Zustand z4 = new Zustand(
-        "Im Fluss vom Westhafen zum Osthafen.", flussDauer, this, () -> setOrt(Ort.FLUSS));
+      "Im Fluss vom Westhafen zum Osthafen.",
+      flussDauer,
+      this,
+      () -> setOrt(Ort.FLUSS)
+    );
     z1.setNachfolgeZustand(z2);
     z2.setNachfolgeZustand(z3);
     z3.setNachfolgeZustand(z4);
@@ -26,7 +42,7 @@ public class Schiff extends ISimObjekt {
   }
 
   public Schiff(int kapazitat) {
-    this(kapazitat,10,5);
+    this(kapazitat, 10, 5);
   }
 
   public synchronized void einschiffen(Pirat pirat) {

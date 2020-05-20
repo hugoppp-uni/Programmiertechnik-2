@@ -1,19 +1,22 @@
 package praktikum.aufgabe3H;
 
 public class Zustand implements IZustand {
-  private String name;
-  private int dauer;
+  private final String name;
+  private final int dauer;
+  private final Runnable onReset;
+  private final ISimObjekt simObject;
+
   private int zeitImZustand;
   private Zustand nachfolgeZustand;
-  private ISimObjekt simObject;
-  private Runnable onReset;
 
   @Override
   public float getFortschritt() {
-    return zeitImZustand/(float)dauer;
+    return zeitImZustand / (float) dauer;
   }
 
-  public Zustand(String name, int dauer, ISimObjekt simObject, Runnable onReset) {
+  public Zustand(
+    String name, int dauer, ISimObjekt simObject, Runnable onReset
+  ) {
     this.name = name;
     this.dauer = dauer;
     this.simObject = simObject;
