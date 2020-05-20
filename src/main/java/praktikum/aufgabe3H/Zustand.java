@@ -14,6 +14,10 @@ public class Zustand implements IZustand {
     return zeitImZustand / (float) dauer;
   }
 
+  public void setNachfolgeZustand(Zustand nachfolgeZustand) {
+    this.nachfolgeZustand = nachfolgeZustand;
+  }
+
   public Zustand(
     String name, int dauer, ISimObjekt simObject, Runnable onReset
   ) {
@@ -42,9 +46,5 @@ public class Zustand implements IZustand {
   @Override
   public String toString() {
     return name;
-  }
-
-  public void setNachfolgeZustand(Zustand nachfolgeZustand) {
-    this.nachfolgeZustand = nachfolgeZustand;
   }
 }

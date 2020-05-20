@@ -4,13 +4,32 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Pirat extends ISimObjekt {
   private final String name;
-  private Schiff schiff;
+  private final Schiff schiff;
   private Ort ort;
   private Zustand zustand;
 
   private static int rumlaufDauerMin = 3;
-
   private static int rumlaufDauerMax = 20;
+
+  @Override
+  public String getName() {
+    return name;
+  }
+
+  @Override
+  public Ort getOrt() {
+    return ort;
+  }
+
+  @Override
+  public IZustand getZustand() {
+    return zustand;
+  }
+
+  @Override
+  public Typ getTyp() {
+    return Typ.PIRAT;
+  }
 
   public static void setRumlaufDauerMin(int rumlaufDauerMin) {
     Pirat.rumlaufDauerMin = rumlaufDauerMin;
@@ -26,7 +45,7 @@ public class Pirat extends ISimObjekt {
         "Pirat muss im Ost- oder Westland starten");
     Zustand z1 = new Zustand(
       "Herumlaufen im Westland",
-      getRandom(rumlaufDauerMin, rumlaufDauerMax),
+      generateRandom(rumlaufDauerMin, rumlaufDauerMax),
       this,
       () -> ort = Ort.WESTLAND
     );
@@ -40,7 +59,7 @@ public class Pirat extends ISimObjekt {
     });
     Zustand z4 = new Zustand(
       "Herumlaufen im Ostland",
-      getRandom(rumlaufDauerMin, rumlaufDauerMax),
+      generateRandom(rumlaufDauerMin, rumlaufDauerMax),
       this,
       () -> ort = Ort.OSTLAND
     );
@@ -69,26 +88,6 @@ public class Pirat extends ISimObjekt {
     }
   }
 
-  @Override
-  public String getName() {
-    return name;
-  }
-
-  @Override
-  public Ort getOrt() {
-    return ort;
-  }
-
-  @Override
-  public IZustand getZustand() {
-    return zustand;
-  }
-
-  @Override
-  public Typ getTyp() {
-    return Typ.PIRAT;
-  }
-
   @SuppressWarnings({"BusyWait", "InfiniteLoopStatement"})
   @Override
   public void run() {
@@ -103,7 +102,7 @@ public class Pirat extends ISimObjekt {
     }
   }
 
-  private int getRandom(int min, int max) {
+  private int generateRandom(int min, int max) {
     return ThreadLocalRandom.current().nextInt(min, max + 1);
   }
 }

@@ -6,6 +6,31 @@ public class Schiff extends ISimObjekt {
   private int beladung;
   private Ort ort;
 
+  @Override
+  public String getName() {
+    return "Schiff";
+  }
+
+  @Override
+  public Ort getOrt() {
+    return ort;
+  }
+
+  @Override
+  public IZustand getZustand() {
+    return zustand;
+  }
+
+  @Override
+  public Typ getTyp() {
+    return Typ.SCHIFF;
+  }
+
+  public synchronized void setOrt(Ort ort) {
+    this.ort = ort;
+    this.notifyAll();
+  }
+
   public Schiff(int kapazitat, int hafenDauer, int flussDauer) {
     Zustand z1 = new Zustand(
       "Osthafen",
@@ -67,31 +92,6 @@ public class Schiff extends ISimObjekt {
     }
     beladung--;
     notifyAll();
-  }
-
-  @Override
-  public String getName() {
-    return "Schiff";
-  }
-
-  @Override
-  public Ort getOrt() {
-    return ort;
-  }
-
-  public synchronized void setOrt(Ort ort) {
-    this.ort = ort;
-    this.notifyAll();
-  }
-
-  @Override
-  public IZustand getZustand() {
-    return zustand;
-  }
-
-  @Override
-  public Typ getTyp() {
-    return Typ.SCHIFF;
   }
 
   @SuppressWarnings({"InfiniteLoopStatement", "BusyWait"})
