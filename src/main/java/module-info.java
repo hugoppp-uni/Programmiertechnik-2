@@ -26,5 +26,7 @@ module pmzwei {
   exports praktikum.aufgabe3H.darstellung;
   exports praktikum.aufgabe3F;
   exports praktikum.aufgabe3F.darstellung;
-  exports praktikum.aufgabe4;
+  exports praktikum.aufgabe4H;
+  exports praktikum.aufgabe4F;
+
 }
