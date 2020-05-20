@@ -26,7 +26,7 @@ public class Schiff extends ISimObjekt {
     return Typ.SCHIFF;
   }
 
-  public synchronized void setOrt(Ort ort) {
+  public synchronized void setOrtAndNotifyAll(Ort ort) {
     this.ort = ort;
     this.notifyAll();
   }
@@ -35,22 +35,22 @@ public class Schiff extends ISimObjekt {
     Zustand z1 = new Zustand("Osthafen",
       hafenDauer,
       this,
-      () -> setOrt(Ort.OSTHAFEN)
+      () -> setOrtAndNotifyAll(Ort.OSTHAFEN)
     );
     Zustand z2 = new Zustand("Im Fluss vom Osthafen zum Westhafen",
       flussDauer,
       this,
-      () -> setOrt(Ort.FLUSS)
+      () -> ort = Ort.FLUSS
     );
     Zustand z3 = new Zustand("Westhafen",
       hafenDauer,
       this,
-      () -> setOrt(Ort.WESTHAFEN)
+      () -> setOrtAndNotifyAll(Ort.WESTHAFEN)
     );
     Zustand z4 = new Zustand("Im Fluss vom Westhafen zum Osthafen.",
       flussDauer,
       this,
-      () -> setOrt(Ort.FLUSS)
+      () -> ort = Ort.FLUSS
     );
     z1.setNachfolgeZustand(z2);
     z2.setNachfolgeZustand(z3);
