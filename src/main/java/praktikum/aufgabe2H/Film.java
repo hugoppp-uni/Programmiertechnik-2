@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Film {
   String id;
-  String name;
+  String titel;
   /**
    * laufzeit in Minuten
    */
@@ -19,9 +19,17 @@ public class Film {
    */
   int oskars;
 
-  public Film(String id, String name, int laufzeit, int budget, int oskars) {
+  public String getTitel() {
+    return titel;
+  }
+
+  public int getLaufzeit() {
+    return laufzeit;
+  }
+
+  public Film(String id, String titel, int laufzeit, int budget, int oskars) {
     this.id = id;
-    this.name = name;
+    this.titel = titel;
     this.laufzeit = laufzeit;
     this.budget = budget;
     this.oskars = oskars;
@@ -49,7 +57,7 @@ public class Film {
 
   @Override
   public String toString() {
-    return "Film{" + "id='" + id + "'\n" + ", name='" + name + '\'' +
+    return "Film{" + "id='" + id + "'\n" + ", name='" + titel + '\'' +
            ", laufzeit=" + laufzeit +
            ", budget=" + budget + ", oskars=" + oskars + '}';
   }

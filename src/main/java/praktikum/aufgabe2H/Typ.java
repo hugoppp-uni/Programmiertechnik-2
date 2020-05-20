@@ -10,32 +10,35 @@ package praktikum.aufgabe2H;
  * Aufwählungstyp für die verfügbaren Typen.
  */
 public enum Typ {
-  MENSCH,
+  ADLER,
+  AINUR,
+  DRACHE,
   ELB,
-  ZWERG,
+  ENT,
+  GOTT,
+  GROSSE_SPINNE,
+  HALB_ELB,
   HOBBIT,
   MAIAR,
-  ENT,
+  MENSCH,
   ORC,
-  GROSSE_SPINNE,
-  DRACHE,
-  AINUR,
-  RABE,
-  WERWOLF,
-  HALB_ELB,
-  ADLER,
-  RINGGEIST,
-  GOTT,
-  WOLFSHUND,
   PFERD,
+  RABE,
+  RINGGEIST,
   STEINTROLL,
+  UNDEFINED,
   VAMPIR,
-  UNDEFINED;
+  WERWOLF,
+  WOLFSHUND,
+  ZWERG;
+
 
   /**
-   * Liefert die Konstante für einen String. Einige Typen aus der JSON-Datei, die den gleichen
+   * Liefert die Konstante für einen String. Einige Typen aus der JSON-Datei,
+   * die den gleichen
    * Typ beschreiben werden
-   * hier gleich zusammengefasst. Liefert null, wenn keine passende Konstante gefunden wurde.
+   * hier gleich zusammengefasst. Liefert null, wenn keine passende Konstante
+   * gefunden wurde.
    */
   public static Typ from(String text) {
     switch (text) {

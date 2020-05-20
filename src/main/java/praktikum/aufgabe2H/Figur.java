@@ -44,22 +44,6 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
     this.name = name;
   }
 
-  public float getGroesse() {
-    return groesse;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public Typ getTyp() {
-    return typ;
-  }
-
   /**
    * Generates a List of new Figur from JSON file
    *
@@ -103,6 +87,42 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
       return Float.parseFloat(res.charAt(0) + "." + res.charAt(1) + res.charAt(2));
     }
     return 0f;
+  }
+
+  public float getGroesse() {
+    return groesse;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public Typ getTyp() {
+    return typ;
+  }
+
+  public Geschlecht getGeschlecht() {
+    return geschlecht;
+  }
+
+  public String getGeburtstag() {
+    return geburtstag;
+  }
+
+  public String getPartner() {
+    return partner;
+  }
+
+  public String getTodestag() {
+    return todestag;
+  }
+
+  public String getHaarfarbe() {
+    return haarfarbe;
   }
 
   @Override

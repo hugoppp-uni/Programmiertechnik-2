@@ -16,7 +16,9 @@ public class HerrDerRingeDaten {
    * @param relPath Must contain zitate.json, figuren.json, filme.json
    */
   public HerrDerRingeDaten(String relPath) {
-    zitate = Zitat.generateFromJson(relPath + "zitate.json");
+    zitate =
+      Zitat.generateFromJson(relPath + "zitate.json").stream().filter(zitat -> zitat.getDialog().length() > 0).collect(
+        Collectors.toList());
     figuren = Figur.generateFromJson(relPath + "figuren.json");
     filme = Film.generateFromJson(relPath + "filme.json");
   }
