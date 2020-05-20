@@ -25,6 +25,14 @@ public class HerrDerRingeDaten {
     this("./src/main/resources/json/");
   }
 
+  public List<Zitat> getZitate() {
+    return zitate;
+  }
+
+  public List<Film> getFilme() {
+    return filme;
+  }
+
   public List<Figur> getFiguren() {
     return figuren;
   }
