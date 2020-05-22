@@ -82,7 +82,7 @@ public class Schiff extends ISimObjekt {
       }
     }
     beladung++;
-    notifyAll();
+   // notifyAll(); //TODO warum hier notify? Die Threads sind ja in Warteschleife
   }
 
   /**
