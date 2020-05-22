@@ -10,6 +10,15 @@ public class Pirat extends ISimObjekt {
   private final Schiff schiff;
   private Ort ort;
 
+  /**
+   * Erstellt einen Piraten.
+   *
+   * @param schiff   Referenz auf das Schiff
+   * @param name     Name
+   * @param startOrt Startort des Piraten. Muss
+   *                 {@link praktikum.aufgabe3H.ISimObjekt.Ort#WESTLAND} oder
+   *                 {@link praktikum.aufgabe3H.ISimObjekt.Ort#OSTLAND} sein.
+   */
   public Pirat(Schiff schiff, String name, Ort startOrt) {
     if (startOrt != Ort.OSTLAND && startOrt != Ort.WESTLAND)
       throw new IllegalArgumentException("Pirat muss im Ost- oder Westland starten");
