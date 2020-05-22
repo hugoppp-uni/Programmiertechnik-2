@@ -24,4 +24,11 @@ public interface IZustand {
    * Setzt den Zustand zurück auf den Anfangszustand.
    */
   void reset();
+
+  /**
+   * Setzt den Nachfolgezustand.
+   *
+   * @param nachfolgeZustand Nachfolgezustand
+   */
+  void setNachfolgeZustand(IZustand nachfolgeZustand);
 }

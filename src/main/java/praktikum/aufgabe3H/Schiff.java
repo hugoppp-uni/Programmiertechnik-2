@@ -1,10 +1,33 @@
 package praktikum.aufgabe3H;
 
 public class Schiff extends ISimObjekt {
-  private Zustand zustand;
+  //moved into super
+  //  private IZustand zustand;
   private final int kapazitat;
   private int beladung;
   private Ort ort;
+
+  public Schiff(int kapazitat, int hafenDauer, int flussDauer) {
+    IZustand z1 = new Zustand("Osthafen", hafenDauer, this, () -> setOrtAndNotifyAll(Ort.OSTHAFEN));
+    IZustand z2 =
+      new Zustand("Im Fluss vom Osthafen zum Westhafen", flussDauer, this, () -> ort = Ort.FLUSS);
+    IZustand z3 =
+      new Zustand("Westhafen", hafenDauer, this, () -> setOrtAndNotifyAll(Ort.WESTHAFEN));
+    IZustand z4 =
+      new Zustand("Im Fluss vom Westhafen zum Osthafen.", flussDauer, this, () -> ort = Ort.FLUSS);
+    z1.setNachfolgeZustand(z2);
+    z2.setNachfolgeZustand(z3);
+    z3.setNachfolgeZustand(z4);
+    z4.setNachfolgeZustand(z1);
+
+    this.ort = Ort.OSTHAFEN;
+    this.kapazitat = kapazitat;
+    zustand = z1;
+  }
+
+  public Schiff(int kapazitat) {
+    this(kapazitat, 10, 5);
+  }
 
   @Override
   public String getName() {
@@ -31,41 +54,6 @@ public class Schiff extends ISimObjekt {
     this.notifyAll();
   }
 
-  public Schiff(int kapazitat, int hafenDauer, int flussDauer) {
-    Zustand z1 = new Zustand("Osthafen",
-      hafenDauer,
-      this,
-      () -> setOrtAndNotifyAll(Ort.OSTHAFEN)
-    );
-    Zustand z2 = new Zustand("Im Fluss vom Osthafen zum Westhafen",
-      flussDauer,
-      this,
-      () -> ort = Ort.FLUSS
-    );
-    Zustand z3 = new Zustand("Westhafen",
-      hafenDauer,
-      this,
-      () -> setOrtAndNotifyAll(Ort.WESTHAFEN)
-    );
-    Zustand z4 = new Zustand("Im Fluss vom Westhafen zum Osthafen.",
-      flussDauer,
-      this,
-      () -> ort = Ort.FLUSS
-    );
-    z1.setNachfolgeZustand(z2);
-    z2.setNachfolgeZustand(z3);
-    z3.setNachfolgeZustand(z4);
-    z4.setNachfolgeZustand(z1);
-
-    this.ort = Ort.OSTHAFEN;
-    this.kapazitat = kapazitat;
-    zustand = z1;
-  }
-
-  public Schiff(int kapazitat) {
-    this(kapazitat, 10, 5);
-  }
-
   /**
    * Increments beladung if schiff is not full and schiff and pirat have same
    * ort. Notifies all.
@@ -82,7 +70,7 @@ public class Schiff extends ISimObjekt {
       }
     }
     beladung++;
-   // notifyAll(); //TODO warum hier notify? Die Threads sind ja in Warteschleife
+    // notifyAll(); //TODO warum hier notify? Die Threads sind ja in Warteschleife
   }
 
   /**
@@ -105,17 +93,19 @@ public class Schiff extends ISimObjekt {
     notifyAll();
   }
 
-  @SuppressWarnings({"InfiniteLoopStatement", "BusyWait"})
-  @Override
-  public void run() {
-    while (true) {
-      zustand = (Zustand) zustand.tick();
-      melden();
-      try {
-        Thread.sleep(300);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
-  }
+  //moved into super
+  //  @SuppressWarnings({"InfiniteLoopStatement", "BusyWait"})
+  //  @Override
+  //  public void run() {
+  //    while (true) {
+  //      zustand =  zustand.tick();
+  //      melden();
+  //      try {
+  //        Thread.sleep(301);
+  //      } catch (InterruptedException e) {
+  //        e.printStackTrace();
+  //      }
+  //    }
+  //  }
+
 }
