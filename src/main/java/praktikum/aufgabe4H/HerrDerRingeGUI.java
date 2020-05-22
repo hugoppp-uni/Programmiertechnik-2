@@ -41,8 +41,9 @@ public class HerrDerRingeGUI extends Application {
   public void start(Stage primaryStage) {
     HerrDerRingeDaten herrDerRingeDaten = new HerrDerRingeDaten();
 
-    TableView<Figur> tableViewFigur =
-      new TableView<>(observableArrayList(herrDerRingeDaten.getFiguren()));
+    var figurList = herrDerRingeDaten.getFiguren();
+    var figurObservableList = observableArrayList(figurList);
+    TableView<Figur> tableViewFigur = new TableView<>(figurObservableList);
     var vornameTableColumnColumn = new TableColumn<Figur, String>("Name");
     vornameTableColumnColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     var typTableColumn = new TableColumn<Figur, String>("Typ");
@@ -77,6 +78,9 @@ public class HerrDerRingeGUI extends Application {
     verticalSplitPaneFigurfilmZitat.setOrientation(Orientation.VERTICAL);
 
     TextField textField = new TextField();
+    textField.textProperty()
+             .addListener((observable, oldValue, newValue) -> figurObservableList.setAll(
+               herrDerRingeDaten.filterFiguren(figurList, newValue)));
 
     VBox wurzel = new VBox(textField, verticalSplitPaneFigurfilmZitat);
     primaryStage.setTitle("Herr der Ringe");
@@ -84,4 +88,5 @@ public class HerrDerRingeGUI extends Application {
     primaryStage.setScene(szene);
     primaryStage.show();
   }
+
 }

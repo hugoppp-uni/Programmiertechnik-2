@@ -3,6 +3,8 @@ package praktikum.aufgabe2H;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class HerrDerRingeDaten {
@@ -16,15 +18,52 @@ public class HerrDerRingeDaten {
    * @param relPath Must contain zitate.json, figuren.json, filme.json
    */
   public HerrDerRingeDaten(String relPath) {
-    zitate =
-      Zitat.generateFromJson(relPath + "zitate.json").stream().filter(zitat -> zitat.getDialog().length() > 0).collect(
-        Collectors.toList());
+    zitate = Zitat.generateFromJson(relPath + "zitate.json")
+                  .stream()
+                  .filter(zitat -> zitat.getDialog().length() > 0)
+                  .collect(Collectors.toList());
     figuren = Figur.generateFromJson(relPath + "figuren.json");
     filme = Film.generateFromJson(relPath + "filme.json");
   }
 
   public HerrDerRingeDaten() {
     this("./src/main/resources/json/");
+  }
+
+  /**
+   * Filters a list of figures based on a filterstring.
+   *
+   * @param figurList    The list to filter
+   * @param filterString FILTER &lt;key&gt &lt;operator&gt; &lt;value&gt; where <br>
+   *                     key = "NAME" or "TYP" <br>
+   *                     operator = "=" <br>
+   *                     value = the value of the filter <br>
+   * @return The filtered list or original list, if result is empty or filterstring invalid
+   */
+  public List<Figur> filterFiguren(List<Figur> figurList, String filterString) {
+    Matcher matcher = Pattern.compile("(\\w+)\\s*=\\s*(\\w+)").matcher(filterString.trim());
+    if (!matcher.find()) {
+      return figurList;
+    }
+    String key = matcher.group(1).toLowerCase();
+    String value = matcher.group(2).toLowerCase();
+    List<Figur> result;
+
+    switch (key) {
+      case "name":
+        result = figurList.stream()
+                          .filter(figur -> figur.getName().toLowerCase().contains(value))
+                          .collect(Collectors.toList());
+        break;
+      case ("typ"):
+        result = figurList.stream()
+                          .filter(figur -> figur.getTyp().name().toLowerCase().contains(value))
+                          .collect(Collectors.toList());
+        break;
+      default:
+        result = figurList;
+    }
+    return !result.isEmpty() ? result : figurList;
   }
 
   public List<Zitat> getZitate() {
@@ -46,9 +85,8 @@ public class HerrDerRingeDaten {
    * @return random Figure with matching name.
    */
   public Figur findFigur(String name) {
-    Optional<Figur> result = figuren.stream()
-        .filter(figur -> figur.getName().equals(name))
-        .findAny();
+    Optional<Figur> result =
+      figuren.stream().filter(figur -> figur.getName().equals(name)).findAny();
     return result.orElse(null);
   }
 
@@ -63,16 +101,14 @@ public class HerrDerRingeDaten {
     String id = findFigur(name).getId();
     if (id == null || id.equals("")) return null;
     return zitate.stream()
-        .filter(o -> o.getFigurId().equals(id))
-        .map(Zitat::getDialog)
-        .collect(Collectors.toList());
+                 .filter(o -> o.getFigurId().equals(id))
+                 .map(Zitat::getDialog)
+                 .collect(Collectors.toList());
   }
 
   public List<Zitat> getZitateOfId(String id) {
     if (id == null || id.equals("")) return null;
-    return zitate.stream()
-                 .filter(o -> o.getFigurId().equals(id))
-                 .collect(Collectors.toList());
+    return zitate.stream().filter(o -> o.getFigurId().equals(id)).collect(Collectors.toList());
   }
 
   /**
@@ -84,9 +120,9 @@ public class HerrDerRingeDaten {
   public HashMap<String, List<String>> getZitateMap(List<Figur> figurenLs) {
     HashMap<String, List<String>> nameZitateHashmap = new HashMap<>();
     figurenLs.stream()
-        .map(Figur::getName)
-        .filter(name -> !getZitateDialogOf(name).isEmpty())
-        .forEach(name -> nameZitateHashmap.put(name, getZitateDialogOf(name)));
+             .map(Figur::getName)
+             .filter(name -> !getZitateDialogOf(name).isEmpty())
+             .forEach(name -> nameZitateHashmap.put(name, getZitateDialogOf(name)));
     return nameZitateHashmap;
   }
 
@@ -97,8 +133,8 @@ public class HerrDerRingeDaten {
    */
   public void printZitate(List<Figur> figurenLs) {
     getZitateMap(figurenLs).
-        forEach((name, zitate) -> System.out.println(
-            "\n--" + name + "--" + ":\t" +
-            zitate.stream().reduce("", (s1, s2) -> s1 + "\n\t" + s2)));
+                             forEach((name, zitate) -> System.out.println(
+                               "\n--" + name + "--" + ":\t" +
+                               zitate.stream().reduce("", (s1, s2) -> s1 + "\n\t" + s2)));
   }
 }
