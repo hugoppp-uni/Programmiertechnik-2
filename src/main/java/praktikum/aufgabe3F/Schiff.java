@@ -4,15 +4,56 @@ public class Schiff extends ISimObjekt {
     private String name;
     private Zustand zustand;
     private Ort ort;
-    private int kapazität;
+    private int kapazitaet;
     private int aktuelleBeladung;
 
-    public synchronized void einschiffen(Pirat pirat) {
+    public Schiff(String name, int kapazitaet) {
+        Zustand z1 = new Zustand(this, "Osthafen", 5,
+          () -> setOrtAndNotifyAll(Ort.OSTHAFEN));
+        Zustand z2 = new Zustand(this, "Im Fluss vom Osthafen zum Westhafen",
+          10, () -> setOrtAndNotifyAll(Ort.FLUSS));
+        Zustand z3 = new Zustand(this, "Westhafen", 5,
+          () -> setOrtAndNotifyAll(Ort.WESTHAFEN));
+        Zustand z4 = new Zustand(this, "Im Fluss vom Westhafen zum Osthafen",
+          10, () -> setOrtAndNotifyAll(Ort.FLUSS));
 
+        z1.setNachfolgeZustand(z2);
+        z2.setNachfolgeZustand(z3);
+        z3.setNachfolgeZustand(z4);
+        z4.setNachfolgeZustand(z1);
+
+        this.name = name;
+        this.zustand = z1;
+        this.ort = Ort.OSTHAFEN;
+        this.kapazitaet = kapazitaet;
+        this.aktuelleBeladung = 0;
+    }
+
+    public void setOrtAndNotifyAll(Ort ort) {
+        this.ort = ort;
+        this.notifyAll();
+    }
+
+    public synchronized void einschiffen(Pirat pirat) {
+        while (this.ort != pirat.getOrt() || aktuelleBeladung >= kapazitaet) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        aktuelleBeladung++;
     }
 
     public synchronized void ausschiffen(Pirat pirat, Ort ort) {
-
+        while (ort != this.ort || aktuelleBeladung >= kapazitaet) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        aktuelleBeladung--;
     }
 
     /**
@@ -35,7 +76,7 @@ public class Schiff extends ISimObjekt {
      * Liefert den aktuellen Zustand des Objektes.
      */
     @Override
-    public IZustand getZustand() {
+    public Zustand getZustand() {
         return zustand;
     }
 
@@ -60,6 +101,14 @@ public class Schiff extends ISimObjekt {
      */
     @Override
     public void run() {
-
+        while(true){
+            zustand.tick();
+            try {
+                Thread.sleep(300);
+            } catch(InterruptedException e){
+                Thread.currentThread().interrupt();
+            }
+            melden();
+        }
     }
 }

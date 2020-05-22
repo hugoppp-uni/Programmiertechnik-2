@@ -5,15 +5,16 @@ public class Zustand implements IZustand {
     private int dauer;
     private int zeitImZustand;
     private Zustand nachfolgeZustand;
-    private SimObjekt simObjekt;
+    private ISimObjekt simObjekt;
     private Runnable onReset;
 
-    public Zustand(SimObjekt simObjekt, String name, int dauer,
+    public Zustand(ISimObjekt simObjekt, String name, int dauer,
                    Runnable onReset) {
         this.name = name;
         this.dauer = dauer;
         this.simObjekt = simObjekt;
         this.onReset = onReset;
+        this.zeitImZustand = 0;
     }
 
     public void setNachfolgeZustand(Zustand neuerZustand){
@@ -37,7 +38,7 @@ public class Zustand implements IZustand {
         if(zeitImZustand < dauer) {
             return this;
         }
-        reset();
+        nachfolgeZustand.reset();
         return nachfolgeZustand;
     }
 
@@ -46,7 +47,6 @@ public class Zustand implements IZustand {
      */
     @Override
     public void reset() {
-        zeitImZustand = 0;
         onReset.run();
     }
 
