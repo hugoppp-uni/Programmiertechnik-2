@@ -58,7 +58,7 @@ public class HerrDerRingeDaten {
    * @param name Figur name
    * @return list of Zitate as String
    */
-  public List<String> getZitateOf(String name) {
+  public List<String> getZitateDialogOf(String name) {
     if (name == null || name.equals("")) return null;
     String id = findFigur(name).getId();
     if (id == null || id.equals("")) return null;
@@ -66,6 +66,13 @@ public class HerrDerRingeDaten {
         .filter(o -> o.getFigurId().equals(id))
         .map(Zitat::getDialog)
         .collect(Collectors.toList());
+  }
+
+  public List<Zitat> getZitateOfId(String id) {
+    if (id == null || id.equals("")) return null;
+    return zitate.stream()
+                 .filter(o -> o.getFigurId().equals(id))
+                 .collect(Collectors.toList());
   }
 
   /**
@@ -78,8 +85,8 @@ public class HerrDerRingeDaten {
     HashMap<String, List<String>> nameZitateHashmap = new HashMap<>();
     figurenLs.stream()
         .map(Figur::getName)
-        .filter(name -> !getZitateOf(name).isEmpty())
-        .forEach(name -> nameZitateHashmap.put(name, getZitateOf(name)));
+        .filter(name -> !getZitateDialogOf(name).isEmpty())
+        .forEach(name -> nameZitateHashmap.put(name, getZitateDialogOf(name)));
     return nameZitateHashmap;
   }
 
