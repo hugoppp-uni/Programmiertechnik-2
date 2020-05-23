@@ -1,18 +1,18 @@
 package praktikum.aufgabe3F;
 
 public class Schiff extends ISimObjekt {
-    private String name;
+    private final String name;
     private Zustand zustand;
     private Ort ort;
-    private int kapazitaet;
+    private final int kapazitaet;
     private int aktuelleBeladung;
 
     public Schiff(String name, int kapazitaet) {
-        Zustand z1 = new Zustand(this, "Osthafen", 5,
+        Zustand z1 = new Zustand(this, "Osthafen", 10,
           () -> setOrtAndNotifyAll(Ort.OSTHAFEN));
         Zustand z2 = new Zustand(this, "Im Fluss vom Osthafen zum Westhafen",
           10, () -> setOrtAndNotifyAll(Ort.FLUSS));
-        Zustand z3 = new Zustand(this, "Westhafen", 5,
+        Zustand z3 = new Zustand(this, "Westhafen", 10,
           () -> setOrtAndNotifyAll(Ort.WESTHAFEN));
         Zustand z4 = new Zustand(this, "Im Fluss vom Westhafen zum Osthafen",
           10, () -> setOrtAndNotifyAll(Ort.FLUSS));
@@ -31,7 +31,9 @@ public class Schiff extends ISimObjekt {
 
     public void setOrtAndNotifyAll(Ort ort) {
         this.ort = ort;
-        this.notifyAll();
+        synchronized (this) {
+            notifyAll();
+        }
     }
 
     public synchronized void einschiffen(Pirat pirat) {
@@ -43,10 +45,11 @@ public class Schiff extends ISimObjekt {
             }
         }
         aktuelleBeladung++;
+        notifyAll();
     }
 
     public synchronized void ausschiffen(Pirat pirat, Ort ort) {
-        while (ort != this.ort || aktuelleBeladung >= kapazitaet) {
+        while (ort != this.ort) {
             try {
                 this.wait();
             } catch (InterruptedException e) {
@@ -54,6 +57,7 @@ public class Schiff extends ISimObjekt {
             }
         }
         aktuelleBeladung--;
+        notifyAll();
     }
 
     /**
@@ -101,12 +105,12 @@ public class Schiff extends ISimObjekt {
      */
     @Override
     public void run() {
-        while(true){
-            zustand.tick();
+        while (true) {
+            zustand = zustand.tick();
             try {
                 Thread.sleep(300);
-            } catch(InterruptedException e){
-                Thread.currentThread().interrupt();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             melden();
         }

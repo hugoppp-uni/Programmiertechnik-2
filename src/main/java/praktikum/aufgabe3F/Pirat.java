@@ -3,24 +3,38 @@ package praktikum.aufgabe3F;
 import java.awt.image.renderable.ContextualRenderedImageFactory;
 
 public class Pirat extends ISimObjekt {
-    private String name;
-    private Schiff referenzAufSchiff;
+    private final String name;
+    private final Schiff referenzAufSchiff;
     private Ort ort;
     private Zustand zustand;
 
     public Pirat(String name, Schiff referenzAufSchiff) {
         Zustand z1 = new Zustand(this, "Herumlaufen im Westland",
-          3 + (int) (Math.random() * ((5 - 3) + 1)), () -> ort = Ort.WESTLAND);
-        Zustand z2 = new Zustand(this, "Einschiﬀen am Westhafen", 5,
-          () -> {ort = Ort.WESTHAFEN; referenzAufSchiff.einschiffen(this);});
+          30 + (int) (Math.random() * ((30 - 1) + 1)), () -> ort = Ort.WESTLAND);
+        Zustand z2 = new Zustand(this, "Einschiﬀen am Westhafen",
+          1,
+          () -> {
+              ort = Ort.WESTHAFEN;
+              referenzAufSchiff.einschiffen(this);
+          });
         Zustand z3 = new Zustand(this, "Übersetzen von West nach Ost", 10,
-          () -> {ort = Ort.AUF_SCHIFF; referenzAufSchiff.ausschiffen(this, Ort.OSTHAFEN);});
+          () -> {
+              ort = Ort.AUF_SCHIFF;
+              referenzAufSchiff.ausschiffen(this, Ort.OSTHAFEN);
+          });
         Zustand z4 = new Zustand(this, "Herumlaufen im Ostland",
-          3 + (int) (Math.random() * ((5 - 3) + 1)), () -> ort = Ort.OSTLAND);
-        Zustand z5 = new Zustand(this, "Einschiffen am Osthafen", 5,
-          () -> {ort = Ort.OSTHAFEN; referenzAufSchiff.einschiffen(this);});
+          30 + (int) (Math.random() * ((30 - 1) + 1)), () -> ort = Ort.OSTLAND);
+        Zustand z5 = new Zustand(this, "Einschiffen am Osthafen",
+          1,
+          () -> {
+              ort = Ort.OSTHAFEN;
+              referenzAufSchiff.einschiffen(this);
+          });
         Zustand z6 = new Zustand(this, "Übersetzen von Ost nach West", 10,
-          () -> {ort = Ort.AUF_SCHIFF; referenzAufSchiff.ausschiffen(this, Ort.WESTHAFEN);});
+        () -> {
+            ort = Ort.AUF_SCHIFF;
+            referenzAufSchiff.ausschiffen(this, Ort.WESTHAFEN);
+        });
 
         z1.setNachfolgeZustand(z2);
         z2.setNachfolgeZustand(z3);
@@ -82,12 +96,12 @@ public class Pirat extends ISimObjekt {
     public void run() {
         while (true) {
             zustand = zustand.tick();
-            melden();
             try {
                 Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            melden();
         }
     }
 }

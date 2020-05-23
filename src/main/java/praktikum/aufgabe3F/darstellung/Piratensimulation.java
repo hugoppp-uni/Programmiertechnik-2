@@ -27,9 +27,9 @@ public class Piratensimulation extends Application {
     @Override
     public void start(Stage primaryStage) {
         StackPane wurzel = new StackPane();
-        Scene szene = new Scene(wurzel, 600, 300);
+        Scene szene = new Scene(wurzel, 600, 400);
         Darstellungscanvas darstellungscanvas = new Darstellungscanvas(600,
-          300, objekteAnlegen());
+          400, objekteAnlegen());
         wurzel.getChildren().add(darstellungscanvas);
         primaryStage.setTitle("Piratensimulation");
         primaryStage.setScene(szene);
@@ -41,11 +41,12 @@ public class Piratensimulation extends Application {
      */
     public List<ISimObjekt> objekteAnlegen() {
         // TODO: Objekte anlegen, starten und in Liste zurückgeben.
-        Schiff schiff = new Schiff("FlyingDutchman", 4);
+        Schiff schiff = new Schiff("FlyingDutchman", 3);
         List<ISimObjekt> liste = Arrays.asList(schiff, new Pirat("Hook",
-          schiff));
+          schiff), new Pirat("Peter", schiff), new Pirat("Karsten",
+          schiff), new Pirat("Mike", schiff), new Pirat("Frank", schiff));
         for(ISimObjekt listElement : liste){
-            new Thread(listElement);
+            new Thread(listElement).start();
         }
         return liste;
     }

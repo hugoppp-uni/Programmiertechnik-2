@@ -1,12 +1,12 @@
 package praktikum.aufgabe3F;
 
 public class Zustand implements IZustand {
-    private String name;
-    private int dauer;
+    private final String name;
+    private final int dauer;
     private int zeitImZustand;
     private Zustand nachfolgeZustand;
-    private ISimObjekt simObjekt;
-    private Runnable onReset;
+    private final ISimObjekt simObjekt;
+    private final Runnable onReset;
 
     public Zustand(ISimObjekt simObjekt, String name, int dauer,
                    Runnable onReset) {
@@ -26,7 +26,7 @@ public class Zustand implements IZustand {
      */
     @Override
     public float getFortschritt() {
-        return dauer-zeitImZustand;
+        return (float) zeitImZustand/dauer;
     }
 
     /**
@@ -39,6 +39,7 @@ public class Zustand implements IZustand {
             return this;
         }
         nachfolgeZustand.reset();
+        zeitImZustand = 0;
         return nachfolgeZustand;
     }
 
