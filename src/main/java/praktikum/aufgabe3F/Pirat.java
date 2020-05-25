@@ -17,7 +17,7 @@ public class Pirat extends ISimObjekt {
               ort = Ort.WESTHAFEN;
               referenzAufSchiff.einschiffen(this);
           });
-        Zustand z3 = new Zustand(this, "Übersetzen von West nach Ost", 10,
+        Zustand z3 = new Zustand(this, "Übersetzen von West nach Ost", 1,
           () -> {
               ort = Ort.AUF_SCHIFF;
               referenzAufSchiff.ausschiffen(this, Ort.OSTHAFEN);
@@ -30,7 +30,7 @@ public class Pirat extends ISimObjekt {
               ort = Ort.OSTHAFEN;
               referenzAufSchiff.einschiffen(this);
           });
-        Zustand z6 = new Zustand(this, "Übersetzen von Ost nach West", 10,
+        Zustand z6 = new Zustand(this, "Übersetzen von Ost nach West", 1,
         () -> {
             ort = Ort.AUF_SCHIFF;
             referenzAufSchiff.ausschiffen(this, Ort.WESTHAFEN);
