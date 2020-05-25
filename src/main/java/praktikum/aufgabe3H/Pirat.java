@@ -22,7 +22,7 @@ public class Pirat extends ISimObjekt {
   public Pirat(Schiff schiff, String name, Ort startOrt) {
     if (startOrt != Ort.OSTLAND && startOrt != Ort.WESTLAND)
       throw new IllegalArgumentException("Pirat muss im Ost- oder Westland starten");
-    Zustand z1 =
+    IZustand z1 =
       new Zustand("Herumlaufen im Westland", generateRandom(rumlaufDauerMin, rumlaufDauerMax), this,
         () -> ort = Ort.WESTLAND
       );
