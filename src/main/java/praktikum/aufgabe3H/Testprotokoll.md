@@ -1,6 +1,7 @@
 #Testprotokoll
 ###Piraten
 ####Erstellen von Piraten
+Es befinden sich jeweils 4 Piraten an den Haefen
 1. Die Namen entsprechen den Namen in der Visualisierung.
 1. Die Piraten starten am jeweils angegebenen Ort (Westland/Ostland).
 ####Aendern vom Zustand und Ort
@@ -15,7 +16,7 @@ Nach der angegebenen Anzahl von Ticks sollen die Piraten den Zustand aendern
 1. Übersetzen von Ost nach West
 
 * Aus den Zustaenden 2 und 6 soll nur gewechselt werden, wenn das Schiff am
-   jeweiligen Hafen anliegt und das Schiff die Kapazität nicht ausgereizt
+   jeweiligen Hafen anliegt und das Schiff die Kapazität (3) nicht ausgereizt
     hat.
 * Die Anzahl an Ticks, die ein Pirat im West-/Ostland verbringt, soll
  innerhalb der mit`setRumlaufDauerMin(int)` und `setRumlaufDauerMax(int)` in [Piratensimmulation](darstellung/Piratensimulation.java) gesetzen Grenzen liegen.

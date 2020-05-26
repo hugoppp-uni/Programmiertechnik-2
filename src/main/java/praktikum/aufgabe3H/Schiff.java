@@ -49,7 +49,7 @@ public class Schiff extends ISimObjekt {
     return Typ.SCHIFF;
   }
 
-  public synchronized void setOrtAndNotifyAll(Ort ort) {
+  private synchronized void setOrtAndNotifyAll(Ort ort) {
     this.ort = ort;
     this.notifyAll();
   }
@@ -70,7 +70,7 @@ public class Schiff extends ISimObjekt {
       }
     }
     beladung++;
-    // notifyAll(); //TODO warum hier notify? Die Threads sind ja in Warteschleife
+    notifyAll();
   }
 
   /**

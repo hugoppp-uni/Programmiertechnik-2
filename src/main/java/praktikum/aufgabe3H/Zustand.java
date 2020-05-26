@@ -7,7 +7,7 @@ public class Zustand implements IZustand {
   private final ISimObjekt simObject;
 
   private int zeitImZustand;
-  private Zustand nachfolgeZustand;
+  private IZustand nachfolgeZustand;
 
   @Override
   public float getFortschritt() {
@@ -15,7 +15,7 @@ public class Zustand implements IZustand {
   }
 
   public void setNachfolgeZustand(IZustand nachfolgeZustand) {
-    this.nachfolgeZustand = (Zustand)nachfolgeZustand;
+    this.nachfolgeZustand = nachfolgeZustand;
   }
 
   public Zustand(
