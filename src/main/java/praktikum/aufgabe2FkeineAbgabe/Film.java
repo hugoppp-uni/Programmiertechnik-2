@@ -36,6 +36,22 @@ public class Film {
         return new Film(id, titel, laufzeit, budget, oskars);
     }
 
+    public String getTitel() {
+        return titel.get();
+    }
+
+    public StringProperty titelProperty() {
+        return titel;
+    }
+
+    public int getLaufzeit() {
+        return laufzeit.get();
+    }
+
+    public IntegerProperty laufzeitProperty() {
+        return laufzeit;
+    }
+
     @Override
     public String toString() {
         return "Film{" +

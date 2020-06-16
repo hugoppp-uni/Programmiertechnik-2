@@ -1,11 +1,8 @@
 package praktikum.aufgabe2FkeineAbgabe;
 
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
@@ -72,6 +69,10 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
 
     public ObjectProperty<Typ> getTyp() {
         return typ;
+    }
+
+    public ObjectProperty<Geschlecht> getGeschlecht(){
+        return geschlecht;
     }
 
     public StringProperty getName() {

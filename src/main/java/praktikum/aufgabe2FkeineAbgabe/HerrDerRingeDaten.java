@@ -1,13 +1,9 @@
 package praktikum.aufgabe2FkeineAbgabe;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -52,7 +48,7 @@ public class HerrDerRingeDaten {
         ObservableList<Film> filmListe = FXCollections.observableArrayList();
         for (int i = 0; i < j.length(); i++) {
             JSONObject film = (JSONObject) j.get(i);
-            Film f = (Film) Film.fromJson(film);
+            Film f = Film.fromJson(film);
             filmListe.add(f);
         }
         return filmListe;
