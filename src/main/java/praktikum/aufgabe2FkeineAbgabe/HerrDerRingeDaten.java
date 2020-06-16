@@ -38,7 +38,9 @@ public class HerrDerRingeDaten {
         for (int i = 0; i < j.length(); i++) {
             JSONObject zitat = (JSONObject) j.get(i);
             Zitat z = Zitat.fromJson(zitat);
-            zitatListe.add(z);
+            if(z.getDialog() != null){
+                zitatListe.add(z);
+            }
         }
         return zitatListe;
     }

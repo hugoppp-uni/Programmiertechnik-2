@@ -10,14 +10,14 @@ public class Zitat {
     private final String filmId;
     private final String figurId;
 
-    public Zitat(String id, String dialog, String filmId, String figurId){
+    public Zitat(String id, String dialog, String filmId, String figurId) {
         this.id = id;
         this.dialog = dialog;
         this.filmId = filmId;
         this.figurId = figurId;
     }
 
-    public static Zitat fromJson(JSONObject o){
+    public static Zitat fromJson(JSONObject o) {
         String id = getNotNull(o, "_id");
         String dialog = getNotNull(o, "dialog");
         String filmId = getNotNull(o, "movie");

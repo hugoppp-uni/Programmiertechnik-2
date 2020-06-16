@@ -33,6 +33,16 @@ public class Helper {
     public static String getNotNull(JSONObject json, String key) {
         if (json.has(key)) {
             Object obj = json.get(key);
+            Pattern pattern = Pattern.compile("\\s+");
+            Matcher matcher = pattern.matcher(String.valueOf(obj));
+            if (matcher.find()) {
+                obj = String.valueOf(obj).replace("  ", "");
+            }
+            Pattern pattern1 = Pattern.compile("(\\s?\\?)");
+            Matcher matcher1 = pattern1.matcher(String.valueOf(obj));
+            if (matcher1.find()) {
+                obj = matcher1.replaceAll("?");
+            }
             return obj.equals(JSONObject.NULL) ? null :
               ((String) obj).isEmpty() ? null : (String) obj;
         }
