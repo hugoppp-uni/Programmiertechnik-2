@@ -7,14 +7,14 @@ import static praktikum.aufgabe2FkeineAbgabe.Helper.getNumberNotNull;
 
 public class Film {
     private final String id;
-    private final String name;
+    private final String titel;
     private final int laufzeit;
     private final int budget;
     private final int oskars;
 
-    public Film(String id, String name, int laufzeit, int budget, int oskars){
+    public Film(String id, String titel, int laufzeit, int budget, int oskars){
         this.id = id;
-        this.name = name;
+        this.titel = titel;
         this.laufzeit = laufzeit;
         this.budget = budget;
         this.oskars = oskars;
@@ -22,7 +22,7 @@ public class Film {
 
     public static Film fromJson(JSONObject o){
         String id = getNotNull(o, "_id");
-        String name = getNotNull(o, "name");
+        String titel = getNotNull(o, "name");
         int laufzeit = Integer.parseInt(getNumberNotNull(o,
           "runtimeInMinutes"));
         int budget = Integer.parseInt(getNumberNotNull(o,
@@ -30,14 +30,14 @@ public class Film {
         int oskars = Integer.parseInt(getNumberNotNull(o,
           "academyAwardWins"));
 
-        return new Film(id, name, laufzeit, budget, oskars);
+        return new Film(id, titel, laufzeit, budget, oskars);
     }
 
     @Override
     public String toString() {
         return "Film{" +
           "\nid ='" + id + '\'' +
-          ",\nname ='" + name + '\'' +
+          ",\nname ='" + titel + '\'' +
           ",\nlaufzeit =" + laufzeit +
           ",\nbudget =" + budget +
           ",\noskars =" + oskars +

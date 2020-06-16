@@ -18,8 +18,8 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
     private final String name;
 
     public Figur(String id, float groesse, Typ typ, Geschlecht geschlecht,
-                  String geburtstag, String partner, String todestag, String
-                    haarfarbe, String name) {
+                 String geburtstag, String partner, String todestag, String
+                   haarfarbe, String name) {
         this.id = id;
         this.groesse = groesse;
         this.typ = typ;

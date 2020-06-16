@@ -11,7 +11,7 @@ public class ReadingJSON {
         HerrDerRingeDaten h = new HerrDerRingeDaten();
         String file = "figuren.json";
         JSONArray e = einlesen("src/main/resources/json/" + file);
-        h.ausgebenHobbit(h.createListFiguren());
+        h.ausgebenHobbit(HerrDerRingeDaten.createListFiguren());
         Figur figur = Figur
             .fromJson((e).getJSONObject(892));
         figur.iterator();

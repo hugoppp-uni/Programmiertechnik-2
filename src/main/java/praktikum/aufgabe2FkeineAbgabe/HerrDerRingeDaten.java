@@ -1,5 +1,8 @@
 package praktikum.aufgabe2FkeineAbgabe;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -11,30 +14,31 @@ import java.util.stream.Stream;
 import static praktikum.aufgabe2FkeineAbgabe.ReadingJSON.*;
 
 public class HerrDerRingeDaten {
-    private final List<Figur> figurenListe;
-    private final List<Film> filmListe;
-    private final List<Zitat> zitatListe;
+    private final ObservableList<FigurWrapper> figurenListe;
+    private final ObservableList<FilmWrapper> filmListe;
+    private final ObservableList<Zitat> zitatListe;
 
-    public HerrDerRingeDaten(){
+    public HerrDerRingeDaten() {
         figurenListe = createListFiguren();
         filmListe = createListFilm();
         zitatListe = createListZitat();
     }
 
-    public List<Figur> createListFiguren() {
+    public static ObservableList<FigurWrapper> createListFiguren() {
         JSONArray j = einlesen("src/main/resources/json/figuren.json");
-        List<Figur> figurenListe = new ArrayList<>();
+        ObservableList<FigurWrapper> figurenListe =
+          FXCollections.observableArrayList();
         for (int i = 0; i < j.length(); i++) {
             JSONObject figur = (JSONObject) j.get(i);
-            Figur f = Figur.fromJson(figur);
+            FigurWrapper f = (FigurWrapper) Figur.fromJson(figur);
             figurenListe.add(f);
         }
         return figurenListe;
     }
 
-    public List<Zitat> createListZitat() {
+    public static ObservableList<Zitat> createListZitat() {
         JSONArray j = einlesen("src/main/resources/json/zitate.json");
-        List<Zitat> zitatListe = new ArrayList<>();
+        ObservableList<Zitat> zitatListe = FXCollections.observableArrayList();
         for (int i = 0; i < j.length(); i++) {
             JSONObject zitat = (JSONObject) j.get(i);
             Zitat z = Zitat.fromJson(zitat);
@@ -43,26 +47,26 @@ public class HerrDerRingeDaten {
         return zitatListe;
     }
 
-    public List<Film> createListFilm() {
+    public static ObservableList<FilmWrapper> createListFilm() {
         JSONArray j = einlesen("src/main/resources/json/filme.json");
-        List<Film> filmListe = new ArrayList<>();
+        ObservableList<FilmWrapper> filmListe = FXCollections.observableArrayList();
         for (int i = 0; i < j.length(); i++) {
             JSONObject film = (JSONObject) j.get(i);
-            Film f = Film.fromJson(film);
+            FilmWrapper f = (FilmWrapper) Film.fromJson(film);
             filmListe.add(f);
         }
         return filmListe;
     }
 
-    public void ausgebenMaiar(List<Figur> figurenListe) {
-        Stream<Figur> s = figurenListe.stream();
+    public void ausgebenMaiar(ObservableList<FigurWrapper> figurenListe) {
+        Stream<FigurWrapper> s = figurenListe.stream();
         s.filter(figur -> figur.getTyp() == Typ.MAIAR)
           .sorted()
           .forEach(System.out::println);
     }
 
-    public void ausgebenHobbit(List<Figur> figurenListe) {
-        Stream<Figur> s = figurenListe.stream();
+    public void ausgebenHobbit(ObservableList<FigurWrapper> figurenListe) {
+        Stream<FigurWrapper> s = figurenListe.stream();
         s.filter(f -> f.getTyp() == Typ.HOBBIT && f.getGroesse() != 0)
           .sorted((o1, o2) -> {
               FigurenComparator f = new FigurenComparator();
@@ -71,13 +75,13 @@ public class HerrDerRingeDaten {
           .forEach(System.out::println);
     }
 
-    public Figur findFigur(String name, List<Figur> figurList) {
-        Optional<Figur> s = figurList.stream()
+    public Figur findFigur(String name, ObservableList<FigurWrapper> figurList) {
+        Optional<FigurWrapper> s = figurList.stream()
           .filter(fName -> (fName.getName()).equals(name)).findAny();
         return s.orElse(null);
     }
 
-    public Stream<Zitat> zitatZuFigur(String name){
+    public Stream<Zitat> zitatZuFigur(String name) {
         Figur figur = findFigur(name, figurenListe);
         return zitatListe.stream().filter(z -> z.getFigurId()
           .equals(figur.getId()));
