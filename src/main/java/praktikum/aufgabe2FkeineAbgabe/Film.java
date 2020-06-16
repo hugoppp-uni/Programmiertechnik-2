@@ -1,18 +1,21 @@
 package praktikum.aufgabe2FkeineAbgabe;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.StringProperty;
 import org.json.JSONObject;
 
-import static praktikum.aufgabe2FkeineAbgabe.Helper.getNotNull;
-import static praktikum.aufgabe2FkeineAbgabe.Helper.getNumberNotNull;
+import static praktikum.aufgabe2FkeineAbgabe.Helper.*;
 
 public class Film {
     private final String id;
-    private final String titel;
-    private final int laufzeit;
+    private final StringProperty titel;
+    private final IntegerProperty laufzeit;
     private final int budget;
     private final int oskars;
 
-    public Film(String id, String titel, int laufzeit, int budget, int oskars){
+    public Film(String id, StringProperty titel, IntegerProperty laufzeit,
+                int budget, int oskars) {
         this.id = id;
         this.titel = titel;
         this.laufzeit = laufzeit;
@@ -20,11 +23,11 @@ public class Film {
         this.oskars = oskars;
     }
 
-    public static Film fromJson(JSONObject o){
+    public static Film fromJson(JSONObject o) {
         String id = getNotNull(o, "_id");
-        String titel = getNotNull(o, "name");
-        int laufzeit = Integer.parseInt(getNumberNotNull(o,
-          "runtimeInMinutes"));
+        StringProperty titel = getNotNullName(o, "name");
+        IntegerProperty laufzeit = new SimpleIntegerProperty(Integer
+          .parseInt(getNumberNotNull(o, "runtimeInMinutes")));
         int budget = Integer.parseInt(getNumberNotNull(o,
           "budgetInMillions"));
         int oskars = Integer.parseInt(getNumberNotNull(o,

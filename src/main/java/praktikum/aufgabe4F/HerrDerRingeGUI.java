@@ -12,8 +12,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import praktikum.aufgabe2FkeineAbgabe.FigurWrapper;
-import praktikum.aufgabe2FkeineAbgabe.FilmWrapper;
+import praktikum.aufgabe2FkeineAbgabe.Figur;
+import praktikum.aufgabe2FkeineAbgabe.Film;
 import praktikum.aufgabe2FkeineAbgabe.HerrDerRingeDaten;
 
 /**
@@ -25,10 +25,10 @@ public class HerrDerRingeGUI extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Herr der Ringe");
         VBox wurzel = new VBox();
-        TableView<FigurWrapper> tabelleFigur = new TableView<>();
+        TableView<Figur> tabelleFigur = new TableView<>();
         tabelleFigur.setItems(HerrDerRingeDaten.createListFiguren());
         wurzel.getChildren().add(tabelleFigur);
-        TableView<FilmWrapper> tabelleFilm = new TableView<>();
+        TableView<Film> tabelleFilm = new TableView<>();
         tabelleFilm.setItems(HerrDerRingeDaten.createListFilm());
         wurzel.getChildren().add(tabelleFilm);
         Scene szene = new Scene(wurzel, 600, 400, Color.WHITE);

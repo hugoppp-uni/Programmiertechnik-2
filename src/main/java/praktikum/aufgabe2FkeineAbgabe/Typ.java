@@ -5,6 +5,8 @@
 
 package praktikum.aufgabe2FkeineAbgabe;
 
+import javafx.beans.property.ObjectProperty;
+
 /**
  * Aufwählungstyp für die verfügbaren Typen.
  */
@@ -34,6 +36,7 @@ public enum Typ {
     /**
      * Liefert die Konstante für einen String. Einige Typen aus der JSON-Datei, die den gleichen Typ beschreiben werden
      * hier gleich zusammengefasst. Liefert null, wenn keine passende Konstante gefunden wurde.
+     * @return
      */
     public static Typ from(String text) {
         switch (text) {

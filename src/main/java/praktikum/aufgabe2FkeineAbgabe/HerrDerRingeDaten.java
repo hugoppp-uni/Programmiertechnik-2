@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 import static praktikum.aufgabe2FkeineAbgabe.ReadingJSON.*;
 
 public class HerrDerRingeDaten {
-    private final ObservableList<FigurWrapper> figurenListe;
-    private final ObservableList<FilmWrapper> filmListe;
+    private final ObservableList<Figur> figurenListe;
+    private final ObservableList<Film> filmListe;
     private final ObservableList<Zitat> zitatListe;
 
     public HerrDerRingeDaten() {
@@ -24,13 +24,13 @@ public class HerrDerRingeDaten {
         zitatListe = createListZitat();
     }
 
-    public static ObservableList<FigurWrapper> createListFiguren() {
+    public static ObservableList<Figur> createListFiguren() {
         JSONArray j = einlesen("src/main/resources/json/figuren.json");
-        ObservableList<FigurWrapper> figurenListe =
+        ObservableList<Figur> figurenListe =
           FXCollections.observableArrayList();
         for (int i = 0; i < j.length(); i++) {
             JSONObject figur = (JSONObject) j.get(i);
-            FigurWrapper f = (FigurWrapper) Figur.fromJson(figur);
+            Figur f = Figur.fromJson(figur);
             figurenListe.add(f);
         }
         return figurenListe;
@@ -47,27 +47,27 @@ public class HerrDerRingeDaten {
         return zitatListe;
     }
 
-    public static ObservableList<FilmWrapper> createListFilm() {
+    public static ObservableList<Film> createListFilm() {
         JSONArray j = einlesen("src/main/resources/json/filme.json");
-        ObservableList<FilmWrapper> filmListe = FXCollections.observableArrayList();
+        ObservableList<Film> filmListe = FXCollections.observableArrayList();
         for (int i = 0; i < j.length(); i++) {
             JSONObject film = (JSONObject) j.get(i);
-            FilmWrapper f = (FilmWrapper) Film.fromJson(film);
+            Film f = (Film) Film.fromJson(film);
             filmListe.add(f);
         }
         return filmListe;
     }
 
-    public void ausgebenMaiar(ObservableList<FigurWrapper> figurenListe) {
-        Stream<FigurWrapper> s = figurenListe.stream();
-        s.filter(figur -> figur.getTyp() == Typ.MAIAR)
+    public void ausgebenMaiar(ObservableList<Figur> figurenListe) {
+        Stream<Figur> s = figurenListe.stream();
+        s.filter(figur -> figur.getTyp().get() == Typ.MAIAR)
           .sorted()
           .forEach(System.out::println);
     }
 
-    public void ausgebenHobbit(ObservableList<FigurWrapper> figurenListe) {
-        Stream<FigurWrapper> s = figurenListe.stream();
-        s.filter(f -> f.getTyp() == Typ.HOBBIT && f.getGroesse() != 0)
+    public void ausgebenHobbit(ObservableList<Figur> figurenListe) {
+        Stream<Figur> s = figurenListe.stream();
+        s.filter(f -> f.getTyp().get() == Typ.HOBBIT && f.getGroesse() != 0)
           .sorted((o1, o2) -> {
               FigurenComparator f = new FigurenComparator();
               return f.compare(o1, o2);
@@ -75,9 +75,9 @@ public class HerrDerRingeDaten {
           .forEach(System.out::println);
     }
 
-    public Figur findFigur(String name, ObservableList<FigurWrapper> figurList) {
-        Optional<FigurWrapper> s = figurList.stream()
-          .filter(fName -> (fName.getName()).equals(name)).findAny();
+    public Figur findFigur(String name, ObservableList<Figur> figurList) {
+        Optional<Figur> s = figurList.stream()
+          .filter(fName -> (fName.getName().get()).equals(name)).findAny();
         return s.orElse(null);
     }
 

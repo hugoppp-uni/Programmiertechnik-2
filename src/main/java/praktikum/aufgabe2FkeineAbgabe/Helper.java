@@ -1,5 +1,7 @@
 package praktikum.aufgabe2FkeineAbgabe;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -33,6 +35,16 @@ public class Helper {
             Object obj = json.get(key);
             return obj.equals(JSONObject.NULL) ? null :
               ((String) obj).isEmpty() ? null : (String) obj;
+        }
+        return null;
+    }
+
+    public static StringProperty getNotNullName(JSONObject json, String key) {
+        if (json.has(key)) {
+            Object obj = json.get(key);
+            return obj.equals(JSONObject.NULL) ? null :
+              ((String) obj).isEmpty() ? null :
+                new SimpleStringProperty((String) obj);
         }
         return null;
     }

@@ -5,6 +5,8 @@
 
 package praktikum.aufgabe2FkeineAbgabe;
 
+import javafx.beans.property.ObjectProperty;
+
 /**
  * Typ für das Geschlecht: Männlich oder Weiblich
  */
@@ -14,6 +16,7 @@ public enum Geschlecht {
 
     /**
      * Liefert die Konstante für einen String. Liefert null, wenn keine passende Konstante gefunden wurde.
+     * @return
      */
     public static Geschlecht from(String text) {
         switch (text) {

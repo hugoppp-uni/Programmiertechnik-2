@@ -1,5 +1,11 @@
 package praktikum.aufgabe2FkeineAbgabe;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
@@ -9,17 +15,18 @@ import java.util.Iterator;
 public class Figur implements Comparable<Figur>, Iterable<String> {
     private final String id;
     private final float groesse;
-    private final Typ typ;
-    private final Geschlecht geschlecht;
+    private final ObjectProperty<Typ> typ;
+    private final ObjectProperty<Geschlecht> geschlecht;
     private final String geburtstag;
     private final String partner;
     private final String todestag;
     private final String haarfarbe;
-    private final String name;
+    private final StringProperty name;
 
-    public Figur(String id, float groesse, Typ typ, Geschlecht geschlecht,
+    public Figur(String id, float groesse, ObjectProperty<Typ> typ,
+                 ObjectProperty<Geschlecht> geschlecht,
                  String geburtstag, String partner, String todestag, String
-                   haarfarbe, String name) {
+                   haarfarbe, StringProperty name) {
         this.id = id;
         this.groesse = groesse;
         this.typ = typ;
@@ -35,18 +42,24 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
         String id = Helper.getNotNull(o, "_id");
         float groesse = (float) Helper.getNumber(Helper.getNumberNotNull(o,
           "height"));
-        Typ typ = Helper.getNotNull(o, "race") == null ? null :
-          Typ.from(o.getString("race"));
-        Geschlecht geschlecht = Helper.getNotNull(o, "gender") == null ?
-          null : Geschlecht.from(o.getString("gender"));
+        ObjectProperty<Typ> typ = Helper.getNotNull(o, "race") == null ? null :
+          new SimpleObjectProperty<>(Typ.from(o.getString("race")));
+        ObjectProperty<Geschlecht> geschlecht = Helper.getNotNull(o,
+          "gender") == null ?
+          null : new SimpleObjectProperty<>(Geschlecht.from(o.getString(
+            "gender")));
         String geburtstag = Helper.getNotNull(o, "birth");
         String partner = Helper.getNotNull(o, "spouse");
         String todestag = Helper.getNotNull(o, "death");
         String haarfarbe = Helper.getNotNull(o, "hair");
-        String name = Helper.getNotNull(o, "name");
+        StringProperty name = Helper.getNotNullName(o, "name");
 
         return new Figur(id, groesse, typ, geschlecht, geburtstag, partner,
           todestag, haarfarbe, name);
+    }
+
+    public void propertyListener() {
+        name.addListener((beobachter, alt, neu) -> System.out.println(alt));
     }
 
     public String getId() {
@@ -57,17 +70,17 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
         return groesse;
     }
 
-    public Typ getTyp() {
+    public ObjectProperty<Typ> getTyp() {
         return typ;
     }
 
-    public String getName() {
+    public StringProperty getName() {
         return name;
     }
 
     @Override
     public int compareTo(Figur o) {
-        return name.compareTo(o.name);
+        return name.get().compareTo(o.name.get());
     }
 
     /**
@@ -87,7 +100,7 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
           partner,
           todestag,
           haarfarbe,
-          name
+          name.get()
         })).iterator();
     }
 
@@ -96,13 +109,13 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
         return "Figur{" +
           "\nid = '" + id + '\'' +
           ",\ngroesse = " + groesse + "m" +
-          ",\ntyp = " + typ +
-          ",\ngeschlecht = " + geschlecht +
+          ",\ntyp = " + typ.get() +
+          ",\ngeschlecht = " + geschlecht.get() +
           ",\ngeburtstag = '" + geburtstag + '\'' +
           ",\npartner = '" + partner + '\'' +
           ",\ntodestag = '" + todestag + '\'' +
           ",\nhaarfarbe = '" + haarfarbe + '\'' +
-          ",\nname = '" + name + '\'' +
+          ",\nname = '" + name.get() + '\'' +
           "\n}\n";
     }
 }
