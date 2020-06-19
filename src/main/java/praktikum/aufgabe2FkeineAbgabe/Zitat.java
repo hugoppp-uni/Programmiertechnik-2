@@ -1,16 +1,17 @@
 package praktikum.aufgabe2FkeineAbgabe;
 
+import javafx.beans.property.StringProperty;
 import org.json.JSONObject;
 
-import static praktikum.aufgabe2FkeineAbgabe.Helper.getNotNull;
-
 public class Zitat {
-    private final String id;
-    private final String dialog;
-    private final String filmId;
-    private final String figurId;
+    private final StringProperty id;
+    private final StringProperty dialog;
+    private final StringProperty filmId;
+    private final StringProperty figurId;
 
-    public Zitat(String id, String dialog, String filmId, String figurId) {
+    public Zitat(StringProperty id, StringProperty dialog,
+                 StringProperty filmId,
+                 StringProperty figurId) {
         this.id = id;
         this.dialog = dialog;
         this.filmId = filmId;
@@ -18,29 +19,39 @@ public class Zitat {
     }
 
     public static Zitat fromJson(JSONObject o) {
-        String id = getNotNull(o, "_id");
-        String dialog = getNotNull(o, "dialog");
-        String filmId = getNotNull(o, "movie");
-        String figurId = getNotNull(o, "character");
+        StringProperty id = Helper.getNotNull2(o, "_id");
+        StringProperty dialog = Helper.getNotNull2(o, "dialog");
+        StringProperty filmId = Helper.getNotNull2(o, "movie");
+        StringProperty figurId = Helper.getNotNull2(o, "character");
 
         return new Zitat(id, dialog, filmId, figurId);
     }
 
-    public String getId() {
+    public StringProperty idProperty() {
         return id;
     }
 
-    public String getDialog() {
+    public String getId(){return id.get();}
+
+    public StringProperty dialogProperty() {
         return dialog;
     }
 
-    public String getFilmId() {
+    public String getDialog() {
+        return dialog.get();
+    }
+
+    public StringProperty filmIdProperty() {
         return filmId;
     }
 
-    public String getFigurId() {
+    public String getFilmId(){return filmId.get();}
+
+    public StringProperty figurIdProperty() {
         return figurId;
     }
+
+    public String getFigurId(){return figurId.get();}
 
     @Override
     public String toString() {

@@ -10,6 +10,6 @@ class HerrDerRingeDatenTest {
     void testFindFigur() {
         HerrDerRingeDaten h = new HerrDerRingeDaten();
         Figur figur = h.findFigur("Frodo Baggins", h.createListFiguren());
-        assertEquals((figur.getId()), "5cd99d4bde30eff6ebccfc15");
+        assertEquals((figur.idProperty()), "5cd99d4bde30eff6ebccfc15");
     }
 }

@@ -30,7 +30,7 @@ public class Helper {
           .isEmpty() ? "0" : String.valueOf(obj);
     }
 
-    public static String getNotNull(JSONObject json, String key) {
+    public static StringProperty getNotNull(JSONObject json, String key) {
         if (json.has(key)) {
             Object obj = json.get(key);
             Pattern pattern = Pattern.compile("\\s+");
@@ -44,17 +44,29 @@ public class Helper {
                 obj = matcher1.replaceAll("?");
             }
             return obj.equals(JSONObject.NULL) ? null :
-              ((String) obj).isEmpty() ? null : (String) obj;
+              (String.valueOf(obj)).isEmpty() ? null :
+                new SimpleStringProperty(String.valueOf(obj));
         }
         return null;
     }
 
-    public static StringProperty getNotNullName(JSONObject json, String key) {
+    public static StringProperty getNotNull2(JSONObject json, String key) {
         if (json.has(key)) {
             Object obj = json.get(key);
-            return obj.equals(JSONObject.NULL) ? null :
-              ((String) obj).isEmpty() ? null :
-                new SimpleStringProperty((String) obj);
+            Pattern pattern = Pattern.compile("\\s+");
+            Matcher matcher = pattern.matcher(String.valueOf(obj));
+            if (matcher.find()) {
+                obj = String.valueOf(obj).replace("  ", "");
+            }
+            Pattern pattern1 = Pattern.compile("(\\s?\\?)");
+            Matcher matcher1 = pattern1.matcher(String.valueOf(obj));
+            if (matcher1.find()) {
+                obj = matcher1.replaceAll("?");
+            }
+            return obj.equals(JSONObject.NULL) ? new SimpleStringProperty(
+              "k. A.") : (String.valueOf(obj)).isEmpty() ?
+              new SimpleStringProperty("k. A.") :
+              new SimpleStringProperty(String.valueOf(obj));
         }
         return null;
     }

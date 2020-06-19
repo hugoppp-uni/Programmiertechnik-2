@@ -2,6 +2,7 @@ package praktikum.aufgabe2FkeineAbgabe;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -10,19 +11,20 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 public class Figur implements Comparable<Figur>, Iterable<String> {
-    private final String id;
+    private final StringProperty id;
     private final float groesse;
     private final ObjectProperty<Typ> typ;
     private final ObjectProperty<Geschlecht> geschlecht;
-    private final String geburtstag;
-    private final String partner;
-    private final String todestag;
-    private final String haarfarbe;
+    private final StringProperty geburtstag;
+    private final StringProperty partner;
+    private final StringProperty todestag;
+    private final StringProperty haarfarbe;
     private final StringProperty name;
 
-    public Figur(String id, float groesse, ObjectProperty<Typ> typ,
+    public Figur(StringProperty id, float groesse, ObjectProperty<Typ> typ,
                  ObjectProperty<Geschlecht> geschlecht,
-                 String geburtstag, String partner, String todestag, String
+                 StringProperty geburtstag, StringProperty partner,
+                 StringProperty todestag, StringProperty
                    haarfarbe, StringProperty name) {
         this.id = id;
         this.groesse = groesse;
@@ -36,47 +38,61 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
     }
 
     public static Figur fromJson(JSONObject o) {
-        String id = Helper.getNotNull(o, "_id");
+        StringProperty id = Helper.getNotNull2(o, "_id");
         float groesse = (float) Helper.getNumber(Helper.getNumberNotNull(o,
           "height"));
-        ObjectProperty<Typ> typ = Helper.getNotNull(o, "race") == null ? null :
+        ObjectProperty<Typ> typ = Helper.getNotNull(o, "race") == null ?
+          new SimpleObjectProperty<>(Typ.UNDEFINED) :
           new SimpleObjectProperty<>(Typ.from(o.getString("race")));
         ObjectProperty<Geschlecht> geschlecht = Helper.getNotNull(o,
           "gender") == null ?
-          null : new SimpleObjectProperty<>(Geschlecht.from(o.getString(
-            "gender")));
-        String geburtstag = Helper.getNotNull(o, "birth");
-        String partner = Helper.getNotNull(o, "spouse");
-        String todestag = Helper.getNotNull(o, "death");
-        String haarfarbe = Helper.getNotNull(o, "hair");
-        StringProperty name = Helper.getNotNullName(o, "name");
+          new SimpleObjectProperty<>(Geschlecht.UNDEFINED) :
+          new SimpleObjectProperty<>(Geschlecht.from(o.getString("gender")));
+        StringProperty geburtstag = Helper.getNotNull2(o, "birth");
+        StringProperty partner = Helper.getNotNull2(o, "spouse");
+        StringProperty todestag = Helper.getNotNull2(o, "death");
+        StringProperty haarfarbe = Helper.getNotNull2(o, "hair");
+        StringProperty name = Helper.getNotNull2(o, "name");
 
+        assert name != null;
         return new Figur(id, groesse, typ, geschlecht, geburtstag, partner,
           todestag, haarfarbe, name);
     }
 
-    public void propertyListener() {
-        name.addListener((beobachter, alt, neu) -> System.out.println(alt));
+    public StringProperty idProperty() {
+        return id;
     }
 
     public String getId() {
-        return id;
+        return id.get();
     }
 
     public float getGroesse() {
         return groesse;
     }
 
-    public ObjectProperty<Typ> getTyp() {
+    public ObjectProperty<Typ> typProperty() {
         return typ;
     }
 
-    public ObjectProperty<Geschlecht> getGeschlecht(){
+    public Typ getTyp() {
+        return typ.get();
+    }
+
+    public ObjectProperty<Geschlecht> geschlechtProperty() {
         return geschlecht;
     }
 
-    public StringProperty getName() {
+    public Geschlecht getGeschlecht() {
+        return geschlecht.get();
+    }
+
+    public StringProperty nameProperty() {
         return name;
+    }
+
+    public String getName() {
+        return name.get();
     }
 
     @Override
@@ -93,14 +109,14 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
     @Override
     public Iterator<String> iterator() {
         return (Arrays.asList(new String[]{
-          id,
+          id.get(),
           String.valueOf(groesse),
           String.valueOf(typ),
-          String.valueOf(geschlecht),
-          geburtstag,
-          partner,
-          todestag,
-          haarfarbe,
+          String.valueOf(geschlecht.get()),
+          geburtstag.get(),
+          partner.get(),
+          todestag.get(),
+          haarfarbe.get(),
           name.get()
         })).iterator();
     }
@@ -108,14 +124,14 @@ public class Figur implements Comparable<Figur>, Iterable<String> {
     @Override
     public String toString() {
         return "Figur{" +
-          "\nid = '" + id + '\'' +
+          "\nid = '" + id.get() + '\'' +
           ",\ngroesse = " + groesse + "m" +
           ",\ntyp = " + typ.get() +
           ",\ngeschlecht = " + geschlecht.get() +
-          ",\ngeburtstag = '" + geburtstag + '\'' +
-          ",\npartner = '" + partner + '\'' +
-          ",\ntodestag = '" + todestag + '\'' +
-          ",\nhaarfarbe = '" + haarfarbe + '\'' +
+          ",\ngeburtstag = '" + geburtstag.get() + '\'' +
+          ",\npartner = '" + partner.get() + '\'' +
+          ",\ntodestag = '" + todestag.get() + '\'' +
+          ",\nhaarfarbe = '" + haarfarbe.get() + '\'' +
           ",\nname = '" + name.get() + '\'' +
           "\n}\n";
     }

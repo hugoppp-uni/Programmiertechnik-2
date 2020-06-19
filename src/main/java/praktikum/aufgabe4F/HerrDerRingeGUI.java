@@ -7,16 +7,11 @@
 package praktikum.aufgabe4F;
 
 import javafx.application.Application;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -47,53 +42,80 @@ public class HerrDerRingeGUI extends Application {
         kind1.getChildren().add(kommandoLabel);
         kind1.getChildren().add(kommando);
 
+        var listFiguren = HerrDerRingeDaten.createListFiguren();
         TableView<Figur> tabelleFigur = new TableView<>();
-        tabelleFigur.setMinSize(400, 10);
-        tabelleFigur.setItems(HerrDerRingeDaten.createListFiguren());
+        tabelleFigur.setMinWidth(400);
+        tabelleFigur.setItems(listFiguren);
         TableColumn<Figur, String> nameSpalte = new TableColumn<>("Name");
+        nameSpalte.setCellValueFactory(new PropertyValueFactory<>("name"));
         tabelleFigur.getColumns().add(nameSpalte);
-        nameSpalte.setCellValueFactory(name -> new SimpleStringProperty(
-          name.getValue().getName().get()));
         TableColumn<Figur, String> typSpalte = new TableColumn<>("Typ");
         tabelleFigur.getColumns().add(typSpalte);
-        typSpalte.setCellValueFactory(typ -> new SimpleStringProperty(
-          typ.getValue().getTyp() == null ? "k. A." :
-            typ.getValue().getTyp().get().toString()));
+        typSpalte.setCellValueFactory(new PropertyValueFactory<>("typ"));
         TableColumn<Figur, String> geschlechtSpalte = new TableColumn<>(
           "Geschlecht");
         tabelleFigur.getColumns().add(geschlechtSpalte);
-        geschlechtSpalte.setCellValueFactory(geschlecht -> new SimpleStringProperty(
-          geschlecht.getValue().getGeschlecht() == null ? "k. A." :
-            geschlecht.getValue().getGeschlecht().get() == null ? "k. A." :
-              geschlecht.getValue().getGeschlecht().get().toString()));
+        geschlechtSpalte.setCellValueFactory(new PropertyValueFactory<>(
+          "geschlecht"));
         kind2.getChildren().add(tabelleFigur);
 
         TableView<Film> tabelleFilm = new TableView<>();
-        tabelleFilm.setMinSize(400, 0);
-        tabelleFilm.setItems(HerrDerRingeDaten.createListFilm());
+        tabelleFilm.setMinWidth(400);
+        var listFilm = HerrDerRingeDaten.createListFilm();
+        tabelleFilm.setItems(listFilm);
         TableColumn<Film, String> titelSpalte = new TableColumn<>("Titel");
         tabelleFilm.getColumns().add(titelSpalte);
-        titelSpalte.setCellValueFactory(titel ->
-          new SimpleStringProperty(titel.getValue().getTitel()));
+        titelSpalte.setCellValueFactory(new PropertyValueFactory<>("titel"));
         TableColumn<Film, String> laufzeitSpalte = new TableColumn<>(
           "Laufzeit in Minuten");
         tabelleFilm.getColumns().add(laufzeitSpalte);
-        laufzeitSpalte.setCellValueFactory(laufzeit ->
-          new SimpleStringProperty(String.valueOf(laufzeit.getValue()
-            .getLaufzeit())));
+        laufzeitSpalte.setCellValueFactory(new PropertyValueFactory<>(
+          "laufzeit"));
         kind2.getChildren().add(tabelleFilm);
 
         TableView<Zitat> tabelleDialog = new TableView<>();
-        tabelleDialog.setMinWidth(800);
-        tabelleDialog.setItems(HerrDerRingeDaten.createListZitat());
+        tabelleDialog.setMaxWidth(800);
+        var listZitat = HerrDerRingeDaten.createListZitat();
+        tabelleDialog.setItems(listZitat);
         TableColumn<Zitat, String> dialogSpalte = new TableColumn<>("Dialog");
         tabelleDialog.getColumns().add(dialogSpalte);
-        dialogSpalte.setCellValueFactory(zitat ->
-          new SimpleStringProperty(zitat.getValue().getDialog()));
+        dialogSpalte.setCellValueFactory(new PropertyValueFactory<>("dialog"));
+
+        tabelleFigur.getSelectionModel().selectedItemProperty()
+          .addListener(((observable, oldValue, newValue) -> {
+              try {
+                  listZitat.setAll(HerrDerRingeDaten
+                    .zitatZuFigur(newValue.getName()));
+              } catch (NullPointerException e) {
+                  listZitat.clear();
+              }
+          }));
+
+        tabelleFilm.getSelectionModel().selectedItemProperty()
+          .addListener((observable, oldValue, newValue) -> {
+              try {
+                  listZitat.setAll(HerrDerRingeDaten
+                    .zitatZuFilm(newValue.getTitel()));
+              } catch (Exception e) {
+                  listZitat.clear();
+              }
+          });
+
+        kommando.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    listFiguren.setAll(HerrDerRingeDaten
+                      .findFigur(kommando.getText(), listFiguren));
+                } catch (Exception e) {
+                    listFiguren.clear();
+                }
+            }
+        });
 
         wurzel.getChildren().add(kind1);
         wurzel.getChildren().add(kind2);
         wurzel.getChildren().add(tabelleDialog);
+
         Scene szene = new Scene(wurzel, 800, 400, Color.WHITE);
         primaryStage.setScene(szene);
         primaryStage.show();

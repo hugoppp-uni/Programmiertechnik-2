@@ -8,13 +8,13 @@ import org.json.JSONObject;
 import static praktikum.aufgabe2FkeineAbgabe.Helper.*;
 
 public class Film {
-    private final String id;
+    private final StringProperty id;
     private final StringProperty titel;
     private final IntegerProperty laufzeit;
     private final int budget;
     private final int oskars;
 
-    public Film(String id, StringProperty titel, IntegerProperty laufzeit,
+    public Film(StringProperty id, StringProperty titel, IntegerProperty laufzeit,
                 int budget, int oskars) {
         this.id = id;
         this.titel = titel;
@@ -24,8 +24,8 @@ public class Film {
     }
 
     public static Film fromJson(JSONObject o) {
-        String id = getNotNull(o, "_id");
-        StringProperty titel = getNotNullName(o, "name");
+        StringProperty id = getNotNull(o, "_id");
+        StringProperty titel = getNotNull(o, "name");
         IntegerProperty laufzeit = new SimpleIntegerProperty(Integer
           .parseInt(getNumberNotNull(o, "runtimeInMinutes")));
         int budget = Integer.parseInt(getNumberNotNull(o,
@@ -33,8 +33,12 @@ public class Film {
         int oskars = Integer.parseInt(getNumberNotNull(o,
           "academyAwardWins"));
 
+        assert titel != null;
         return new Film(id, titel, laufzeit, budget, oskars);
     }
+    public String getId() {return id.get();}
+
+    public StringProperty idProperty(){return id;}
 
     public String getTitel() {
         return titel.get();

@@ -13,7 +13,7 @@ class FigurTest {
           Typ.HOBBIT, Geschlecht.MAENNLICH, "22 September ,TA 2968",
           null, "Unknown (Last sighting ,September 29 ,3021,) " +
           "(,SR 1421,)", "Brown", "Frodo Baggins");
-        assertEquals(0, f1.getName().compareTo(f2.getName()));
+        assertEquals(0, f1.nameProperty().compareTo(f2.nameProperty()));
     }
 
     @Test

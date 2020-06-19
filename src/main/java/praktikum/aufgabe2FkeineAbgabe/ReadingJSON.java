@@ -5,17 +5,15 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.util.Objects;
 
 public class ReadingJSON {
     public static void main(String[] args) {
-        HerrDerRingeDaten h = new HerrDerRingeDaten();
         String file = "figuren.json";
         JSONArray e = einlesen("src/main/resources/json/" + file);
-        h.ausgebenHobbit(HerrDerRingeDaten.createListFiguren());
-        Figur figur = Figur
-            .fromJson((e).getJSONObject(892));
+        Figur figur = Figur.fromJson((e).getJSONObject(892));
         figur.iterator();
-        h.zitatZuFigur("Frodo Baggins").forEach(System.err::println);
+        HerrDerRingeDaten.zitatZuFigur("Frodo Baggins").forEach(System.out::println);
     }
 
     @NotNull
