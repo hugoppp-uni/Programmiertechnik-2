@@ -11,21 +11,12 @@ import java.util.stream.Stream;
 import static praktikum.aufgabe2FkeineAbgabe.ReadingJSON.*;
 
 public class HerrDerRingeDaten {
-    private final ObservableList<Figur> figurenListe;
-    private final ObservableList<Film> filmListe;
-    private final ObservableList<Zitat> zitatListe;
     private static final ObservableList<Figur> figurenListeStatic =
       createListFiguren();
     private static final ObservableList<Zitat> zitatListeStatic =
       createListZitat();
     private static final ObservableList<Film> filmListeStatic =
       createListFilm();
-
-    public HerrDerRingeDaten() {
-        figurenListe = createListFiguren();
-        filmListe = createListFilm();
-        zitatListe = createListZitat();
-    }
 
     public static ObservableList<Figur> createListFiguren() {
         JSONArray j = einlesen("src/main/resources/json/figuren.json");
@@ -86,6 +77,16 @@ public class HerrDerRingeDaten {
         return s.orElse(null);
     }
 
+    public static ObservableList<Figur> findFigurName(String name,
+                                                      ObservableList<Figur> figurList) {
+        return figurList.filtered(figur -> figur.getName().equals(name));
+    }
+
+    public static ObservableList<Figur> findFigurTyp(String typ,
+                                                     ObservableList<Figur> figurList) {
+        return figurList.filtered(figur -> String.valueOf(figur.getTyp()).equals(typ));
+    }
+
     public static ObservableList<Zitat> zitatZuFigur(String name) {
         Figur figur;
         try {
@@ -111,5 +112,11 @@ public class HerrDerRingeDaten {
             return null;
         }
         return zitatListeStatic.filtered(z -> z.getFilmId().equals(film.getId()));
+    }
+
+    public static ObservableList<Zitat> zitatZuFilmFigur(Figur figur,
+                                                         ObservableList<Zitat> zitatObservableList) {
+        return zitatObservableList.filtered(zitat ->
+          zitat.getFigurId().equals(figur.getId()));
     }
 }
