@@ -27,6 +27,10 @@ public class Film {
     return laufzeit;
   }
 
+  public String getId() {
+    return id;
+  }
+
   public Film(String id, String titel, int laufzeit, int budget, int oskars) {
     this.id = id;
     this.titel = titel;

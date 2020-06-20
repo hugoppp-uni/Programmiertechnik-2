@@ -21,7 +21,7 @@ import praktikum.aufgabe2H.Figur;
 import praktikum.aufgabe2H.Film;
 import praktikum.aufgabe2H.HerrDerRingeDaten;
 import praktikum.aufgabe2H.Zitat;
-
+import java.util.stream.Collectors;
 import static javafx.collections.FXCollections.observableArrayList;
 
 /**
@@ -66,11 +66,20 @@ public class HerrDerRingeGUI extends Application {
     var zitateTableColumn = new TableColumn<Zitat, String>("Zitate");
     zitateTableColumn.setCellValueFactory(new PropertyValueFactory<>("dialog"));
     tableViewZitat.getColumns().setAll(zitateTableColumn);
-    //show only zitate from the tableViewFigur selcted item
+    //filter when changing figur
     tableViewFigur.getSelectionModel()
                   .selectedItemProperty()
-                  .addListener((observable, oldValue, newValue) -> zitatObservableList.setAll(
-                    herrDerRingeDaten.getZitateOfId(newValue.getId())));
+                  .addListener((observable, oldValue, newFigur) -> zitatObservableList.setAll(
+                    herrDerRingeDaten.getZitateOfId(newFigur.getId()).stream()
+                            .filter( figur -> figur.getFilmId().equals(tableViewFilm.getSelectionModel().getSelectedItem().getId()))
+                            .collect(Collectors.toList())));
+    //filter when changing film
+    tableViewFilm.getSelectionModel()
+                 .selectedItemProperty()
+                 .addListener((observable, oldValue, newFilm) -> zitatObservableList.setAll(
+                    herrDerRingeDaten.getZitateOfId(tableViewFigur.getSelectionModel().getSelectedItem().getId()).stream()
+                            .filter( zitat -> zitat.getFilmId().equals(tableViewFilm.getSelectionModel().getSelectedItem().getId()))
+                            .collect(Collectors.toList())));
 
     SplitPane horizontalSplitPaneFigurFilm = new SplitPane(tableViewFigur, tableViewFilm);
     SplitPane verticalSplitPaneFigurfilmZitat =
@@ -88,5 +97,7 @@ public class HerrDerRingeGUI extends Application {
     primaryStage.setScene(szene);
     primaryStage.show();
   }
+
+
 
 }

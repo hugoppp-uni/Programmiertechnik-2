@@ -30,6 +30,10 @@ public class Zitat {
     return figurId;
   }
 
+  public String getFilmId() {
+    return filmId;
+  }
+
   /**
    * Generates a List of Zitat from JSON file
    *
