@@ -9,11 +9,12 @@ import java.util.Objects;
 
 public class ReadingJSON {
     public static void main(String[] args) {
+        HerrDerRingeDaten h = new HerrDerRingeDaten();
         String file = "figuren.json";
         JSONArray e = einlesen("src/main/resources/json/" + file);
         Figur figur = Figur.fromJson((e).getJSONObject(892));
         figur.iterator();
-        HerrDerRingeDaten.zitatZuFigur("Frodo Baggins").forEach(System.out::println);
+        h.zitatZuFigur("Frodo Baggins").forEach(System.out::println);
     }
 
     @NotNull

@@ -36,14 +36,13 @@ public class HerrDerRingeGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Herr der Ringe");
+        HerrDerRingeDaten h = new HerrDerRingeDaten();
         VBox wurzel = new VBox();
 
         HBox kind1 = new HBox();
         kind1.setAlignment(Pos.BASELINE_CENTER);
         HBox kind2 = new HBox();
         kind2.setAlignment(Pos.BASELINE_CENTER);
-        HBox kind3 = new HBox();
-        kind3.setAlignment(Pos.BASELINE_CENTER);
 
         Label kommandoLabel = new Label("Kommando: ");
         TextField kommando = new TextField();
@@ -51,7 +50,7 @@ public class HerrDerRingeGUI extends Application {
         kind1.getChildren().add(kommandoLabel);
         kind1.getChildren().add(kommando);
 
-        var listFiguren = HerrDerRingeDaten.createListFiguren();
+        var listFiguren = h.createListFiguren();
         TableView<Figur> tabelleFigur = new TableView<>();
         tabelleFigur.setMinWidth(400);
         tabelleFigur.setItems(listFiguren);
@@ -68,7 +67,7 @@ public class HerrDerRingeGUI extends Application {
           "geschlecht"));
         kind2.getChildren().add(tabelleFigur);
 
-        var listFilm = HerrDerRingeDaten.createListFilm();
+        var listFilm = h.createListFilm();
         TableView<Film> tabelleFilm = new TableView<>();
         tabelleFilm.setMinWidth(400);
         tabelleFilm.setItems(listFilm);
@@ -82,19 +81,18 @@ public class HerrDerRingeGUI extends Application {
           "laufzeit"));
         kind2.getChildren().add(tabelleFilm);
 
-        var listZitat = HerrDerRingeDaten.createListZitat();
+        var listZitat = h.createListZitat();
         TableView<Zitat> tabelleDialog = new TableView<>();
         tabelleDialog.setMinWidth(800);
         tabelleDialog.setItems(listZitat);
         TableColumn<Zitat, String> dialogSpalte = new TableColumn<>("Dialog");
         tabelleDialog.getColumns().add(dialogSpalte);
         dialogSpalte.setCellValueFactory(new PropertyValueFactory<>("dialog"));
-        kind3.getChildren().add(tabelleDialog);
 
         tabelleFigur.getSelectionModel().selectedItemProperty()
           .addListener(((observable, oldValue, newValue) -> {
               try {
-                  tabelleDialog.setItems(HerrDerRingeDaten
+                  tabelleDialog.setItems(h
                     .zitatZuFigur(newValue.getName()));
               } catch (NullPointerException e) {
                   dialogSpalte.getColumns().clear();
@@ -106,8 +104,8 @@ public class HerrDerRingeGUI extends Application {
               try {
                   var figur =
                     tabelleFigur.getSelectionModel().getSelectedItem();
-                  var zitatList = HerrDerRingeDaten.zitatZuFilmFigur(figur,
-                    Objects.requireNonNull(HerrDerRingeDaten.zitatZuFilm(newValue.getTitel())));
+                  var zitatList = h.zitatZuFilmFigur(figur,
+                    Objects.requireNonNull(h.zitatZuFilm(newValue.getTitel())));
                   tabelleDialog.setItems(zitatList);
               } catch (Exception e) {
                   dialogSpalte.getColumns().clear();
@@ -124,12 +122,12 @@ public class HerrDerRingeGUI extends Application {
                     if (matcher.find()) {
                         if (matcher.group(1).equals("NAME")) {
                             figuren = FXCollections
-                              .observableArrayList(HerrDerRingeDaten
+                              .observableArrayList(h
                                 .findFigurName(matcher.group(2), listFiguren));
                             tabelleFigur.setItems(figuren);
-                        } else if (matcher.group(1).equals("TYP")){
+                        } else if (matcher.group(1).equals("TYP")) {
                             figuren = FXCollections
-                              .observableArrayList(HerrDerRingeDaten
+                              .observableArrayList(h
                                 .findFigurTyp(matcher.group(2), listFiguren));
                             tabelleFigur.setItems(figuren);
                         }
@@ -147,7 +145,7 @@ public class HerrDerRingeGUI extends Application {
 
         wurzel.getChildren().add(kind1);
         wurzel.getChildren().add(kind2);
-        wurzel.getChildren().add(kind3);
+        wurzel.getChildren().add(tabelleDialog);
 
         Scene szene = new Scene(wurzel, 800, 400, Color.WHITE);
         primaryStage.setScene(szene);

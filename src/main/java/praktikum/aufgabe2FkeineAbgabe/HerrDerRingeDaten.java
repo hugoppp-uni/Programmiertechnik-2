@@ -6,19 +6,21 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Optional;
-import java.util.stream.Stream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+//import java.util.stream.Stream;
 
 import static praktikum.aufgabe2FkeineAbgabe.ReadingJSON.*;
 
 public class HerrDerRingeDaten {
-    private static final ObservableList<Figur> figurenListeStatic =
+    private final ObservableList<Figur> figurenListeStatic =
       createListFiguren();
-    private static final ObservableList<Zitat> zitatListeStatic =
+    private final ObservableList<Zitat> zitatListeStatic =
       createListZitat();
-    private static final ObservableList<Film> filmListeStatic =
+    private final ObservableList<Film> filmListeStatic =
       createListFilm();
 
-    public static ObservableList<Figur> createListFiguren() {
+    public ObservableList<Figur> createListFiguren() {
         JSONArray j = einlesen("src/main/resources/json/figuren.json");
         ObservableList<Figur> figurenListe =
           FXCollections.observableArrayList();
@@ -30,7 +32,7 @@ public class HerrDerRingeDaten {
         return figurenListe;
     }
 
-    public static ObservableList<Zitat> createListZitat() {
+    public ObservableList<Zitat> createListZitat() {
         JSONArray j = einlesen("src/main/resources/json/zitate.json");
         ObservableList<Zitat> zitatListe = FXCollections.observableArrayList();
         for (int i = 0; i < j.length(); i++) {
@@ -43,7 +45,7 @@ public class HerrDerRingeDaten {
         return zitatListe;
     }
 
-    public static ObservableList<Film> createListFilm() {
+    public ObservableList<Film> createListFilm() {
         JSONArray j = einlesen("src/main/resources/json/filme.json");
         ObservableList<Film> filmListe = FXCollections.observableArrayList();
         for (int i = 0; i < j.length(); i++) {
@@ -54,7 +56,7 @@ public class HerrDerRingeDaten {
         return filmListe;
     }
 
-    public void ausgebenMaiar(ObservableList<Figur> figurenListe) {
+    /*public void ausgebenMaiar(ObservableList<Figur> figurenListe) {
         Stream<Figur> s = figurenListe.stream();
         s.filter(figur -> figur.typProperty().get() == Typ.MAIAR)
           .sorted()
@@ -63,31 +65,41 @@ public class HerrDerRingeDaten {
 
     public void ausgebenHobbit(ObservableList<Figur> figurenListe) {
         Stream<Figur> s = figurenListe.stream();
-        s.filter(f -> f.typProperty().get() == Typ.HOBBIT && f.getGroesse() != 0)
+        s.filter(f -> f.typProperty().get() == Typ.HOBBIT && f.getGroesse()
+        != 0)
           .sorted((o1, o2) -> {
               FigurenComparator f = new FigurenComparator();
               return f.compare(o1, o2);
           }).forEach(System.out::println);
-    }
+    }*/
 
-    public static Figur findFigur(String name,
-                                  ObservableList<Figur> figurList) {
+    public Figur findFigur(String name,
+                           ObservableList<Figur> figurList) {
         Optional<Figur> s = figurList.stream()
           .filter(fName -> (fName.getName()).equals(name)).findAny();
         return s.orElse(null);
     }
 
-    public static ObservableList<Figur> findFigurName(String name,
-                                                      ObservableList<Figur> figurList) {
-        return figurList.filtered(figur -> figur.getName().equals(name));
+    public ObservableList<Figur> findFigurName(String name,
+                                               ObservableList<Figur> figurList) {
+        ObservableList<Figur> filteredFigurList =
+          FXCollections.observableArrayList();
+        for (Figur strings : figurList) {
+            Pattern pattern = Pattern.compile(name);
+            Matcher matcher = pattern.matcher(strings.getName());
+            if (matcher.find()) {
+                filteredFigurList.add(strings);
+            }
+        }
+        return filteredFigurList;
     }
 
-    public static ObservableList<Figur> findFigurTyp(String typ,
-                                                     ObservableList<Figur> figurList) {
+    public ObservableList<Figur> findFigurTyp(String typ,
+                                              ObservableList<Figur> figurList) {
         return figurList.filtered(figur -> String.valueOf(figur.getTyp()).equals(typ));
     }
 
-    public static ObservableList<Zitat> zitatZuFigur(String name) {
+    public ObservableList<Zitat> zitatZuFigur(String name) {
         Figur figur;
         try {
             figur = findFigur(name, figurenListeStatic);
@@ -97,14 +109,14 @@ public class HerrDerRingeDaten {
         return zitatListeStatic.filtered(z -> z.getFigurId().equals(figur.getId()));
     }
 
-    public static Film findFilm(String titel,
-                                ObservableList<Film> filmListe) {
+    public Film findFilm(String titel,
+                         ObservableList<Film> filmListe) {
         Optional<Film> s = filmListe.stream()
           .filter(fTitel -> (fTitel.getTitel()).equals(titel)).findAny();
         return s.orElse(null);
     }
 
-    public static ObservableList<Zitat> zitatZuFilm(String titel) {
+    public ObservableList<Zitat> zitatZuFilm(String titel) {
         Film film;
         try {
             film = findFilm(titel, filmListeStatic);
@@ -114,8 +126,8 @@ public class HerrDerRingeDaten {
         return zitatListeStatic.filtered(z -> z.getFilmId().equals(film.getId()));
     }
 
-    public static ObservableList<Zitat> zitatZuFilmFigur(Figur figur,
-                                                         ObservableList<Zitat> zitatObservableList) {
+    public ObservableList<Zitat> zitatZuFilmFigur(Figur figur,
+                                                  ObservableList<Zitat> zitatObservableList) {
         return zitatObservableList.filtered(zitat ->
           zitat.getFigurId().equals(figur.getId()));
     }

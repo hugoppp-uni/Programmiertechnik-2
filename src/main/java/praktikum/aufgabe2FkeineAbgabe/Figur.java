@@ -2,7 +2,6 @@ package praktikum.aufgabe2FkeineAbgabe;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
