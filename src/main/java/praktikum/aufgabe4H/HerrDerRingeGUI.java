@@ -7,6 +7,7 @@
 package praktikum.aufgabe4H;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
@@ -61,8 +62,9 @@ public class HerrDerRingeGUI extends Application {
     laufzeitTableColumn.setCellValueFactory(new PropertyValueFactory<>("laufzeit"));
     tableViewFilm.getColumns().setAll(titelTableColumn, laufzeitTableColumn);
 
-    var zitatObservableList = observableArrayList(herrDerRingeDaten.getZitate());
+    ObservableList<Zitat> zitatObservableList = observableArrayList();
     TableView<Zitat> tableViewZitat = new TableView<>(zitatObservableList);
+
     var zitateTableColumn = new TableColumn<Zitat, String>("Zitate");
     zitateTableColumn.setCellValueFactory(new PropertyValueFactory<>("dialog"));
     tableViewZitat.getColumns().setAll(zitateTableColumn);
@@ -90,10 +92,12 @@ public class HerrDerRingeGUI extends Application {
     textField.textProperty()
              .addListener((observable, oldValue, newValue) -> figurObservableList.setAll(
                herrDerRingeDaten.filterFiguren(figurList, newValue)));
+    textField.setPromptText("Filter eingeben: NAME/TYP = <Filtertext>");
 
     VBox wurzel = new VBox(textField, verticalSplitPaneFigurfilmZitat);
     primaryStage.setTitle("Herr der Ringe");
     Scene szene = new Scene(wurzel, 1000, 600, Color.WHITE);
+    tableViewZitat.getColumns().get(0).setPrefWidth(szene.getWidth());
     primaryStage.setScene(szene);
     primaryStage.show();
   }
