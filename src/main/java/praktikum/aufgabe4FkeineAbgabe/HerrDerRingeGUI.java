@@ -4,7 +4,7 @@
  * für Angewandte Wissenschaften Hamburg von Prof. Philipp Jenke (Informatik)
  */
 
-package praktikum.aufgabe4F;
+package praktikum.aufgabe4FkeineAbgabe;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
