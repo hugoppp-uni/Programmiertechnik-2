@@ -8,10 +8,12 @@ import org.json.JSONObject;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-//import java.util.stream.Stream;
 
 import static praktikum.aufgabe2FkeineAbgabe.ReadingJSON.*;
 
+/**
+ * Erstellung der HerrDerRinge-Datensätzen
+ */
 public class HerrDerRingeDaten {
     private final ObservableList<Figur> figurenListeStatic =
       createListFiguren();
@@ -73,6 +75,13 @@ public class HerrDerRingeDaten {
           }).forEach(System.out::println);
     }*/
 
+    /**
+     * findet Figur zu name in figurList
+     *
+     * @param name Name, der zu suchenden Figur
+     * @param figurList Liste, in der gesucht wird
+     * @return Figur zu name
+     */
     public Figur findFigur(String name,
                            ObservableList<Figur> figurList) {
         Optional<Figur> s = figurList.stream()
@@ -80,13 +89,20 @@ public class HerrDerRingeDaten {
         return s.orElse(null);
     }
 
+    /**
+     * findet mehrere Figuren zu name durch regex in figurList
+     *
+     * @param name Name, der zu suchenden Figuren
+     * @param figurList Liste, in der gesucht wird
+     * @return Figuren zu name
+     */
     public ObservableList<Figur> findFigurName(String name,
                                                ObservableList<Figur> figurList) {
         ObservableList<Figur> filteredFigurList =
           FXCollections.observableArrayList();
         for (Figur strings : figurList) {
-            Pattern pattern = Pattern.compile(name);
-            Matcher matcher = pattern.matcher(strings.getName());
+            Pattern pattern = Pattern.compile(name.toLowerCase());
+            Matcher matcher = pattern.matcher(strings.getName().toLowerCase());
             if (matcher.find()) {
                 filteredFigurList.add(strings);
             }
@@ -94,11 +110,38 @@ public class HerrDerRingeDaten {
         return filteredFigurList;
     }
 
+    /**
+     * findet Figuren zu typ in figurList
+     *
+     * @param typ Typ, der zu suchenden Figuren
+     * @param figurList Liste, in der gesucht wird
+     * @return Figuren zu typ
+     */
     public ObservableList<Figur> findFigurTyp(String typ,
                                               ObservableList<Figur> figurList) {
         return figurList.filtered(figur -> String.valueOf(figur.getTyp()).equals(typ));
     }
 
+    /**
+     * findet Film zu titel in filmListe
+     *
+     * @param titel Titel, des zu suchenden Films
+     * @param filmListe Liste, in der gesucht wird
+     * @return Film zu titel
+     */
+    public Film findFilm(String titel,
+                          ObservableList<Film> filmListe) {
+        Optional<Film> s = filmListe.stream()
+          .filter(fTitel -> (fTitel.getTitel()).equals(titel)).findAny();
+        return s.orElse(null);
+    }
+
+    /**
+     * findet die Zitate zu name einer Figur
+     *
+     * @param name Name, der Figur, die die Zitate spricht
+     * @return Zitate zu name von Figur
+     */
     public ObservableList<Zitat> zitatZuFigur(String name) {
         Figur figur;
         try {
@@ -109,13 +152,12 @@ public class HerrDerRingeDaten {
         return zitatListeStatic.filtered(z -> z.getFigurId().equals(figur.getId()));
     }
 
-    public Film findFilm(String titel,
-                         ObservableList<Film> filmListe) {
-        Optional<Film> s = filmListe.stream()
-          .filter(fTitel -> (fTitel.getTitel()).equals(titel)).findAny();
-        return s.orElse(null);
-    }
-
+    /**
+     * findet Zitate zu titel eines Film
+     *
+     * @param titel Titel, des Films, aus dem die Zitate stammen
+     * @return Zitate zu titel von Film
+     */
     public ObservableList<Zitat> zitatZuFilm(String titel) {
         Film film;
         try {
@@ -126,6 +168,12 @@ public class HerrDerRingeDaten {
         return zitatListeStatic.filtered(z -> z.getFilmId().equals(film.getId()));
     }
 
+    /**
+     * findet Zitate zu einer Figur
+     * @param figur Figur, die die Zitate spricht
+     * @param zitatObservableList Liste, in der gesucht wird
+     * @return Zitate von figur aus zitatObservableList
+     */
     public ObservableList<Zitat> zitatZuFilmFigur(Figur figur,
                                                   ObservableList<Zitat> zitatObservableList) {
         return zitatObservableList.filtered(zitat ->

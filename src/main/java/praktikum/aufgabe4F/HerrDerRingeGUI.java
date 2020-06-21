@@ -7,7 +7,6 @@
 package praktikum.aufgabe4F;
 
 import javafx.application.Application;
-import javafx.beans.value.ObservableListValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -18,6 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import praktikum.aufgabe2FkeineAbgabe.Figur;
 import praktikum.aufgabe2FkeineAbgabe.Film;
@@ -44,6 +44,9 @@ public class HerrDerRingeGUI extends Application {
         HBox kind2 = new HBox();
         kind2.setAlignment(Pos.BASELINE_CENTER);
 
+        Label filterEingabe = new Label("Filtereingabe nach folgendem " +
+          "Muster: 'FILTER NAME/TYP = Suchwert'");
+        filterEingabe.setTextFill(Paint.valueOf("#02C226"));
         Label kommandoLabel = new Label("Kommando: ");
         TextField kommando = new TextField();
         kommando.setMinWidth(730);
@@ -143,6 +146,7 @@ public class HerrDerRingeGUI extends Application {
             }
         });
 
+        wurzel.getChildren().add(filterEingabe);
         wurzel.getChildren().add(kind1);
         wurzel.getChildren().add(kind2);
         wurzel.getChildren().add(tabelleDialog);

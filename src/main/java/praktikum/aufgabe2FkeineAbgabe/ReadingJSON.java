@@ -5,7 +5,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.util.Objects;
 
 public class ReadingJSON {
     public static void main(String[] args) {

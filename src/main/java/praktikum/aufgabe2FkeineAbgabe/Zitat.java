@@ -31,7 +31,9 @@ public class Zitat {
         return id;
     }
 
-    public String getId(){return id.get();}
+    public String getId() {
+        return id.get();
+    }
 
     public StringProperty dialogProperty() {
         return dialog;
@@ -45,13 +47,17 @@ public class Zitat {
         return filmId;
     }
 
-    public String getFilmId(){return filmId.get();}
+    public String getFilmId() {
+        return filmId.get();
+    }
 
     public StringProperty figurIdProperty() {
         return figurId;
     }
 
-    public String getFigurId(){return figurId.get();}
+    public String getFigurId() {
+        return figurId.get();
+    }
 
     @Override
     public String toString() {
