@@ -40,7 +40,7 @@ public class HerrDerRingeGUI extends Application {
         VBox wurzel = new VBox();
 
         HBox kind1 = new HBox();
-        kind1.setAlignment(Pos.BASELINE_CENTER);
+        kind1.setAlignment(Pos.BASELINE_LEFT);
         HBox kind2 = new HBox();
         kind2.setAlignment(Pos.BASELINE_CENTER);
 
@@ -49,13 +49,13 @@ public class HerrDerRingeGUI extends Application {
         filterEingabe.setTextFill(Paint.valueOf("#02C226"));
         Label kommandoLabel = new Label("Kommando: ");
         TextField kommando = new TextField();
-        kommando.setMinWidth(730);
+        kommando.setMinWidth(930);
         kind1.getChildren().add(kommandoLabel);
         kind1.getChildren().add(kommando);
 
         var listFiguren = h.createListFiguren();
         TableView<Figur> tabelleFigur = new TableView<>();
-        tabelleFigur.setMinWidth(400);
+        tabelleFigur.setMinWidth(500);
         tabelleFigur.setItems(listFiguren);
         TableColumn<Figur, String> nameSpalte = new TableColumn<>("Name");
         nameSpalte.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -72,7 +72,7 @@ public class HerrDerRingeGUI extends Application {
 
         var listFilm = h.createListFilm();
         TableView<Film> tabelleFilm = new TableView<>();
-        tabelleFilm.setMinWidth(400);
+        tabelleFilm.setMinWidth(500);
         tabelleFilm.setItems(listFilm);
         TableColumn<Film, String> titelSpalte = new TableColumn<>("Titel");
         tabelleFilm.getColumns().add(titelSpalte);
@@ -119,16 +119,17 @@ public class HerrDerRingeGUI extends Application {
             if (event.getCode() == KeyCode.ENTER) {
                 try {
                     ObservableList<Figur> figuren;
-                    Pattern pattern = Pattern.compile("FILTER\\s(\\w{3,4})" +
+                    Pattern pattern = Pattern.compile("(\\w{3,4})" +
                       "\\s=\\s(\\w+)");
                     Matcher matcher = pattern.matcher(kommando.getText());
                     if (matcher.find()) {
-                        if (matcher.group(1).equals("NAME")) {
+                        if (matcher.group(1).toLowerCase().equals("name")) {
                             figuren = FXCollections
                               .observableArrayList(h
                                 .findFigurName(matcher.group(2), listFiguren));
                             tabelleFigur.setItems(figuren);
-                        } else if (matcher.group(1).equals("TYP")) {
+                        } else if (matcher.group(1).toLowerCase().equals("typ"
+                        )) {
                             figuren = FXCollections
                               .observableArrayList(h
                                 .findFigurTyp(matcher.group(2), listFiguren));
@@ -151,7 +152,7 @@ public class HerrDerRingeGUI extends Application {
         wurzel.getChildren().add(kind2);
         wurzel.getChildren().add(tabelleDialog);
 
-        Scene szene = new Scene(wurzel, 800, 400, Color.WHITE);
+        Scene szene = new Scene(wurzel, 1000, 600, Color.WHITE);
         primaryStage.setScene(szene);
         primaryStage.show();
     }
