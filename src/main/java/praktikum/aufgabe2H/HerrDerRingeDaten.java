@@ -31,19 +31,18 @@ public class HerrDerRingeDaten {
   }
 
   /**
-   * Filters a list of figures based on a filterstring.
+   * Filters figuren based on a filterstring.
    *
-   * @param figurList    The list to filter
    * @param filterString FILTER &lt;key&gt &lt;operator&gt; &lt;value&gt; where <br>
    *                     key = "NAME" or "TYP" <br>
    *                     operator = "=" <br>
    *                     value = the value of the filter <br>
    * @return The filtered list or original list, if result is empty or filterstring invalid
    */
-  public List<Figur> filterFiguren(List<Figur> figurList, String filterString) {
+  public List<Figur> filterFiguren(String filterString) {
     Matcher matcher = Pattern.compile("(\\w+)\\s*=\\s*(\\w+)").matcher(filterString.trim());
     if (!matcher.find()) {
-      return figurList;
+      return figuren;
     }
     String key = matcher.group(1).toLowerCase();
     String value = matcher.group(2).toLowerCase();
@@ -51,19 +50,19 @@ public class HerrDerRingeDaten {
 
     switch (key) {
       case "name":
-        result = figurList.stream()
-                          .filter(figur -> figur.getName().toLowerCase().contains(value))
-                          .collect(Collectors.toList());
+        result = figuren.stream()
+                        .filter(figur -> figur.getName().toLowerCase().contains(value))
+                        .collect(Collectors.toList());
         break;
       case ("typ"):
-        result = figurList.stream()
-                          .filter(figur -> figur.getTyp().name().toLowerCase().contains(value))
-                          .collect(Collectors.toList());
+        result = figuren.stream()
+                        .filter(figur -> figur.getTyp().name().toLowerCase().contains(value))
+                        .collect(Collectors.toList());
         break;
       default:
-        result = figurList;
+        result = figuren;
     }
-    return !result.isEmpty() ? result : figurList;
+    return !result.isEmpty() ? result : figuren;
   }
 
   public List<Zitat> getZitate() {
@@ -135,6 +134,6 @@ public class HerrDerRingeDaten {
     getZitateMap(figurenLs).
                              forEach((name, zitate) -> System.out.println(
                                "\n--" + name + "--" + ":\t" +
-                               zitate.stream().reduce("", (s1, s2) -> s1 + "\n\t" + s2)));
+                                 zitate.stream().reduce("", (s1, s2) -> s1 + "\n\t" + s2)));
   }
 }

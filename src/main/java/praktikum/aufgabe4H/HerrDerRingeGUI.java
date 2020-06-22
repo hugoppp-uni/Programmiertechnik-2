@@ -72,16 +72,18 @@ public class HerrDerRingeGUI extends Application {
     tableViewFigur.getSelectionModel()
                   .selectedItemProperty()
                   .addListener((observable, oldValue, newFigur) -> zitatObservableList.setAll(
-                    herrDerRingeDaten.getZitateOfId(newFigur.getId()).stream()
-                            .filter( figur -> figur.getFilmId().equals(tableViewFilm.getSelectionModel().getSelectedItem().getId()))
-                            .collect(Collectors.toList())));
+                    herrDerRingeDaten
+                      .getZitateOfId(newFigur.getId()).stream()
+                      .filter(figur -> figur.getFilmId().equals(tableViewFilm.getSelectionModel().getSelectedItem().getId()))
+                      .collect(Collectors.toList())));
     //filter when changing film
     tableViewFilm.getSelectionModel()
                  .selectedItemProperty()
                  .addListener((observable, oldValue, newFilm) -> zitatObservableList.setAll(
-                    herrDerRingeDaten.getZitateOfId(tableViewFigur.getSelectionModel().getSelectedItem().getId()).stream()
-                            .filter( zitat -> zitat.getFilmId().equals(tableViewFilm.getSelectionModel().getSelectedItem().getId()))
-                            .collect(Collectors.toList())));
+                   herrDerRingeDaten
+                     .getZitateOfId(tableViewFigur.getSelectionModel().getSelectedItem().getId()).stream()
+                     .filter(zitat -> zitat.getFilmId().equals(tableViewFilm.getSelectionModel().getSelectedItem().getId()))
+                     .collect(Collectors.toList())));
 
     SplitPane horizontalSplitPaneFigurFilm = new SplitPane(tableViewFigur, tableViewFilm);
     SplitPane verticalSplitPaneFigurfilmZitat =
@@ -91,7 +93,7 @@ public class HerrDerRingeGUI extends Application {
     TextField textField = new TextField();
     textField.textProperty()
              .addListener((observable, oldValue, newValue) -> figurObservableList.setAll(
-               herrDerRingeDaten.filterFiguren(figurList, newValue)));
+               herrDerRingeDaten.filterFiguren(newValue)));
     textField.setPromptText("Filter eingeben: NAME/TYP = <Filtertext>");
 
     VBox wurzel = new VBox(textField, verticalSplitPaneFigurfilmZitat);
@@ -101,7 +103,6 @@ public class HerrDerRingeGUI extends Application {
     primaryStage.setScene(szene);
     primaryStage.show();
   }
-
 
 
 }
